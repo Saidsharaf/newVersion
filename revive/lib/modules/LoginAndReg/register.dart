@@ -16,27 +16,27 @@ class RegScreen extends StatelessWidget {
               height: double.infinity,
               width: double.infinity,
               decoration: const BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  Color.fromARGB(255, 23, 184, 109),
-                  Color.fromARGB(255, 22, 55, 21),
-                ]),
-              ),
-              child:Column(
-                children: [
-                  Image.asset("assets/images/grass.png",fit: BoxFit.fill,),
-                ],
-              ),
-            ),
-             const Padding(
-                padding: EdgeInsets.only(top: 60.0, left: 22),
-                child: Text(
-                  'Create Your\nAccount',
-                  style: TextStyle(
-                      fontSize: 30,
-                      color:Color.fromARGB(206, 255, 255, 255),
-                      fontWeight: FontWeight.bold),
+                // gradient: LinearGradient(colors: [
+                //   Color.fromARGB(255, 23, 184, 109),
+                //   Color.fromARGB(255, 22, 55, 21),
+                // ]),
+                image: DecorationImage(
+                  image: AssetImage("assets/images/plant1.jpg"),
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.srgbToLinearGamma(),
                 ),
               ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 60.0, left: 22),
+              child: Text(
+                'Create Your\nAccount',
+                style: TextStyle(
+                    fontSize: 30,
+                    color: Color.fromARGB(206, 255, 255, 255),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 220.0),
               child: Container(
@@ -161,10 +161,10 @@ class RegScreen extends StatelessWidget {
                               child: Text(
                                 "Sign in",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                    color: Color.fromARGB(255, 95, 86, 3),
-                                    ),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                  color: Color.fromARGB(255, 95, 86, 3),
+                                ),
                               ),
                             ),
                           ],

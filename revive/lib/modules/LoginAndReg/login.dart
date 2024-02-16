@@ -23,6 +23,7 @@ class loginScreen extends StatelessWidget {
             image: DecorationImage(
               image: AssetImage("assets/images/plant1.jpg"),
               fit: BoxFit.cover,
+              colorFilter: ColorFilter.srgbToLinearGamma(),
             ),
           ),
           // child: Column(
