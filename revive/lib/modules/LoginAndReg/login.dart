@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:revive/layout/home_layout.dart';
+import 'package:revive/modules/LoginAndReg/component.dart';
 import 'package:revive/modules/LoginAndReg/register.dart';
 import 'package:revive/shared/component/component.dart';
 
+// ignore: must_be_immutable
 class loginScreen extends StatelessWidget {
-  const loginScreen({Key? key}) : super(key: key);
-
+  loginScreen({Key? key}) : super(key: key);
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,70 +57,26 @@ class loginScreen extends StatelessWidget {
             height: double.infinity,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.only(left: 28.0, right: 18, top: 25),
+              padding: const EdgeInsets.only(left: 28.0, right: 18, top: 35),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    TextFormField(
-                      textInputAction: TextInputAction.go,
-                      keyboardType: TextInputType.emailAddress,
-                      style: TextStyle(
-                        fontFamily: "Body",
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      cursorColor: Colors.grey,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(
-                          left: 10,
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.green,
-                          ),
-                        ),
-                        suffixIcon: Icon(
-                          Icons.check,
-                          color: Colors.grey,
-                        ),
-                        label: Text(
-                          'Gmail',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 23, 184, 109),
-                          ),
-                        ),
-                      ),
+                    buildTextFormField(
+                      text: "Gmail",
+                      sufIcon: Icons.email,
+                      textEditingController: emailController,
+                      textInputType: TextInputType.emailAddress,
                     ),
                     SizedBox(
                       height: 40,
                     ),
-                    const TextField(
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      cursorColor: Colors.grey,
-                      style: TextStyle(fontFamily: "Body"),
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(
-                            left: 10,
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.green,
-                            ),
-                          ),
-                          suffixIcon: Icon(
-                            Icons.visibility_off,
-                            color: Colors.grey,
-                          ),
-                          label: Text(
-                            'Password',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 23, 184, 109),
-                            ),
-                          )),
+                    buildTextFormField(
+                      text: "Password",
+                      sufIcon: Icons.visibility_off,
+                      textEditingController: passwordController,
+                      textInputType: TextInputType.visiblePassword,
+                      hidePassword: true,
                     ),
                     const SizedBox(
                       height: 25,
@@ -143,12 +102,14 @@ class loginScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        navigateAndFinish(
-                          context,
-                          HomeLayout(
-                            index: 0,
-                          ),
-                        );
+                        // navigateAndFinish(
+                        //   context,
+                        //   HomeLayout(
+                        //     index: 0,
+                        //   ),
+                        // );
+                        print(emailController.text);
+                        print(passwordController.text);
                       },
                       child: Container(
                         height: 55,
@@ -172,7 +133,7 @@ class loginScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 45,
                     ),
                     Align(
                       alignment: Alignment.bottomRight,

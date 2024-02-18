@@ -1,6 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:revive/modules/LoginAndReg/register.dart';
 import 'package:revive/modules/login_screen/login.dart';
 import 'package:revive/modules/onBoarding/onBoarding.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
@@ -64,7 +65,7 @@ class MyApp extends StatelessWidget {
         splashIconSize: 200,
         splashTransition: SplashTransition.scaleTransition,
         duration: 1000,
-        nextScreen: onBoarding(),
+        nextScreen: RegScreen(),
         ),
     );
   }

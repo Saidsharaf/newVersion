@@ -52,7 +52,7 @@ class WelcomeScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const loginScreen()));
+                          builder: (context) =>  loginScreen()));
                 },
                 child: Container(
                   height: 53,
@@ -81,7 +81,7 @@ class WelcomeScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const RegScreen()));
+                          builder: (context) =>  RegScreen()));
                 },
                 child: Container(
                   height: 53,
