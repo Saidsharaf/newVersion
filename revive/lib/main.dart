@@ -1,14 +1,17 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:revive/modules/LoginAndReg/register.dart';
 import 'package:revive/modules/login_screen/login.dart';
 import 'package:revive/modules/onBoarding/onBoarding.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
+import 'package:revive/shared/network/remote/dioHelper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await sharedPref.init();
+  DioHelper.init();
 
   runApp(MyApp());
 }
@@ -56,17 +59,19 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: AnimatedSplashScreen(
-        backgroundColor: Color.fromRGBO(83,233,129,1),
-        splash:  CircleAvatar(
-        backgroundImage: AssetImage("assets/images/logo1.png",),
-        backgroundColor: Color.fromRGBO(83,233,129,1),
-        radius: 90,
+        backgroundColor: Color.fromRGBO(83, 233, 129, 1),
+        splash: CircleAvatar(
+          backgroundImage: AssetImage(
+            "assets/images/logo1.png",
+          ),
+          backgroundColor: Color.fromRGBO(83, 233, 129, 1),
+          radius: 90,
         ),
         splashIconSize: 200,
         splashTransition: SplashTransition.scaleTransition,
         duration: 1000,
         nextScreen: RegScreen(),
-        ),
+      ),
     );
   }
 }

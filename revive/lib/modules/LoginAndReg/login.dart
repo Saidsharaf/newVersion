@@ -5,10 +5,22 @@ import 'package:revive/modules/LoginAndReg/register.dart';
 import 'package:revive/shared/component/component.dart';
 
 // ignore: must_be_immutable
-class loginScreen extends StatelessWidget {
+class loginScreen extends StatefulWidget {
   loginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<loginScreen> createState() => _loginScreenState();
+}
+
+class _loginScreenState extends State<loginScreen> {
   var emailController = TextEditingController();
+
   var passwordController = TextEditingController();
+
+  var formKey = GlobalKey<FormState>();
+
+  bool ispassword = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,111 +71,133 @@ class loginScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 28.0, right: 18, top: 35),
               child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    buildTextFormField(
-                      text: "Gmail",
-                      sufIcon: Icons.email,
-                      textEditingController: emailController,
-                      textInputType: TextInputType.emailAddress,
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    buildTextFormField(
-                      text: "Password",
-                      sufIcon: Icons.visibility_off,
-                      textEditingController: passwordController,
-                      textInputType: TextInputType.visiblePassword,
-                      hidePassword: true,
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: () {
-                          bottomEmail(context);
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      buildTextFormField(
+                        text: "Gmail",
+                        sufIcon: Icons.email,
+                        textEditingController: emailController,
+                        textInputType: TextInputType.emailAddress,
+                        validate: (value) {
+                          if (value!.isEmpty) {
+                            return "Email must not be empty";
+                          }
+                          return null;
                         },
-                        child: Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                            color: Color.fromARGB(255, 95, 86, 3),
-                          ),
-                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 45,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        // navigateAndFinish(
-                        //   context,
-                        //   HomeLayout(
-                        //     index: 0,
-                        //   ),
-                        // );
-                        print(emailController.text);
-                        print(passwordController.text);
-                      },
-                      child: Container(
-                        height: 55,
-                        width: 300,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          gradient: const LinearGradient(colors: [
-                            Color.fromARGB(255, 23, 184, 109),
-                            Color.fromARGB(255, 22, 55, 21),
-                          ]),
-                        ),
-                        child: const Center(
+                      SizedBox(
+                        height: 40,
+                      ),
+                      buildTextFormField(
+                        text: "Password",
+                        sufIcon: ispassword? Icons.visibility_off: Icons.visibility,
+                        textEditingController: passwordController,
+                        textInputType: TextInputType.visiblePassword,
+                        onpressSuf: () {
+                          setState(() {
+                            ispassword = !ispassword;
+                          });
+                        },
+                        hidePassword: ispassword,
+                        validate: (value) {
+                          if (value!.isEmpty) {
+                            return "Password must not be empty";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: GestureDetector(
+                          onTap: () {
+                            bottomEmail(context);
+                          },
                           child: Text(
-                            'SIGN IN',
+                            'Forgot Password?',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 45,
-                    ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Don't have account?",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              navigateAndFinish(context, RegScreen());
-                            },
-                            child: Text(
-                              "Sign up",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                                color: Color.fromARGB(255, 95, 86, 3),
-                              ),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                              color: Color.fromARGB(255, 95, 86, 3),
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                    )
-                  ],
+                      const SizedBox(
+                        height: 45,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // navigateAndFinish(
+                          //   context,
+                          //   HomeLayout(
+                          //     index: 0,
+                          //   ),
+                          // );
+                          if (formKey.currentState!.validate()) {
+                            print(emailController.text);
+                            print(passwordController.text);
+                          }
+                        },
+                        child: Container(
+                          height: 55,
+                          width: 300,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            gradient: const LinearGradient(colors: [
+                              Color.fromARGB(255, 23, 184, 109),
+                              Color.fromARGB(255, 22, 55, 21),
+                            ]),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'SIGN IN',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 45,
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              "Don't have account?",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                navigateAndFinish(context, RegScreen());
+                              },
+                              child: Text(
+                                "Sign up",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                  color: Color.fromARGB(255, 95, 86, 3),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -6,8 +6,10 @@ Widget buildTextFormField({
   IconData? sufIcon,
   TextInputType? textInputType,
   TextInputAction? textInputAction,
-  @required TextEditingController?textEditingController,
-  bool hidePassword=false,
+  @required TextEditingController? textEditingController,
+  bool hidePassword = false,
+  String? Function(String?)? validate,
+  void Function()? onpressSuf,
 }) {
   return TextFormField(
     obscureText: hidePassword,
@@ -29,9 +31,12 @@ Widget buildTextFormField({
           color: Colors.green,
         ),
       ),
-      suffixIcon: Icon(
-        sufIcon,
-        color: Colors.grey,
+      suffixIcon: IconButton(
+        onPressed: onpressSuf,
+        icon:  Icon(
+          sufIcon,
+          color: Colors.grey,
+        ),
       ),
       prefix: Icon(
         prefIcon,
@@ -45,5 +50,6 @@ Widget buildTextFormField({
         ),
       ),
     ),
+    validator: validate,
   );
 }
