@@ -24,7 +24,36 @@ class loginScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is loginSuccessState) {
+            if (state.loginModel.status!) {
+              // print(state.loginModel.message);
+              // print(state.loginModel.data!.token);
+              showToast(msg: state.loginModel.message!, state: toastStates.SUCCESS);
+              // Fluttertoast.showToast(
+              //   msg: state.loginModel.message!,
+              //   toastLength: Toast.LENGTH_SHORT,
+              //   gravity: ToastGravity.BOTTOM,
+              //   timeInSecForIosWeb: 5,
+              //   backgroundColor: Colors.green,
+              //   textColor: Colors.white,
+              //   fontSize: 16.0,
+              // );
+            } else {
+              //print(state.loginModel.message);
+              showToast(msg: state.loginModel.message!, state: toastStates.ERROR);
+              // Fluttertoast.showToast(
+              //   msg: state.loginModel.message!,
+              //   toastLength: Toast.LENGTH_SHORT,
+              //   gravity: ToastGravity.BOTTOM,
+              //   timeInSecForIosWeb: 5,
+              //   backgroundColor: Colors.red,
+              //   textColor: Colors.white,
+              //   fontSize: 16.0,
+              // );
+            }
+          }
+        },
         builder: (context, state) {
           var cubit = LoginCubit.get(context);
           return Scaffold(

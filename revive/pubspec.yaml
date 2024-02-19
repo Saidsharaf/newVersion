@@ -57,6 +57,7 @@ dependencies:
   slide_countdown: ^1.5.1
   like_button: ^2.0.5
   csc_picker: ^0.2.7
+  fluttertoast: ^8.2.2
   
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 Widget buildTextFormField({
   @required String? text,
@@ -54,4 +55,37 @@ Widget buildTextFormField({
     ),
     validator: validate,
   );
+}
+
+
+void showToast({
+  @required String? msg,
+  @required toastStates? state,
+}) {
+  Fluttertoast.showToast(
+      msg: msg!,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 5,
+      backgroundColor: chooseToastColor(state!),
+      textColor: Colors.white,
+      fontSize: 9.0);
+}
+
+enum toastStates { SUCCESS, WARNING, ERROR }
+
+Color chooseToastColor(toastStates state) {
+  Color color;
+  switch (state) {
+    case toastStates.SUCCESS:
+      color = Colors.green;
+      break;
+    case toastStates.ERROR:
+      color = Colors.red;
+      break;
+    case toastStates.WARNING:
+      color = Colors.amber;
+      break;
+  }
+  return color;
 }
