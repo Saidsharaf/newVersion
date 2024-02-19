@@ -10,9 +10,11 @@ Widget buildTextFormField({
   bool hidePassword = false,
   String? Function(String?)? validate,
   void Function()? onpressSuf,
+  void Function(String)? onsubmit,
 }) {
   return TextFormField(
     obscureText: hidePassword,
+    onFieldSubmitted: onsubmit,
     controller: textEditingController,
     textInputAction: textInputAction,
     keyboardType: textInputType,

@@ -14,15 +14,20 @@ class LoginCubit extends Cubit<LoginStates> {
     @required String? password,
   }) {
     emit(loginLoadingState());
-    DioHelper.postData(url: LOGIN, data: {
-      "email": email,
-      "password": password,
-    }).then((value) {
+    DioHelper.postData(
+      url: LOGIN,
+      data: {
+        "email": email,
+        "password": password,
+      },
+    ).then((value) {
       print(value.data);
       emit(loginSuccessState());
-    }).catchError((error) {
-      emit(loginErrorState(error.toString()));
-    });
+    }).catchError(
+      (error) {
+        emit(loginErrorState(error.toString()));
+      },
+    );
   }
 
   bool ispassword = true;

@@ -18,7 +18,7 @@ class loginScreen extends StatelessWidget {
 
   var formKey = GlobalKey<FormState>();
 
- // bool ispassword = false;
+  // bool ispassword = false;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -109,6 +109,14 @@ class loginScreen extends StatelessWidget {
                                 //   ispassword = !ispassword;
                                 // });
                               },
+                              onsubmit: (value) {
+                                if (formKey.currentState!.validate()) {
+                                  cubit.userLogin(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  );
+                                }
+                              },
                               hidePassword: cubit.ispassword,
                               validate: (value) {
                                 if (value!.isEmpty) {
@@ -181,8 +189,8 @@ class loginScreen extends StatelessWidget {
                                   ),
                                 );
                               },
-                              fallback: (context) =>
-                                  CircularProgressIndicator(color: Colors.green),
+                              fallback: (context) => CircularProgressIndicator(
+                                  color: Colors.green),
                             ),
                             const SizedBox(
                               height: 45,
