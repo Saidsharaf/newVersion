@@ -1,9 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:revive/modules/LoginAndReg/register.dart';
-import 'package:revive/modules/login_screen/login.dart';
+import 'package:revive/layout/home_layout.dart';
+import 'package:revive/modules/LoginAndReg/welcome_screen.dart';
 import 'package:revive/modules/onBoarding/onBoarding.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 import 'package:revive/shared/network/remote/dioHelper.dart';
@@ -12,12 +11,29 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await sharedPref.init();
   DioHelper.init();
+  bool? onBoarding = sharedPref.getData(key: "onBoarding");
+  String? token = sharedPref.getData(key: "token");
+  Widget? widget;
 
-  runApp(MyApp());
+  if (onBoarding != null) {
+    if (token != null)
+      widget = HomeLayout(index: 0);
+    else
+      widget = WelcomeScreen();
+  } else
+    widget = OnBoarding();
+
+  runApp(MyApp(
+    startWidget: widget,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Widget? startWidget;
+  const MyApp({
+    super.key,
+    this.startWidget,
+  });
 
   // This widget is the root of your application.
   @override
@@ -70,7 +86,7 @@ class MyApp extends StatelessWidget {
         splashIconSize: 200,
         splashTransition: SplashTransition.scaleTransition,
         duration: 1000,
-        nextScreen: RegScreen(),
+        nextScreen:startWidget!,
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:revive/modules/LoginAndReg/cubit/cubit.dart';
 import 'package:revive/modules/LoginAndReg/cubit/state.dart';
 import 'package:revive/modules/LoginAndReg/register.dart';
 import 'package:revive/shared/component/component.dart';
+import 'package:revive/shared/network/local/shared_pref.dart';
 
 // ignore: must_be_immutable
 class loginScreen extends StatelessWidget {
@@ -29,28 +30,17 @@ class loginScreen extends StatelessWidget {
             if (state.loginModel.status!) {
               // print(state.loginModel.message);
               // print(state.loginModel.data!.token);
-              showToast(msg: state.loginModel.message!, state: toastStates.SUCCESS);
-              // Fluttertoast.showToast(
-              //   msg: state.loginModel.message!,
-              //   toastLength: Toast.LENGTH_SHORT,
-              //   gravity: ToastGravity.BOTTOM,
-              //   timeInSecForIosWeb: 5,
-              //   backgroundColor: Colors.green,
-              //   textColor: Colors.white,
-              //   fontSize: 16.0,
-              // );
+              // showToast(
+              //     msg: state.loginModel.message!, state: toastStates.SUCCESS);
+              sharedPref
+                  .saveData(key: "token", value: state.loginModel.data!.token)
+                  .then((value) {
+                navigateAndFinish(context, HomeLayout(index: 0));
+              });
             } else {
               //print(state.loginModel.message);
-              showToast(msg: state.loginModel.message!, state: toastStates.ERROR);
-              // Fluttertoast.showToast(
-              //   msg: state.loginModel.message!,
-              //   toastLength: Toast.LENGTH_SHORT,
-              //   gravity: ToastGravity.BOTTOM,
-              //   timeInSecForIosWeb: 5,
-              //   backgroundColor: Colors.red,
-              //   textColor: Colors.white,
-              //   fontSize: 16.0,
-              // );
+              showToast(
+                  msg: state.loginModel.message!, state: toastStates.ERROR);
             }
           }
         },

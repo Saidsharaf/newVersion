@@ -8,6 +8,7 @@ import 'package:revive/modules/LoginAndReg/login.dart';
 import 'package:revive/modules/chat_screen/chat.dart';
 import 'package:revive/modules/report_screen/homeReport.dart';
 import 'package:revive/shared/component/component.dart';
+import 'package:revive/shared/network/local/shared_pref.dart';
 
 class listOfslider extends StatelessWidget {
   const listOfslider({
@@ -138,7 +139,11 @@ class headofslider extends StatelessWidget {
                   txt: "Logout",
                   icon: Icons.logout_outlined,
                   press: () {
-                    navigateAndFinish(context, loginScreen());
+                    sharedPref.removeData(key: "token").then((value) {
+                      if (value) {
+                        navigateAndFinish(context, loginScreen());
+                      }
+                    });
                   },
                 ),
               ],

@@ -8,17 +8,25 @@ import 'package:revive/modules/onBoarding/intro_page3.dart';
 import 'package:revive/modules/onBoarding/intro_page4.dart';
 import 'package:revive/modules/onBoarding/intro_page5.dart';
 import 'package:revive/shared/component/component.dart';
+import 'package:revive/shared/network/local/shared_pref.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class onBoarding extends StatefulWidget {
+class OnBoarding extends StatefulWidget {
   @override
-  State<onBoarding> createState() => _onBoardingState();
+  State<OnBoarding> createState() => _onBoardingState();
 }
 
-class _onBoardingState extends State<onBoarding> {
+class _onBoardingState extends State<OnBoarding> {
   var boardController = PageController();
 
   bool isLast = false;
+  void submit() {
+    sharedPref.saveData(key: "onBoarding", value: true).then((value) {
+      if (value) {
+        navigateAndFinish(context, WelcomeScreen());
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +80,11 @@ class _onBoardingState extends State<onBoarding> {
                     spacing: 5.0,
                   ),
                 ),
+                //_________________________________________________________
                 isLast
                     ? GestureDetector(
                         onTap: () {
-                          navigateAndFinish(context, WelcomeScreen());
+                          submit();
                         },
                         child: Text(
                           "Done",
