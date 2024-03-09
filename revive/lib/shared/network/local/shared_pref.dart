@@ -7,7 +7,7 @@ class sharedPref {
     pref = await SharedPreferences.getInstance();
   }
 
-  static Future<bool> setData({
+  static Future<bool> setData(String s, {
     @required String? key,
     @required String? value,
   }) async {

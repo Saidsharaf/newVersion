@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:revive/modules/footprint_screen/questions.dart';
+import 'package:revive/shared/component/appLocale.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -113,7 +114,7 @@ class _FootprintState extends State<Footprint> {
                   );
                 },
                 child: Text(
-                  "Calculate",
+                  "${getLang(context, "calculate")}",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22,

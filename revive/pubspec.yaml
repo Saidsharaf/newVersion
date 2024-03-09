@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -58,7 +61,7 @@ dependencies:
   like_button: ^2.0.5
   csc_picker: ^0.2.7
   fluttertoast: ^8.2.2
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -90,6 +93,7 @@ flutter:
   assets:
     - assets/images/
     - assets/lottie/
+    - assets/lang/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

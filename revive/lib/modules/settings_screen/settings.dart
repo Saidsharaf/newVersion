@@ -179,7 +179,7 @@ Widget buildLocation({
       settingKey: 'settingKey',
       initialValue: value!,
       onChange: (p0) {
-        sharedPref.setData(key: key, value: value);
+        sharedPref.saveData(key: key, value: value);
       },
     );
 Widget buildPassword() => TextInputSettingsTile(
