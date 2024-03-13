@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/layout/home_layout.dart';
 import 'package:revive/modules/LoginAndReg/component.dart';
-import 'package:revive/modules/LoginAndReg/cubit/cubit.dart';
-import 'package:revive/modules/LoginAndReg/cubit/state.dart';
+import 'package:revive/modules/LoginAndReg/cubitForLogin/cubit.dart';
+import 'package:revive/modules/LoginAndReg/cubitForLogin/state.dart';
 import 'package:revive/modules/LoginAndReg/register.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
@@ -202,7 +202,8 @@ class loginScreen extends StatelessWidget {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
-                                            color: Colors.white),
+                                            color: Colors.white,
+                                            ),
                                       ),
                                     ),
                                   ),

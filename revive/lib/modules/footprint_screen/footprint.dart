@@ -114,7 +114,8 @@ class _FootprintState extends State<Footprint> {
                   );
                 },
                 child: Text(
-                  "${getLang(context, "calculate")}",
+                  // "${getLang(context, "calculate")}",
+                  "Calculate",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22,

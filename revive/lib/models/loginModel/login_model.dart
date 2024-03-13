@@ -6,8 +6,8 @@ class LoginModel {
   // LoginModel(this.status, this.message);
   LoginModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
-    message = json["message"];
-    data = json["data"] != null ? UserData.fromJson(json["data"]) : null;
+    message = json["msg"];
+    data = json["Users"] != null ? UserData.fromJson(json["Users"]) : null;
   }
 }
 
@@ -23,12 +23,12 @@ class UserData {
 
   UserData.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    name = json["name"];
+    name = json["username"];
     email = json["email"];
-    phone = json["phone"];
-    image = json["image"];
-    points = json["points"];
-    credit = json["credit"];
-    token = json["token"];
+    // phone = json["phone"];
+    // image = json["image"];
+    // points = json["points"];
+    // credit = json["credit"];
+    token = json["api_token"];
   }
 }

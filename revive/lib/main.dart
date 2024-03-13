@@ -6,6 +6,7 @@ import 'package:revive/layout/home_layout.dart';
 import 'package:revive/modules/LoginAndReg/welcome_screen.dart';
 import 'package:revive/modules/onBoarding/onBoarding.dart';
 import 'package:revive/shared/component/appLocale.dart';
+import 'package:revive/shared/component/constants.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 import 'package:revive/shared/network/remote/dioHelper.dart';
 
@@ -14,7 +15,7 @@ void main() async {
   await sharedPref.init();
   DioHelper.init();
   bool? onBoarding = sharedPref.getData(key: "onBoarding");
-  String? token = sharedPref.getData(key: "token");
+  token = sharedPref.getData(key: "token");
   Widget? widget;
 
   if (onBoarding != null) {
@@ -42,26 +43,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
-        AppLocale.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: [
-        Locale("en",""),
-        Locale("ar",""),
-      ], 
-      localeResolutionCallback: (currentLang, supportLang) {
-          if (currentLang != null) {
-            for (Locale locale in supportLang) {
-              if (locale.languageCode == currentLang.languageCode) {
-                sharedPref.saveData(key: "lang",value:  currentLang.languageCode) ; 
-                return currentLang;
-              }
-            }
-          }
-          return supportLang.first;
-        },
+      // localizationsDelegates: [
+      //   AppLocale.delegate,
+      //   GlobalMaterialLocalizations.delegate,
+      //   GlobalWidgetsLocalizations.delegate,
+      // ],
+      // supportedLocales: [
+      //   Locale("en",""),
+      //   Locale("ar",""),
+      // ], 
+      // localeResolutionCallback: (currentLang, supportLang) {
+      //     if (currentLang != null) {
+      //       for (Locale locale in supportLang) {
+      //         if (locale.languageCode == currentLang.languageCode) {
+      //           sharedPref.saveData(key: "lang",value:  currentLang.languageCode) ; 
+      //           return currentLang;
+      //         }
+      //       }
+      //     }
+      //     return supportLang.first;
+      //   },
       theme: ThemeData(
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: Colors.green,

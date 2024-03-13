@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:revive/shared/network/end_point.dart';
 
 class DioHelper {
   static Dio? dio;
   static init() {
     dio = Dio(
       BaseOptions(
-          baseUrl: "https://student.valuxapps.com/api/",
+         // baseUrl: "https://student.valuxapps.com/api/",
+          baseUrl: "$server",
           receiveDataWhenStatusError: true,
           headers: {
             "Content-Type": "application/json",
