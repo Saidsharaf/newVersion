@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:revive/models/loginModel/login_model.dart';
+import 'package:revive/models/appModel/login_model.dart';
 import 'package:revive/modules/LoginAndReg/cubitForReg/state.dart';
 import 'package:revive/shared/network/end_point.dart';
 import 'package:revive/shared/network/remote/dioHelper.dart';

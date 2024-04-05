@@ -1,4 +1,4 @@
-import 'package:revive/models/loginModel/login_model.dart';
+import 'package:revive/models/appModel/login_model.dart';
 
 abstract class LoginStates {}
 
