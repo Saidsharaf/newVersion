@@ -1,13 +1,12 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:revive/modules/LoginAndReg/component.dart';
 import 'package:revive/modules/LoginAndReg/cubitForReg/cubit.dart';
 import 'package:revive/modules/LoginAndReg/cubitForReg/state.dart';
 import 'package:revive/modules/LoginAndReg/login.dart';
 import 'package:revive/shared/component/component.dart';
-import 'package:revive/shared/component/constants.dart';
-import 'package:revive/shared/network/local/shared_pref.dart';
 
 // ignore: must_be_immutable
 class RegScreen extends StatelessWidget {
@@ -16,7 +15,9 @@ class RegScreen extends StatelessWidget {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var confirmController = TextEditingController();
+  var birthController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -97,7 +98,7 @@ class RegScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               buildTextFormField(
-                                text: "Full Name",
+                                text: "userName",
                                 sufIcon: Icons.check,
                                 textEditingController: nameController,
                                 validate: (value) {
@@ -108,18 +109,18 @@ class RegScreen extends StatelessWidget {
                                 },
                               ),
                               SizedBox(height: 15),
-                              buildTextFormField(
-                                text: "Phone or Gmail",
-                                sufIcon: Icons.email,
-                                textEditingController: emailController,
-                                validate: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Email must not be empty";
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox(height: 15),
+                              // buildTextFormField(
+                              //   text: "Phone or Gmail",
+                              //   sufIcon: Icons.email,
+                              //   textEditingController: emailController,
+                              //   validate: (value) {
+                              //     if (value!.isEmpty) {
+                              //       return "Email must not be empty";
+                              //     }
+                              //     return null;
+                              //   },
+                              // ),
+                              // SizedBox(height: 15),
                               buildTextFormField(
                                 text: "Password",
                                 sufIcon: cubit.ispassword
@@ -156,8 +157,60 @@ class RegScreen extends StatelessWidget {
                                   return null;
                                 },
                               ),
+                              SizedBox(height: 15),
+                              buildTextFormField(
+                                text: "Birthday",
+                                textEditingController: birthController,
+                                sufIcon: Icons.calendar_today_rounded,
+                                ontap: () async {
+                                  DateTime? pickDate = await showDatePicker(
+                                    context: context,
+                                    firstDate: DateTime(1940),
+                                    lastDate: DateTime.now(),
+                                  );
+                                  if (pickDate != null) {
+                                    birthController.text =
+                                        DateFormat("yyyy-MM-dd")
+                                            .format(pickDate);
+                                  }
+                                },
+                              ),
+                              SizedBox(height: 15),
+                              Row(
+                                children: [
+                                  Text("Gender"),
+                                  Radio(
+                                    value: "male",
+                                    groupValue: cubit.selectedValue,
+                                    activeColor: Colors.green,
+                                    onChanged: (value) {
+                                      cubit.changeRadio(value);
+                                      cubit.theGender = value;
+                                    },
+                                  ),
+                                  Text("Male"),
+                                  Radio(
+                                    value: "female",
+                                    groupValue: cubit.selectedValue,
+                                    activeColor: Colors.green,
+                                    onChanged: (value) {
+                                      cubit.changeRadio(value);
+                                      cubit.theGender = value;
+                                    },
+                                  ),
+                                  Text("Female"),
+                                  // RadioListTile(
+                                  //   value: "male",
+                                  //   groupValue: cubit.selectedValue,
+                                  //   onChanged: (value) {
+                                  //     cubit.changeRadio(value);
+                                  //   },
+                                  //   title: Text("Male"),
+                                  // ),
+                                ],
+                              ),
                               const SizedBox(
-                                height: 50,
+                                height: 14,
                               ),
                               ConditionalBuilder(
                                 condition: state is! registerLoadingState,
@@ -169,6 +222,8 @@ class RegScreen extends StatelessWidget {
                                           username: nameController.text,
                                           email: emailController.text,
                                           password: passwordController.text,
+                                          gender: cubit.theGender,
+                                          birthday: birthController.text,
                                         );
                                         // print(emailController.text);
                                         // print(passwordController.text);
@@ -202,7 +257,7 @@ class RegScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(
-                                height: 41,
+                                height: 38,
                               ),
                               Align(
                                 alignment: Alignment.bottomRight,

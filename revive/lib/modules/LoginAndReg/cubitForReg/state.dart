@@ -5,6 +5,7 @@ abstract class RegisterStates {}
 class registerInitialState extends RegisterStates {}
 
 class registerChangeShowPassState extends RegisterStates {}
+class registerChangeRadioState extends RegisterStates {}
 
 class registerLoadingState extends RegisterStates {}
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:revive/layout/home_layout.dart';
+import 'package:revive/modules/Admin/home_admin/homeAdmin.dart';
 import 'package:revive/modules/LoginAndReg/welcome_screen.dart';
 import 'package:revive/modules/onBoarding/onBoarding.dart';
 import 'package:revive/shared/component/appLocale.dart';
@@ -16,12 +17,15 @@ void main() async {
   DioHelper.init();
   bool? onBoarding = sharedPref.getData(key: "onBoarding");
   token = sharedPref.getData(key: "token");
+  role = sharedPref.getData(key: "role");
   Widget? widget;
 
   if (onBoarding != null) {
-    if (token != null)
+    if (token != null && role != 1) {
       widget = HomeLayout(index: 0);
-    else
+    } else if (token != null && role == 1) {
+      widget = HomeAdmin();
+    } else
       widget = WelcomeScreen();
   } else
     widget = OnBoarding();
@@ -51,12 +55,12 @@ class MyApp extends StatelessWidget {
       // supportedLocales: [
       //   Locale("en",""),
       //   Locale("ar",""),
-      // ], 
+      // ],
       // localeResolutionCallback: (currentLang, supportLang) {
       //     if (currentLang != null) {
       //       for (Locale locale in supportLang) {
       //         if (locale.languageCode == currentLang.languageCode) {
-      //           sharedPref.saveData(key: "lang",value:  currentLang.languageCode) ; 
+      //           sharedPref.saveData(key: "lang",value:  currentLang.languageCode) ;
       //           return currentLang;
       //         }
       //       }
@@ -109,7 +113,7 @@ class MyApp extends StatelessWidget {
         splashIconSize: 200,
         splashTransition: SplashTransition.scaleTransition,
         duration: 1000,
-        nextScreen:startWidget!,
+        nextScreen: startWidget!,
       ),
     );
   }

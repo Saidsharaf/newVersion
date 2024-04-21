@@ -12,10 +12,12 @@ Widget buildTextFormField({
   String? Function(String?)? validate,
   void Function()? onpressSuf,
   void Function(String)? onsubmit,
+  VoidCallback? ontap,
 }) {
   return TextFormField(
     obscureText: hidePassword,
     onFieldSubmitted: onsubmit,
+    onTap: ontap,
     controller: textEditingController,
     textInputAction: textInputAction,
     keyboardType: textInputType,

@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/layout/cubit/cubit.dart';
 import 'package:revive/layout/cubit/states.dart';
 import 'package:revive/models/slider/listofslider.dart';
+import 'package:revive/shared/network/end_point.dart';
+import 'package:revive/shared/network/local/shared_pref.dart';
 
 // ignore: must_be_immutable
 class HomeLayout extends StatelessWidget {
@@ -82,10 +84,10 @@ class HomeLayout extends StatelessWidget {
               drawer: Drawer(
                 backgroundColor: Color.fromARGB(255, 14, 100, 57),
                 child: headofslider(
-                  userName: "Said Sharaf",
-                  email: "saidsharaf209@gmail.com",
+                  userName: sharedPref.getData(key: "username"),
+                  email: sharedPref.getData(key: "email"),
                   backgroundImage: "assets/images/soft.jpg",
-                  imageOfprof: "assets/images/prof1.jpeg",
+                  imageOfprof: server+sharedPref.getData(key: "profilePic"),
                 ),
               ),
             ),

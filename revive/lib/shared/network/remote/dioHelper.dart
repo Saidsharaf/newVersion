@@ -18,7 +18,7 @@ class DioHelper {
 
   static Future<Response> getData({
     @required String? url,
-    @required Map<String, dynamic>? query,
+    Map<String, dynamic>? query,
     String? token,
     String lang = "en",
   }) async {
@@ -37,13 +37,31 @@ class DioHelper {
     Map<String, dynamic>? query,
     @required Map<String, dynamic>? data,
     String? token,
-    String lang = "ar",
+    String lang = "en",
   }) async {
     dio!.options.headers = {
       "lang": lang,
       "Authorization": token,
     };
     return dio!.post(
+      url!,
+      queryParameters: query,
+      data: data,
+    );
+  }
+
+  static Future<Response> getAdminData({
+    @required String? url,
+    Map<String, dynamic>? query,
+    @required Map<String, dynamic>? data,
+    String? token,
+    String lang = "en",
+  }) async {
+    dio!.options.headers = {
+      "lang": lang,
+      "Authorization": token,
+    };
+    return dio!.get(
       url!,
       queryParameters: query,
       data: data,

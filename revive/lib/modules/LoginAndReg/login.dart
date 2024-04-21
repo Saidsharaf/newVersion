@@ -2,10 +2,12 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/layout/home_layout.dart';
+import 'package:revive/modules/Admin/home_admin/homeAdmin.dart';
 import 'package:revive/modules/LoginAndReg/component.dart';
 import 'package:revive/modules/LoginAndReg/cubitForLogin/cubit.dart';
 import 'package:revive/modules/LoginAndReg/cubitForLogin/state.dart';
 import 'package:revive/modules/LoginAndReg/register.dart';
+import 'package:revive/modules/profile_screen/cubit.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 
@@ -32,11 +34,31 @@ class loginScreen extends StatelessWidget {
               // print(state.loginModel.data!.token);
               // showToast(
               //     msg: state.loginModel.message!, state: toastStates.SUCCESS);
-              sharedPref
-                  .saveData(key: "token", value: state.loginModel.data!.token)
-                  .then((value) {
-                navigateAndFinish(context, HomeLayout(index: 0));
-              });
+              if (state.loginModel.data!.role == 1) {
+                sharedPref
+                    .saveData(key: "token", value: state.loginModel.data!.token)
+                    .then((value) {
+                  navigateAndFinish(context, HomeAdmin());
+                  sharedPref.saveData(
+                      key: "role", value: state.loginModel.data!.role);
+                  sharedPref.saveData(
+                      key: "AdminName", value: state.loginModel.data!.name);
+                  sharedPref.saveData(
+                      key: "AdminEmail", value: state.loginModel.data!.email);
+                });
+              } else {
+                sharedPref
+                    .saveData(key: "token", value: state.loginModel.data!.token)
+                    .then((value) {
+                  navigateAndFinish(context, HomeLayout(index: 0));
+                  sharedPref.saveData(
+                      key: "profilePic", value: state.loginModel.data!.image);
+                  sharedPref.saveData(
+                      key: "username", value: state.loginModel.data!.name);
+                  sharedPref.saveData(
+                      key: "email", value: state.loginModel.data!.email);
+                });
+              }
             } else {
               //print(state.loginModel.message);
               showToast(
@@ -101,7 +123,7 @@ class loginScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             buildTextFormField(
-                              text: "Gmail",
+                              text: "userName",
                               sufIcon: Icons.email,
                               textEditingController: emailController,
                               textInputType: TextInputType.emailAddress,
@@ -200,10 +222,10 @@ class loginScreen extends StatelessWidget {
                                       child: Text(
                                         'SIGN IN',
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            ),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),

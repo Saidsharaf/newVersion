@@ -1,13 +1,13 @@
-class LoginModel {
+class ShowUserModel {
   bool? status;
   String? message;
   UserData? data;
 
   // LoginModel(this.status, this.message);
-  LoginModel.fromJson(Map<String, dynamic> json) {
+  ShowUserModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["msg"];
-    data = json["Users"] != null ? UserData.fromJson(json["Users"]) : null;
+    data = json["users"] != null ? UserData.fromJson(json["users"]) : null;
   }
 }
 
@@ -31,6 +31,5 @@ class UserData {
     image = json["profile_photo"];
     // points = json["points"];
     // credit = json["credit"];
-    token = json["api_token"];
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/layout/cubit/cubit.dart';
 import 'package:revive/layout/cubit/states.dart';
-import 'package:revive/layout/home_layout.dart';
 import 'package:revive/modules/FactoryFootprint/questions_factory.dart';
 import 'package:revive/modules/LoginAndReg/login.dart';
 import 'package:revive/modules/chat_screen/chat.dart';
@@ -85,7 +84,7 @@ class headofslider extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       image: DecorationImage(
-                        image: AssetImage(
+                        image: NetworkImage(
                           imageOfprof,
                         ),
                         fit: BoxFit.cover,

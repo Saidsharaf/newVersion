@@ -19,7 +19,7 @@ class LoginCubit extends Cubit<LoginStates> {
     DioHelper.postData(
       url: LOGIN,
       data: {
-        "email": email,
+        "field": email,
         "password": password,
         "checksecurity":"EI8m2bl8TFVjbwYmuopsNPd1",
       },

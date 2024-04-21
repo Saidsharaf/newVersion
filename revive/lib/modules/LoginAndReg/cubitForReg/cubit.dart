@@ -15,21 +15,23 @@ class RegisterCubit extends Cubit<RegisterStates> {
     @required String? email,
     @required String? password,
     @required String? username,
+    @required String? gender,
+    @required String? birthday,
   }) {
     emit(registerLoadingState());
     DioHelper.postData(
       url: REGISTER,
       data: {
         "checksecurity": "EI8m2bl8TFVjbwYmuopsNPd1",
-        "name": "lona",
+       // "name": "lona",
         "username": username,
-        "email": "lona@customer.rev",
+        //"email": "lona@customer.rev",
         "password": password,
-        "gmail": email,
-        "phone": "4255759631",
-        "Personal_card": "3034567894125",
-        "birthday": "2001-11-07",
-        "gender": "female"
+        //"gmail": email,
+        // "phone": "4255759631",
+        // "Personal_card": "3034567894125",
+        "birthday": birthday,
+        "gender": gender
       },
     ).then((value) {
       print(value.data);
@@ -50,4 +52,11 @@ class RegisterCubit extends Cubit<RegisterStates> {
     ispassword = !ispassword;
     emit(registerChangeShowPassState());
   }
+  String? selectedValue;
+  void changeRadio(value) {
+    selectedValue = value;
+    emit(registerChangeShowPassState());
+  }
+String? theGender ;
+
 }
