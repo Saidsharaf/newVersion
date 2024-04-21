@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:revive/models/appModel/adminModel/users/cubit.dart';
-import 'package:revive/models/appModel/adminModel/users/states.dart';
+import 'package:revive/models/appModel/adminModel/allUsers/cubit.dart';
+import 'package:revive/models/appModel/adminModel/allUsers/states.dart';
 import 'package:revive/modules/Admin/Users/user.dart';
 import 'package:revive/modules/LoginAndReg/login.dart';
 import 'package:revive/shared/component/component.dart';
@@ -14,19 +14,17 @@ class HomeAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ShowUserCubit(),
-      child: BlocConsumer<ShowUserCubit, ShowUserStates>(
+      create: (context) => AllUsersCubit(),
+      child: BlocConsumer<AllUsersCubit, AllUsersStates>(
         listener: (context, state) {
-          if (state is showUserSuccessState) {
-            if (state.showUserModel.status!) {
+          if (state is allUsersSuccessState) {
+            if (state.allUsersModel.status!) {
               sharedPref
                   .saveData(
-                      key: "UserName", value: state.showUserModel.data!.name)
+                      key: "fName", value: state.allUsersModel.users![0].name)
                   .then((value) {
-                navigateAndFinish(context, Users());
-                sharedPref.saveData(
-                    key: "UserEmail", value: state.showUserModel.data!.email);
-              });
+                navigate(context, Users());
+                });
             } else {
               print("noooooooooooooooooo");
             }
@@ -35,7 +33,7 @@ class HomeAdmin extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          var cubit = ShowUserCubit.get(context);
+          var cubit = AllUsersCubit.get(context);
           return Scaffold(
             body: ListView(
               padding: EdgeInsets.zero,
@@ -112,7 +110,7 @@ class HomeAdmin extends StatelessWidget {
                             iconData: CupertinoIcons.person_2,
                             background: Colors.purple,
                             onPress: () {
-                              cubit.showUser();
+                              cubit.showALlUsers();
                             }),
                         itemDashboard(
                             title: 'Comments',
