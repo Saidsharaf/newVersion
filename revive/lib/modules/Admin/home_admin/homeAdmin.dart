@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/models/appModel/adminModel/allUsers/cubit.dart';
 import 'package:revive/models/appModel/adminModel/allUsers/states.dart';
-import 'package:revive/modules/Admin/Users/user.dart';
+import 'package:revive/modules/Admin/home_admin/audience.dart';
 import 'package:revive/modules/LoginAndReg/login.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
@@ -17,23 +17,22 @@ class HomeAdmin extends StatelessWidget {
       create: (context) => AllUsersCubit(),
       child: BlocConsumer<AllUsersCubit, AllUsersStates>(
         listener: (context, state) {
-          if (state is allUsersSuccessState) {
-            if (state.allUsersModel.status!) {
-              sharedPref
-                  .saveData(
-                      key: "fName", value: state.allUsersModel.users![0].name)
-                  .then((value) {
-                navigate(context, Users());
-                });
-            } else {
-              print("noooooooooooooooooo");
-            }
-          } else {
-            print("yeeeeeeeeeeeeeeeeees");
-          }
+          // if (state is allUsersSuccessState) {
+          //   if (state.allUsersModel.status!) {
+          //     sharedPref
+          //         .saveData(
+          //             key: "fName", value: state.allUsersModel.users![0].name)
+          //         .then((value) {
+          //       navigate(context, Users());
+          //     });
+          //   } else {
+          //     print("noooooooooooooooooo");
+          //   }
+          // } else {
+          //   print("yeeeeeeeeeeeeeeeeees");
+          // }
         },
         builder: (context, state) {
-          var cubit = AllUsersCubit.get(context);
           return Scaffold(
             body: ListView(
               padding: EdgeInsets.zero,
@@ -110,7 +109,7 @@ class HomeAdmin extends StatelessWidget {
                             iconData: CupertinoIcons.person_2,
                             background: Colors.purple,
                             onPress: () {
-                              cubit.showALlUsers();
+                              navigate(context, Audience());
                             }),
                         itemDashboard(
                             title: 'Comments',
@@ -118,10 +117,13 @@ class HomeAdmin extends StatelessWidget {
                             background: Colors.brown,
                             onPress: () {}),
                         itemDashboard(
-                            title: 'Revenue',
-                            iconData: CupertinoIcons.money_dollar_circle,
-                            background: Colors.indigo,
-                            onPress: () {}),
+                          title: 'Machine',
+                          iconData: Icons.factory_outlined,
+                          background: Colors.indigo,
+                          onPress: () {
+                            
+                          },
+                        ),
                         itemDashboard(
                             title: 'Upload',
                             iconData: CupertinoIcons.add_circled,

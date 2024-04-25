@@ -11,9 +11,8 @@ class AllUsersCubit extends Cubit<AllUsersStates> {
   static AllUsersCubit get(context) => BlocProvider.of(context);
   AllUsersModel? allUsersModel;
 
-  
   void showALlUsers({
-    int? id,
+    @required String? type,
   }) {
     emit(allUsersLoadingState());
     print("loooooooading");
@@ -23,7 +22,7 @@ class AllUsersCubit extends Cubit<AllUsersStates> {
         "checksecurity": "EI8m2bl8TFVjbwYmuopsNPd1",
         "token":
             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMjEyNC0yYTA5LWJhYzUtMzBiOS0xZWItMDAtMzEtOGIubmdyb2stZnJlZS5hcHAvYXBpL3Jldi91c2Vycy9sb2dpbiIsImlhdCI6MTcxMzU4NzIyOSwibmJmIjoxNzEzNTg3MjI5LCJqdGkiOiJ6M2tmYmtjMXptQWVuaG41Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Z-hu4esTGOtShtGKJ4Hbl2_7vUBLxw2JjJ79G2FP5_s",
-        "type":"OWNER"
+        "type": type
       },
     ).then((value) {
       print(value.data);
@@ -37,5 +36,90 @@ class AllUsersCubit extends Cubit<AllUsersStates> {
       },
     );
   }
-  
+
+  void DeleteUsers({
+    @required int? id,
+  }) {
+    emit(deletedUsersLoadingState());
+    print("loooooooading");
+    DioHelper.DeleteData(
+      url: DELETEDATA,
+      data: {
+        "checksecurity": "EI8m2bl8TFVjbwYmuopsNPd1",
+        "token":
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3Jldi91c2Vycy9sb2dpbiIsImlhdCI6MTcwNjk5ODkxNSwibmJmIjoxNzA2OTk4OTE1LCJqdGkiOiJRWkp6azlSRnJXSERqN0dJIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.yGzlSZoxTCQY4TETLhUapP4xT_QBB6KLLuBlvsrlBaI",
+        "id": id
+      },
+    ).then((value) {
+      print(value.data);
+      allUsersModel = AllUsersModel.fromJson(value.data);
+      emit(deletedUsersSuccessState(allUsersModel!));
+      showALlUsers(type: "CUSTOMER");
+    }).catchError(
+      (error) {
+        print(error.toString());
+        emit(deletedUsersErrorState(error.toString()));
+      },
+    );
+  }
+
+  void DeleteOwners({
+    @required int? id,
+  }) {
+    emit(deletedUsersLoadingState());
+    print("loooooooading");
+    DioHelper.DeleteData(
+      url: DELETEDATA,
+      data: {
+        "checksecurity": "EI8m2bl8TFVjbwYmuopsNPd1",
+        "token":
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3Jldi91c2Vycy9sb2dpbiIsImlhdCI6MTcwNjk5ODkxNSwibmJmIjoxNzA2OTk4OTE1LCJqdGkiOiJRWkp6azlSRnJXSERqN0dJIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.yGzlSZoxTCQY4TETLhUapP4xT_QBB6KLLuBlvsrlBaI",
+        "id": id
+      },
+    ).then((value) {
+      print(value.data);
+      allUsersModel = AllUsersModel.fromJson(value.data);
+      emit(deletedUsersSuccessState(allUsersModel!));
+      showALlUsers(type: "OWNER");
+    }).catchError(
+      (error) {
+        print(error.toString());
+        emit(deletedUsersErrorState(error.toString()));
+      },
+    );
+  }
+
+  void DeleteAdmins({
+    @required int? id,
+  }) {
+    emit(deletedUsersLoadingState());
+    print("loooooooading");
+    DioHelper.DeleteData(
+      url: DELETEDATA,
+      data: {
+        "checksecurity": "EI8m2bl8TFVjbwYmuopsNPd1",
+        "token":
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3Jldi91c2Vycy9sb2dpbiIsImlhdCI6MTcwNjk5ODkxNSwibmJmIjoxNzA2OTk4OTE1LCJqdGkiOiJRWkp6azlSRnJXSERqN0dJIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.yGzlSZoxTCQY4TETLhUapP4xT_QBB6KLLuBlvsrlBaI",
+        "id": id
+      },
+    ).then((value) {
+      print(value.data);
+      allUsersModel = AllUsersModel.fromJson(value.data);
+      emit(deletedUsersSuccessState(allUsersModel!));
+      showALlUsers(type: "ADMIN");
+    }).catchError(
+      (error) {
+        print(error.toString());
+        emit(deletedUsersErrorState(error.toString()));
+      },
+    );
+  }
+
+  int? indexNum;
+
+  void changeIndexNumber(index) {
+    indexNum = index;
+    print(indexNum);
+    emit(allUsersChangeIndexState());
+  }
 }

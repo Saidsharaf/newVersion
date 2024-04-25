@@ -7,6 +7,8 @@ class allUsersInitialState extends AllUsersStates {}
 
 class allUsersLoadingState extends AllUsersStates {}
 
+class allUsersChangeIndexState extends AllUsersStates {}
+
 class allUsersSuccessState extends AllUsersStates {
   final AllUsersModel allUsersModel;
 
@@ -16,4 +18,16 @@ class allUsersSuccessState extends AllUsersStates {
 class allUsersErrorState extends AllUsersStates {
   final String error;
   allUsersErrorState(this.error);
+}
+class deletedUsersLoadingState extends AllUsersStates {}
+
+class deletedUsersSuccessState extends AllUsersStates {
+  final AllUsersModel allUsersModel;
+
+  deletedUsersSuccessState(this.allUsersModel);
+}
+
+class deletedUsersErrorState extends AllUsersStates {
+  final String error;
+  deletedUsersErrorState(this.error);
 }
