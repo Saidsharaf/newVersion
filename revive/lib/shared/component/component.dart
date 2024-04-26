@@ -211,6 +211,7 @@ void navigate(context, Widget) => Navigator.push(
 Widget btnQuestions({
   String? txt,
   Function()? onPress,
+  Color? color,
 }) {
   return Column(
     children: [
@@ -250,38 +251,79 @@ Widget btnQuestions({
   );
 }
 
-Widget textBuild() {
-  return Container(
-    width: double.infinity,
-    height: 50,
-    decoration: BoxDecoration(
-      color: Colors.green,
-      borderRadius: BorderRadius.circular(17),
-      boxShadow: [
-        BoxShadow(
-          color: Color.fromRGBO(38, 41, 37, 0.29),
-          blurRadius: 1,
-          offset: Offset(0, 1),
+Widget btnkQuestions({
+  String? txt,
+  Function()? onPress,
+  bool? Selected,
+  void Function(bool)? onSelected,
+  int? index,
+}) {
+  return Column(
+    children: [
+      InkWell(
+        onTap: onPress,
+        child: Container(
+          width: double.infinity,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromRGBO(38, 41, 37, 0.29),
+                blurRadius: 1,
+                offset: Offset(0, 1),
+              ),
+            ],
+          ),
+          child: Center(
+              child: ChoiceChip(
+            label: Text(txt!),
+            selected: Selected!,
+            onSelected: onSelected,
+            backgroundColor: Colors.grey[200],
+            selectedColor:Colors.grey[200] ,
+            side: BorderSide.none,
+          )),
         ),
-      ],
-    ),
-    child: Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
-      child: TextFormField(
-        cursorColor: Colors.white,
-        keyboardType: TextInputType.phone,
-        decoration: InputDecoration(
-            border: UnderlineInputBorder(
-          borderSide: BorderSide.none,
-        )),
-        maxLines: 1,
-        style: TextStyle(
-          color: Colors.white,
-        ),
+      ),
+      SizedBox(
+        height: 16,
+      )
+    ],
+  );
+}
+
+Widget textBuild({
+  TextEditingController? controller,
+  void Function(String)? onChange,
+  void Function(String)? onSubmit,
+  String? Function(String?)? validate,
+}) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
+    child: TextFormField(
+      onChanged: onChange,
+      onFieldSubmitted: onSubmit,
+      validator: validate,
+      controller: controller,
+      cursorColor: Colors.white,
+      keyboardType: TextInputType.phone,
+      decoration: InputDecoration(
+          hoverColor: Colors.green,
+          filled: true,
+          fillColor: Colors.green,
+          border: UnderlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(10))),
+      maxLines: 1,
+      style: TextStyle(
+        color: Colors.white,
       ),
     ),
   );
 }
+
 Widget textBuild2({
   @required String? text,
 }) {
@@ -305,10 +347,10 @@ Widget textBuild2({
         cursorColor: Colors.white,
         keyboardType: TextInputType.phone,
         decoration: InputDecoration(
-          label: Text(text!),
+            label: Text(text!),
             border: UnderlineInputBorder(
-          borderSide: BorderSide.none,
-        )),
+              borderSide: BorderSide.none,
+            )),
         maxLines: 1,
         style: TextStyle(
           color: Colors.white,
@@ -322,7 +364,9 @@ Widget buildDropDown() {
   return CSCPicker(
     layout: Layout.vertical,
     //flagState: CountryFlag.DISABLE,
-    onCountryChanged: (country) {},
+    onCountryChanged: (country) {
+      print(country);
+    },
     onStateChanged: (state) {},
     onCityChanged: (city) {},
     /* countryDropdownLabel: "*Country",

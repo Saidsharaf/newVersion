@@ -122,4 +122,12 @@ class AllUsersCubit extends Cubit<AllUsersStates> {
     print(indexNum);
     emit(allUsersChangeIndexState());
   }
+
+  String valueChosen = "customer";
+  void changeDropBtn(value) {
+    valueChosen = value!;
+
+    emit(allUsersChangeDropDownState());
+    showALlUsers(type: "CUSTOMER");
+  }
 }

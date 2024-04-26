@@ -72,8 +72,9 @@ class OwnerUsers extends StatelessWidget {
                           child: ListTile(
                             leading: CircleAvatar(
                               radius: 28,
-                              backgroundImage: NetworkImage(server +
-                                  sharedPref.getData(key: "profilePic")),
+                              backgroundImage: NetworkImage( server +
+                                    state.allUsersModel.users![index]
+                                        .profilePhoto!,),
                             ),
                             title:
                                 Text(state.allUsersModel.users![index].username!),

@@ -7,7 +7,6 @@ import 'package:revive/modules/LoginAndReg/component.dart';
 import 'package:revive/modules/LoginAndReg/cubitForLogin/cubit.dart';
 import 'package:revive/modules/LoginAndReg/cubitForLogin/state.dart';
 import 'package:revive/modules/LoginAndReg/register.dart';
-import 'package:revive/modules/profile_screen/cubit.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 
@@ -51,6 +50,8 @@ class loginScreen extends StatelessWidget {
                     .saveData(key: "token", value: state.loginModel.data!.token)
                     .then((value) {
                   navigateAndFinish(context, HomeLayout(index: 0));
+                  sharedPref.saveData(
+                      key: "role", value: state.loginModel.data!.role);
                   sharedPref.saveData(
                       key: "profilePic", value: state.loginModel.data!.image);
                   sharedPref.saveData(
