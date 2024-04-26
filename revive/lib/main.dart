@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:revive/layout/home_layout.dart';
 import 'package:revive/modules/Admin/home_admin/homeAdmin.dart';
+import 'package:revive/modules/FactoryFootprint/questions_factory.dart';
 import 'package:revive/modules/LoginAndReg/welcome_screen.dart';
 import 'package:revive/modules/onBoarding/onBoarding.dart';
 import 'package:revive/shared/component/appLocale.dart';
@@ -22,7 +23,7 @@ void main() async {
 
   if (onBoarding != null) {
     if (token != null && role != 1) {
-      widget = HomeLayout(index: 0);
+      widget = QuestionsFactory();
     } else if (token != null && role == 1) {
       widget = HomeAdmin();
     } else

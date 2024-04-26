@@ -524,22 +524,22 @@ class QuestionsFactory extends StatelessWidget {
                           onPressed: () {
                             if (cubit.isLast) {
                               if (formKey.currentState!.validate()) {
-                                cubit.carbonFactory(
-                                  factSize: sharedPref.getData(key: "factSize"),
-                                  numPeople:
-                                      sharedPref.getData(key: "numPeople"),
-                                  electricityCons: sharedPref.getData(
-                                      key: "electricityCons"),
-                                  cleanEnergy:
-                                      sharedPref.getData(key: "cleanEnergy"),
-                                  numCars: sharedPref.getData(key: "numCars"),
-                                  localProduct:
-                                      sharedPref.getData(key: "localProducts"),
-                                  buyEnvComp: sharedPref.getData(key: "buyEnv"),
-                                  handleWaste:
-                                      sharedPref.getData(key: "handleWaste"),
-                                  heating: sharedPref.getData(key: "heating"),
-                                );
+                                // cubit.carbonFactory(
+                                //   factSize: sharedPref.getData(key: "factSize"),
+                                //   numPeople:
+                                //       sharedPref.getData(key: "numPeople"),
+                                //   electricityCons: sharedPref.getData(
+                                //       key: "electricityCons"),
+                                //   cleanEnergy:
+                                //       sharedPref.getData(key: "cleanEnergy"),
+                                //   numCars: sharedPref.getData(key: "numCars"),
+                                //   localProduct:
+                                //       sharedPref.getData(key: "localProducts"),
+                                //   buyEnvComp: sharedPref.getData(key: "buyEnv"),
+                                //   handleWaste:
+                                //       sharedPref.getData(key: "handleWaste"),
+                                //   heating: sharedPref.getData(key: "heating"),
+                                // );
                                 navigateAndFinish(
                                     context,
                                     HomeLayout(
