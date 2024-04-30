@@ -46,6 +46,13 @@ List<String> answer8 = [
   "Sometimes",
   "I'm not considering this option",
 ];
+List<String> answer9 = [
+  "Plastic",
+  "Glass",
+  "Tin cans",
+  "Food",
+  "Paper",
+];
 
 var numPeopleController = TextEditingController();
 var electricityConsController = TextEditingController();
@@ -256,7 +263,6 @@ class QuestionsFactory extends StatelessWidget {
                     sharedPref.saveData(
                         key: "numPeople",
                         value: int.parse(numPeopleController.text));
-
                     //print(numPeopleController.text);
                     print(sharedPref.getData(key: "numPeople").toString());
                     // cubit.carbonFactory(numPeople: sharedPref.getData(key: "numPeople"));
@@ -282,7 +288,7 @@ class QuestionsFactory extends StatelessWidget {
                   if (formKey.currentState!.validate()) {
                     sharedPref.saveData(
                         key: "electricityCons",
-                        value: int.parse(numPeopleController.text));
+                        value: int.parse(electricityConsController.text));
                     // cubit.carbonFactory(electricityCons: sharedPref.getData(key: "electricityCons"));
                     // pageController.nextPage(
                     //     duration: Duration(milliseconds: 500),
@@ -306,7 +312,7 @@ class QuestionsFactory extends StatelessWidget {
                   if (formKey.currentState!.validate()) {
                     sharedPref.saveData(
                         key: "cleanEnergy",
-                        value: int.parse(numPeopleController.text));
+                        value: int.parse(cleanEnergyController.text));
                     // cubit.carbonFactory(cleanEnergy: sharedPref.getData(key: "cleanEnergy"));
                     // pageController.nextPage(
                     //     duration: Duration(milliseconds: 500),
@@ -330,7 +336,7 @@ class QuestionsFactory extends StatelessWidget {
                   if (formKey.currentState!.validate()) {
                     sharedPref.saveData(
                         key: "numCars",
-                        value: int.parse(numPeopleController.text));
+                        value: int.parse(numCarsController.text));
                     // cubit.carbonFactory(numCars: sharedPref.getData(key: "numCars"));
                     // pageController.nextPage(
                     //     duration: Duration(milliseconds: 500),
@@ -354,7 +360,7 @@ class QuestionsFactory extends StatelessWidget {
                   if (formKey.currentState!.validate()) {
                     sharedPref.saveData(
                         key: "factSize",
-                        value: int.parse(numPeopleController.text));
+                        value: int.parse(factSizeController.text));
                     // cubit.carbonFactory(
                     //   factSize: sharedPref.getData(key: "factSize"),
                     //   numPeople: sharedPref.getData(key: "numPeople"),
@@ -435,7 +441,7 @@ class QuestionsFactory extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) => btnkQuestions(
-                    txt: answer7[index],
+                    txt: answer9[index],
                     Selected: cubit.current3Index == index,
                     onSelected: (value) {
                       // setState(() {
@@ -443,8 +449,8 @@ class QuestionsFactory extends StatelessWidget {
                       cubit.changeIndex3(value, index);
                       sharedPref.saveData(
                           key: "handleWaste",
-                          value: answer7[cubit.current3Index]);
-                      print(answer7[cubit.current3Index]);
+                          value: answer9[cubit.current3Index]);
+                      print(answer9[cubit.current3Index]);
                       // });
                     },
                   ),
@@ -595,7 +601,7 @@ class QuestionsFactory extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 60,
+              height: 50,
             ),
             model.con,
           ],

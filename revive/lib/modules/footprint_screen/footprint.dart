@@ -61,9 +61,9 @@ class Footprint extends StatelessWidget {
                           child: SfRadialGauge(
                             axes: <RadialAxis>[
                               RadialAxis(
-                                minimum: -1500,
-                                maximum: 1500,
-                                interval: 500,
+                                minimum: 0,
+                                maximum: 80000,
+                                interval: 10000,
                                 annotations: [
                                   GaugeAnnotation(
                                     widget: Text(
@@ -72,8 +72,12 @@ class Footprint extends StatelessWidget {
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 15,
-                                        color:
-                                            500 > 0 ? Colors.green : Colors.red,
+                                        color: double.tryParse(state
+                                                    .carbonFactoryModel
+                                                    .pythonOutput!)! >
+                                                4000
+                                            ? Colors.red
+                                            : Colors.green,
                                       ),
                                     ),
                                     positionFactor: .5,
@@ -95,17 +99,17 @@ class Footprint extends StatelessWidget {
                                 ranges: [
                                   GaugeRange(
                                     startValue: 0,
-                                    endValue: 1500,
+                                    endValue: 1000,
                                     color: Colors.green,
                                   ),
                                   GaugeRange(
-                                    startValue: 0,
-                                    endValue: -500,
+                                    startValue: 1000,
+                                    endValue: 4000,
                                     color: Colors.orange,
                                   ),
                                   GaugeRange(
-                                    startValue: -500,
-                                    endValue: -1500,
+                                    startValue: 4000,
+                                    endValue: 80000,
                                     color: Colors.red,
                                   ),
                                 ],
@@ -132,7 +136,7 @@ class Footprint extends StatelessWidget {
                           ),
                           child: MaterialButton(
                             onPressed: () {
-                              navigate(context, Questions());
+                              navigate(context, QuestionsPerson());
                             },
                             child: Text(
                               // "${getLang(context, "calculate")}",

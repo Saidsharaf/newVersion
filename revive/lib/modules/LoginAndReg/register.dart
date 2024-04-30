@@ -58,7 +58,7 @@ class RegScreen extends StatelessWidget {
                     //   Color.fromARGB(255, 22, 55, 21),
                     // ]),
                     image: DecorationImage(
-                      image: AssetImage("assets/images/plant1.jpg"),
+                      image: AssetImage("assets/images/login_background_2.jpg"),
                       fit: BoxFit.cover,
                       colorFilter: ColorFilter.srgbToLinearGamma(),
                     ),

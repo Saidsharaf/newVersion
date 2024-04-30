@@ -1,244 +1,225 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:revive/modules/machine_screen/history.dart';
-import 'package:revive/shared/component/component.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
-class SingleMachine extends StatelessWidget {
-  const SingleMachine({super.key});
+class SingleMachine extends StatefulWidget {
+  @override
+  State<SingleMachine> createState() => _SingleMachineState();
+}
+
+class _SingleMachineState extends State<SingleMachine> {
+  dynamic date;
+  dynamic dateDay;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor:  Color.fromRGBO(255, 255, 255, 1),
-        ),
-        backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+        backgroundColor: Colors.grey[100],
         title: Text(
-          "Revive",
+          'Revive',
           style: TextStyle(
             fontFamily: "Title",
             fontSize: 25,
+            color: Color.fromARGB(255, 68, 124, 70),
           ),
         ),
         centerTitle: true,
       ),
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(
-                "assets/images/leave.png",
-              ),
-              fit: BoxFit.cover,
-              opacity: 1),
-        ),
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Container(
-                height: 250,
-                // child: Image.asset("assets/images/machine.jpg",),
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.green,
-                        blurRadius: 3,
-                      ),
-                    ],
-                    image: DecorationImage(
-                      image: AssetImage(
-                        "assets/images/back1.png",
-                      ),
+            SizedBox(
+              height: 350,
+              width: MediaQuery.sizeOf(context).width,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Card(
+                  elevation: 6,
+                  child: ClipRRect(
+                    child: Image.asset(
+                      'assets/images/machine_background_2.jpg',
                       fit: BoxFit.fill,
                     ),
-                    border: Border.all(color: Colors.green),
-                    borderRadius: BorderRadius.circular(15)),
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      padding: EdgeInsets.only(top: 10),
-                      height: 130,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.red,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black,
-                            blurRadius: 5,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.device_thermostat_outlined,
-                            color: Colors.white,
-                            size: 50,
-                          ),
-                          Text(
-                            "Degree",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Body",
-                              fontSize: 17,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Text(
-                            "20",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Body",
-                              fontSize: 23,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      padding: EdgeInsets.only(top: 10),
-                      height: 130,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.green,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black,
-                            blurRadius: 5,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.date_range,
-                            color: Colors.white,
-                            size: 50,
-                          ),
-                          Text(
-                            "Day",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Body",
-                              fontSize: 17,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Text(
-                            "13-02-2024",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Body",
-                              fontSize: 15,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      padding: EdgeInsets.only(top: 10),
-                      height: 130,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.blue[400],
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black,
-                            blurRadius: 5,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.co2,
-                            color: Colors.white,
-                            size: 50,
-                          ),
-                          Text(
-                            "Carbon",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Body",
-                              fontSize: 17,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Text(
-                            "15",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "Body",
-                              fontSize: 23,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                margin: EdgeInsets.only(top: 40),
-                width: 250,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black,
-                      blurRadius: 3,
+              padding: EdgeInsets.only(
+                top: 25,
+                right: 14,
+                left: 14,
+                bottom: 12,
+              ),
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      _showDate(context);
+                    },
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: ' History of Your Machine !             ',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          TextSpan(
+                            text: 'Select The Day',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 42, 219, 116),
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                      overflow: TextOverflow.clip,
                     ),
-                  ],
-                  color: Color.fromARGB(255, 173, 145, 59),
+                  ),
+                ],
+              ),
+            ),
+            dateDay == null
+                ? SizedBox()
+                : Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: GasesItemList(
+                      date: dateDay ?? '',
+                    ),
+                  ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showDate(BuildContext context) async {
+    date = await showDatePicker(
+        context: context,
+        firstDate: DateTime(2024),
+        lastDate: DateTime(2030),
+        initialDate: DateTime.now());
+
+    setState(() {
+      dateDay = DateFormat('yyyy-MM-dd').format(date);
+    });
+  }
+}
+
+class GasesItemList extends StatelessWidget {
+  final dynamic date;
+  const GasesItemList({super.key, required this.date});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      children: [
+        GaseItem(
+          itemImage: 'assets/icons/calendar-svgrepo-com (2).svg',
+          itemName: 'Day',
+          itemValue: date,
+          heightSVG: 55,
+          weightSVG: 55,
+          color: Color.fromARGB(255, 103, 202, 127),
+        ),
+        GaseItem(
+          itemImage: 'assets/icons/co2-svgrepo-com.svg',
+          itemName: 'Carbon Dioxide',
+          itemValue: '20',
+          color: Color.fromARGB(255, 103, 202, 127),
+        ),
+        GaseItem(
+          itemImage: 'assets/icons/oxygen-svgrepo-com.svg',
+          itemName: 'Oxygen',
+          itemValue: '25',
+          color: Color.fromARGB(255, 103, 202, 127),
+        ),
+        GaseItem(
+          itemImage: 'assets/icons/thermometer-svgrepo-com.svg',
+          itemName: 'Temperature',
+          itemValue: '30',
+          heightSVG: 55,
+          weightSVG: 55,
+          color: Color.fromARGB(255, 103, 202, 127),
+        ),
+        GaseItem(
+          itemImage: 'assets/icons/snow-svgrepo-com.svg',
+          itemName: 'Humidity',
+          itemValue: '50',
+          heightSVG: 55,
+          weightSVG: 55,
+          color: Color.fromARGB(255, 103, 202, 127),
+        ),
+      ],
+    );
+  }
+}
+
+class GaseItem extends StatelessWidget {
+  final String itemImage;
+  final String itemName;
+  final String itemValue;
+  final double? heightSVG;
+  final double? weightSVG;
+  final Color color;
+
+  const GaseItem({
+    super.key,
+    required this.itemImage,
+    required this.itemName,
+    required this.itemValue,
+    this.heightSVG,
+    this.weightSVG,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: 10,
+      ),
+      child: Card(
+        elevation: 7.5,
+        child: SizedBox(
+          height: 70,
+          child: Container(
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Center(
+              child: ListTile(
+                selectedColor: color,
+                leading: SvgPicture.asset(
+                  itemImage,
+                  height: heightSVG ?? 65,
+                  width: weightSVG ?? 65,
+                  fit: BoxFit.cover,
                 ),
-                child: MaterialButton(
-                  onPressed: () {
-                    navigate(context, History());
-                  },
-                  child: Text(
-                    "History",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: "Revive",
-                      fontSize: 20,
-                      // fontWeight: FontWeight.bold,
-                    ),
+                title: Text(
+                  itemName,
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                trailing: Text(
+                  itemValue,
+                  style: TextStyle(
+                    fontSize: 18,
                   ),
                 ),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

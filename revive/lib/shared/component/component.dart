@@ -326,35 +326,31 @@ Widget textBuild({
 
 Widget textBuild2({
   @required String? text,
+  TextEditingController? controller,
+  void Function(String)? onChange,
+  void Function(String)? onSubmit,
+  String? Function(String?)? validate,
 }) {
-  return Container(
-    width: double.infinity,
-    height: 50,
-    decoration: BoxDecoration(
-      color: Colors.green,
-      borderRadius: BorderRadius.circular(17),
-      boxShadow: [
-        BoxShadow(
-          color: Color.fromRGBO(38, 41, 37, 0.29),
-          blurRadius: 1,
-          offset: Offset(0, 1),
-        ),
-      ],
-    ),
-    child: Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
-      child: TextFormField(
-        cursorColor: Colors.white,
-        keyboardType: TextInputType.phone,
-        decoration: InputDecoration(
-            label: Text(text!),
-            border: UnderlineInputBorder(
+  return Padding(
+    padding: const EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
+    child: TextFormField(
+      onChanged: onChange,
+    onFieldSubmitted: onSubmit,
+    validator: validate,
+    controller: controller,
+      cursorColor: Colors.white,
+      keyboardType: TextInputType.phone,
+      decoration: InputDecoration(
+        hoverColor: Colors.green,
+          filled: true,
+          fillColor: Colors.green,
+          label: Text(text!),
+          border: UnderlineInputBorder(
               borderSide: BorderSide.none,
-            )),
-        maxLines: 1,
-        style: TextStyle(
-          color: Colors.white,
-        ),
+              borderRadius: BorderRadius.circular(10))),
+      maxLines: 1,
+      style: TextStyle(
+        color: Colors.white,
       ),
     ),
   );

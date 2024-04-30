@@ -5,9 +5,12 @@ import 'package:revive/layout/cubit/states.dart';
 import 'package:revive/modules/FactoryFootprint/questions_factory.dart';
 import 'package:revive/modules/LoginAndReg/login.dart';
 import 'package:revive/modules/chat_screen/chat.dart';
-import 'package:revive/modules/report_screen/homeReport.dart';
+import 'package:revive/modules/trash_Screen/trash_post.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../modules/Report/report.dart';
 
 class listOfslider extends StatelessWidget {
   const listOfslider({
@@ -25,14 +28,21 @@ class listOfslider extends StatelessWidget {
       padding: const EdgeInsets.only(top: 6, left: 10),
       child: ListTile(
         onTap: press,
-        leading: Icon(
-          icon,
-          color: Colors.white,
+        leading: Container(
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 63, 129, 67),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 25,
+          ),
         ),
         title: Text(
           txt,
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -41,7 +51,7 @@ class listOfslider extends StatelessWidget {
   }
 }
 
-class headofslider extends StatelessWidget {
+class headofslider extends StatefulWidget {
   const headofslider({
     super.key,
     required this.email,
@@ -53,31 +63,38 @@ class headofslider extends StatelessWidget {
   final String email, userName, backgroundImage, imageOfprof;
 
   @override
+  State<headofslider> createState() => _headofsliderState();
+}
+
+class _headofsliderState extends State<headofslider> {
+  bool isCheck = false;
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider<NewsCubit>(
       create: (context) => NewsCubit(),
       child: BlocConsumer<NewsCubit, NewsStates>(
           listener: (context, state) {},
           builder: (context, state) {
-            var cubit = NewsCubit.get(context);
+            //var cubit = NewsCubit.get(context);
             return ListView(
               children: [
                 UserAccountsDrawerHeader(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      opacity: .3,
+                      opacity: 1.0,
                       image: AssetImage(
-                        backgroundImage,
+                        "assets/images/forest.jpg",
                       ),
                       fit: BoxFit.cover,
                     ),
                   ),
                   accountName: Text(
-                    userName,
+                    widget.userName,
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 16.2),
                   ),
-                  accountEmail: Text(email),
+                  accountEmail: Text(widget.email),
                   currentAccountPicture: Container(
                     height: 50,
                     width: 50,
@@ -85,58 +102,136 @@ class headofslider extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50),
                       image: DecorationImage(
                         image: NetworkImage(
-                          imageOfprof,
+                          widget.imageOfprof,
                         ),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                 ),
-                listOfslider(
+
+                SvglistOfslider(
                   txt: "Factory Footprint",
-                  icon: Icons.border_left_rounded,
+                  icon: "assets/icons/factory-svgrepo-com.svg",
                   press: () {
-                    navigate(
-                      context,
-                      QuestionsFactory(),
-                    );
+                    navigate(context, QuestionsFactory());
                   },
                 ),
-                listOfslider(
-                  txt: "weekly report",
-                  icon: Icons.poll_rounded,
+
+                SvglistOfslider(
+                  txt: "Weekly Report",
+                  icon: "assets/icons/report-svgrepo-com.svg",
                   press: () {
-                    navigate(context, Report());
+                    navigate(context, ReportScreen());
                   },
                 ),
-                listOfslider(
-                  txt: "My Posts",
-                  icon: Icons.paste_outlined,
-                  press: () {},
+                // listOfslider(
+                //   txt: "My Posts",
+                //   icon: Icons.paste_outlined,
+                //   press: () {},
+                // ),
+                // listOfslider(
+                //   txt: "Saved posts",
+                //   icon: Icons.save_rounded,
+                //   press: () {},
+                // ),
+
+                // Row(
+                //   children: [
+                //     Padding(
+                //       padding: const EdgeInsets.only(left: 15),
+                //       child: Container(
+                //         child: ClipOval(
+                //           child: Image.asset(
+                //             "assets/images/factory.jpeg", // Replace with your image path
+                //             width: 40,
+                //             height: 35,
+                //             fit: BoxFit.cover,
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //     SizedBox(
+                //       width: 15,
+                //     ),
+                //     Text(
+                //       'Factory Footprint',
+                //       style: TextStyle(
+                //         color: Colors.white,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // Row(
+                //   children: [
+                //     Padding(
+                //       padding: const EdgeInsets.only(left: 15),
+                //       child: Container(
+                //         child: ClipOval(
+                //           child: Image.asset(
+                //             "assets/images/report.jpeg", // Replace with your image path
+                //             width: 40,
+                //             height: 40,
+                //             fit: BoxFit.cover,
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //     SizedBox(
+                //       width: 15,
+                //     ),
+                //     Text(
+                //       'Weekly report',
+                //       style: TextStyle(
+                //         color: Colors.white,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+
+                SvglistOfslider(
+                  txt: "Trash post",
+                  icon: "assets/icons/garbage-bin-svgrepo-com.svg",
+                  press: () {
+                    navigate(context, TrashPost());
+                  },
                 ),
-                listOfslider(
-                  txt: "Saved posts",
-                  icon: Icons.save_rounded,
-                  press: () {},
+
+                SvglistOfslider(
+                  txt: "light mode",
+                  icon: "assets/icons/light_mode.svg",
+                  trailingWidget: Switch(
+                    onChanged: (value) {
+                      setState(() {
+                        isCheck = !isCheck;
+                      });
+                    },
+                    value: isCheck,
+                  ),
+                  press: () {
+                    navigate(context, TrashPost());
+                  },
                 ),
-                listOfslider(
-                  txt: "Trash posts",
-                  icon: Icons.restore_from_trash,
-                  press: () {},
-                ),
-                listOfslider(
-                  txt: "Chat Rev",
-                  icon: Icons.chat_outlined,
+
+                SvglistOfslider(
+                  txt: "Chat ",
+                  icon: "assets/icons/chat-chat-svgrepo-com.svg",
                   press: () {
                     navigate(context, chat());
                   },
                 ),
                 SizedBox(
-                  height: 110,
+                  height: 1,
                 ),
-                listOfslider(
-                  txt: "Logout",
-                  icon: Icons.logout_outlined,
+                SvglistOfslider(
+                  txt: "LogOut",
+                  icon: "assets/icons/logout-svgrepo-com.svg",
                   press: () {
                     sharedPref.removeData(key: "token").then((value) {
                       if (value) {
@@ -148,6 +243,47 @@ class headofslider extends StatelessWidget {
               ],
             );
           }),
+    );
+  }
+}
+
+class SvglistOfslider extends StatelessWidget {
+  const SvglistOfslider({
+    super.key,
+    required this.txt,
+    required this.icon,
+    required this.press,
+    this.color,
+    this.trailingWidget,
+  });
+  final String txt;
+  final String icon;
+  final Color? color;
+  final void Function()? press;
+  final Widget? trailingWidget;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 6, left: 10),
+      child: ListTile(
+        onTap: press,
+        leading: Container(
+          child: SvgPicture.asset(
+            icon,
+            width: 40,
+            height: 40,
+            // colorFilter: ColorFilter.mode(Colors.red, BlendMode.srcIn),
+          ),
+        ),
+        title: Text(
+          txt,
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        trailing: trailingWidget,
+      ),
     );
   }
 }

@@ -20,10 +20,10 @@ class WelcomeScreen extends StatelessWidget {
           // ),
           image: DecorationImage(
             image: AssetImage(
-              "assets/images/plant1.jpg",
+              "assets/images/login_background_2.jpg",
             ),
             fit: BoxFit.cover,
-            colorFilter: ColorFilter.srgbToLinearGamma(),
+           // colorFilter: ColorFilter.srgbToLinearGamma(),
           ),
         ),
         child: Center(
@@ -49,10 +49,8 @@ class WelcomeScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>  loginScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => loginScreen()));
                 },
                 child: Container(
                   height: 53,
@@ -78,10 +76,8 @@ class WelcomeScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>  RegScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => RegScreen()));
                 },
                 child: Container(
                   height: 53,

@@ -6,7 +6,6 @@ import 'package:revive/models/appModel/adminModel/allUsers/states.dart';
 import 'package:revive/modules/Admin/home_admin/audience.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/end_point.dart';
-import 'package:revive/shared/network/local/shared_pref.dart';
 
 class AdminUsers extends StatelessWidget {
   const AdminUsers({super.key});

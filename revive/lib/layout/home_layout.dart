@@ -7,6 +7,7 @@ import 'package:revive/layout/cubit/states.dart';
 import 'package:revive/models/slider/listofslider.dart';
 import 'package:revive/shared/network/end_point.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
+import 'package:shimmer/shimmer.dart';
 
 // ignore: must_be_immutable
 class HomeLayout extends StatelessWidget {
@@ -43,15 +44,8 @@ class HomeLayout extends StatelessWidget {
                     width: 6,
                   ),
                 ],
-                title: Text(
-                  cubit.title[cubit.currentIndex],
-                  style: TextStyle(
-                    fontFamily: "Title",
-                    color: Color.fromARGB(255, 68, 124, 70),
-                  ),
-                ),
-                titleTextStyle: TextStyle(
-                  fontSize: 33,
+                title: TitletextWidget(
+                  textName: cubit.title[cubit.currentIndex],
                 ),
                 centerTitle: true,
                 // leading: Padding(
@@ -82,7 +76,7 @@ class HomeLayout extends StatelessWidget {
                 },
               ),
               drawer: Drawer(
-                backgroundColor: Color.fromARGB(255, 14, 100, 57),
+                backgroundColor: Color.fromARGB(255, 228, 228, 228),
                 child: headofslider(
                   userName: sharedPref.getData(key: "username"),
                   email: sharedPref.getData(key: "email"),
@@ -94,6 +88,32 @@ class HomeLayout extends StatelessWidget {
             fallback: (context) => Center(child: CircularProgressIndicator()),
           );
         },
+      ),
+    );
+  }
+}
+
+class TitletextWidget extends StatelessWidget {
+  final String textName;
+
+  const TitletextWidget({
+    super.key,
+    required this.textName,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      period: const Duration(seconds: 3),
+      baseColor: Color.fromARGB(255, 68, 124, 70),
+      highlightColor: Color.fromARGB(255, 169, 172, 20),
+      child: Text(
+        textName,
+        style: TextStyle(
+          fontSize: 30,
+          fontFamily: "Title",
+          color: Color.fromARGB(255, 68, 124, 70),
+        ),
       ),
     );
   }

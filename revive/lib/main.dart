@@ -1,13 +1,11 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:revive/layout/home_layout.dart';
 import 'package:revive/modules/Admin/home_admin/homeAdmin.dart';
 import 'package:revive/modules/FactoryFootprint/questions_factory.dart';
 import 'package:revive/modules/LoginAndReg/welcome_screen.dart';
 import 'package:revive/modules/onBoarding/onBoarding.dart';
-import 'package:revive/shared/component/appLocale.dart';
 import 'package:revive/shared/component/constants.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 import 'package:revive/shared/network/remote/dioHelper.dart';
@@ -22,9 +20,12 @@ void main() async {
   Widget? widget;
 
   if (onBoarding != null) {
-    if (token != null && role != 1) {
+    if (token != null && role == 2) {
       widget = QuestionsFactory();
-    } else if (token != null && role == 1) {
+    } else if(token != null && role == 3){
+      widget = HomeLayout(index: 0,);
+    }
+    else if (token != null && role == 1) {
       widget = HomeAdmin();
     } else
       widget = WelcomeScreen();

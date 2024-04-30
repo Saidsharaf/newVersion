@@ -5,6 +5,8 @@ import 'package:revive/layout/cubit/states.dart';
 import 'package:revive/modules/footprint_screen/footprint.dart';
 import 'package:revive/modules/machine_screen/machine.dart';
 import 'package:revive/modules/post_screen/posts.dart';
+import 'package:revive/modules/posts_Screen/posts.dart';
+import 'package:revive/modules/prof_screen/prof.dart';
 import 'package:revive/modules/profile_screen/profile.dart';
 import 'package:revive/modules/settings_screen/settings.dart';
 
@@ -35,8 +37,8 @@ class NewsCubit extends Cubit<NewsStates> {
   List<Widget> screens = [
     Footprint(),
     Machine(),
-    post(),
-    Profile(),
+    Posts(),
+    Prof(),
     Settings(),
   ];
   void changeNav(int value) {
