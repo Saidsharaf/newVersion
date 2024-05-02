@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/models/appModel/CarbonModel/factory_model.dart';
-import 'package:revive/modules/FactoryFootprint/state.dart';
+import 'package:revive/modules/Owner/FactoryFootprint/state.dart';
 import 'package:revive/shared/network/end_point.dart';
 import 'package:revive/shared/network/remote/dioHelper.dart';
 

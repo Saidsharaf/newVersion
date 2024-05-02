@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:revive/modules/post_screen/add_post.dart';
-import 'package:revive/modules/post_screen/comment.dart';
-import 'package:revive/modules/prof_screen/prof.dart';
+import 'package:revive/modules/betweenOwner_Customer/post_screen/add_post.dart';
+import 'package:revive/modules/betweenOwner_Customer/post_screen/comment.dart';
+import 'package:revive/modules/betweenOwner_Customer/prof_screen/prof.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/tabs/saved_post.dart';
 

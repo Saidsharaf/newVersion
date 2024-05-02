@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/models/appModel/login_model.dart';
 import 'package:revive/modules/LoginAndReg/cubitForLogin/cubit.dart';
 import 'package:revive/modules/LoginAndReg/cubitForLogin/state.dart';
-import 'package:revive/modules/profile_screen/tree.dart';
+import 'package:revive/modules/betweenOwner_Customer/profile_screen/profile_screen/tree.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/end_point.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';

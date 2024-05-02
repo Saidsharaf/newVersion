@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
-import 'package:revive/modules/settings_screen/account.dart';
+import 'package:revive/modules/betweenOwner_Customer/settings_screen/account.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 
 class Settings extends StatelessWidget {

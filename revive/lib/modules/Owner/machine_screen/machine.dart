@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:revive/modules/machine_screen/machine_info_model.dart';
-import 'package:revive/modules/machine_screen/single_machine.dart';
+import 'package:revive/modules/Owner/machine_screen/machine_info_model.dart';
+import 'package:revive/modules/Owner/machine_screen/single_machine.dart';
 import 'package:revive/shared/component/component.dart';
 
 // ignore: must_be_immutable

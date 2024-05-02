@@ -1,8 +1,8 @@
 import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
-import 'package:revive/modules/machine_screen/Single_machine.dart';
-import 'package:revive/modules/post_screen/comment.dart';
+import 'package:revive/modules/Owner/machine_screen/single_machine.dart';
+import 'package:revive/modules/betweenOwner_Customer/post_screen/comment.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 import 'package:url_launcher/url_launcher.dart';
 

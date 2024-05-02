@@ -6,7 +6,9 @@ import 'package:revive/modules/Admin/home_admin/homeAdmin.dart';
 import 'package:revive/modules/LoginAndReg/component.dart';
 import 'package:revive/modules/LoginAndReg/cubitForLogin/cubit.dart';
 import 'package:revive/modules/LoginAndReg/cubitForLogin/state.dart';
+import 'package:revive/modules/LoginAndReg/forget_screen.dart';
 import 'package:revive/modules/LoginAndReg/register.dart';
+import 'package:revive/modules/Owner/FactoryFootprint/questions_factory.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 
@@ -45,11 +47,25 @@ class loginScreen extends StatelessWidget {
                   sharedPref.saveData(
                       key: "AdminEmail", value: state.loginModel.data!.email);
                 });
-              } else {
+              } else if (state.loginModel.data!.role == 2){
                 sharedPref
                     .saveData(key: "token", value: state.loginModel.data!.token)
                     .then((value) {
-                  navigateAndFinish(context, HomeLayout(index: 0));
+                  navigateAndFinish(context, QuestionsFactory());
+                  sharedPref.saveData(
+                      key: "role", value: state.loginModel.data!.role);
+                  sharedPref.saveData(
+                      key: "profilePic", value: state.loginModel.data!.image);
+                  sharedPref.saveData(
+                      key: "username", value: state.loginModel.data!.name);
+                  sharedPref.saveData(
+                      key: "email", value: state.loginModel.data!.email);
+                });
+              }else{
+                  sharedPref
+                    .saveData(key: "token", value: state.loginModel.data!.token)
+                    .then((value) {
+                  navigateAndFinish(context, HomeLayout(index: 0,));
                   sharedPref.saveData(
                       key: "role", value: state.loginModel.data!.role);
                   sharedPref.saveData(
@@ -83,7 +99,7 @@ class loginScreen extends StatelessWidget {
                   image: DecorationImage(
                     image: AssetImage("assets/images/login_background_2.jpg"),
                     fit: BoxFit.cover,
-                  //  colorFilter: ColorFilter.srgbToLinearGamma(),
+                    //  colorFilter: ColorFilter.srgbToLinearGamma(),
                   ),
                 ),
                 // child: Column(
@@ -174,7 +190,8 @@ class loginScreen extends StatelessWidget {
                               alignment: Alignment.centerRight,
                               child: GestureDetector(
                                 onTap: () {
-                                  bottomEmail(context);
+                                  // bottomEmail(context);
+                                  navigate(context, ForgetPassword());
                                 },
                                 child: Text(
                                   'Forgot Password?',

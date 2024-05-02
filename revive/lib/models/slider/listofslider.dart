@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/layout/cubit/cubit.dart';
 import 'package:revive/layout/cubit/states.dart';
-import 'package:revive/modules/FactoryFootprint/questions_factory.dart';
 import 'package:revive/modules/LoginAndReg/login.dart';
+import 'package:revive/modules/Owner/FactoryFootprint/questions_factory.dart';
+import 'package:revive/modules/Owner/Report/report.dart';
+import 'package:revive/modules/betweenOwner_Customer/trash_Screen/trash_post.dart';
 import 'package:revive/modules/chat_screen/chat.dart';
-import 'package:revive/modules/trash_Screen/trash_post.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../modules/Report/report.dart';
 
 class listOfslider extends StatelessWidget {
   const listOfslider({
@@ -110,7 +110,7 @@ class _headofsliderState extends State<headofslider> {
                   ),
                 ),
 
-                SvglistOfslider(
+              sharedPref.getData(key: "role")==3? Container():SvglistOfslider(
                   txt: "Factory Footprint",
                   icon: "assets/icons/factory-svgrepo-com.svg",
                   press: () {
@@ -118,7 +118,7 @@ class _headofsliderState extends State<headofslider> {
                   },
                 ),
 
-                SvglistOfslider(
+                sharedPref.getData(key: "role")==3? Container():SvglistOfslider(
                   txt: "Weekly Report",
                   icon: "assets/icons/report-svgrepo-com.svg",
                   press: () {

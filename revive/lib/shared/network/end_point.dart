@@ -6,4 +6,4 @@ const DELETEDATA = "/api/rev/users/destroy/37";
 const CARBONFACTORY = "/api/rev/python/carbon/footprint/factory";
 const CARBONPERSON = "/api/rev/python/dioxide/ratio";
 
-const server = "https://c0a4-2a09-bac5-30cb-1eb-00-31-8c.ngrok-free.app";
+const server = "https://4830-2a09-bac5-d578-1eb-00-31-115.ngrok-free.app";

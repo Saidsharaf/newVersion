@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:revive/modules/FactoryFootprint/cubit.dart';
-import 'package:revive/modules/FactoryFootprint/state.dart';
+
+import 'package:revive/modules/Owner/FactoryFootprint/cubit.dart';
+import 'package:revive/modules/Owner/FactoryFootprint/state.dart';
 import 'package:revive/modules/footprint_screen/questions.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';

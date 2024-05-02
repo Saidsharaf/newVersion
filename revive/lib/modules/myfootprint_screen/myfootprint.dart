@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:revive/modules/profile_screen/tlived.dart';
-import 'package:revive/modules/profile_screen/tree.dart';
+import 'package:revive/modules/betweenOwner_Customer/profile_screen/profile_screen/tlived.dart';
+import 'package:revive/modules/betweenOwner_Customer/profile_screen/profile_screen/tree.dart';
 //import 'package:revive/modules/profile_screen/tree.dart';
 import 'package:revive/shared/component/component.dart';
 

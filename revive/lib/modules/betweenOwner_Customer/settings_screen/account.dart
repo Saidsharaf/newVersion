@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
-import 'package:revive/modules/settings_screen/settings.dart';
+import 'package:revive/modules/betweenOwner_Customer/settings_screen/settings.dart';
 
 class Account extends StatelessWidget {
   const Account({super.key});

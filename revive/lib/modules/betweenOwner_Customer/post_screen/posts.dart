@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:revive/models/dropdownMenu/menu.dart';
 import 'package:revive/models/dropdownMenu/menu_item.dart';
-import 'package:revive/modules/post_screen/add_post.dart';
+import 'package:revive/modules/betweenOwner_Customer/post_screen/add_post.dart';
 import 'package:revive/shared/component/component.dart';
 
 class post extends StatelessWidget {
