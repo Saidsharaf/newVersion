@@ -3,8 +3,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/tabs/my_post_details.dart';
 
-class SavedPost extends StatelessWidget {
-  const SavedPost({Key? key}) : super(key: key);
+class MyPost extends StatelessWidget {
+  const MyPost({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class SavedPost extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 4.0),
         child: MasonryGridView.builder(
           physics: NeverScrollableScrollPhysics(),
-          itemCount: 5,
+          itemCount: 4,
           gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
           ),
@@ -29,7 +29,7 @@ class SavedPost extends StatelessWidget {
                 child: Opacity(
                   opacity: 0.9,
                   child: Image.asset(
-                      'assets/images/image' + (index + 1).toString() + '.jpg'),
+                      'assets/images/post_' + (index + 1).toString() + '.jpeg'),
                 ),
               ),
             ),

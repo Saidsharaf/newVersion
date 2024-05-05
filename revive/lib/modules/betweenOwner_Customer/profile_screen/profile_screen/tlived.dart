@@ -26,7 +26,7 @@ class _TreeState extends State<TreeLived> {
             const Padding(
               padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
               child: Text(
-                "That's a living example of how you can control the environment, You can use the slider to build or tear down the Tree",
+                "That's a living example of how many trees that you helped to live or die",
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: "Body",
@@ -39,16 +39,16 @@ class _TreeState extends State<TreeLived> {
                 Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.only(left: 5, top: 150),
                       child: Image(
                         image: AssetImage("assets/images/tree_lived.jpg"),
-                        width: 220,
-                        height: 650,
+                        width: 110,
+                        height: 250,
                       ),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsets.only(right: 40, top: 0, bottom: 0),
+                          const EdgeInsets.only(left: 10, top: 0, bottom: 0),
                       child: Text(
                         "Tree Lived ",
                         style: TextStyle(
@@ -59,7 +59,7 @@ class _TreeState extends State<TreeLived> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 60),
+                      padding: const EdgeInsets.only(left: 10),
                       child: Text(
                         "15 ",
                         style: TextStyle(
@@ -78,16 +78,16 @@ class _TreeState extends State<TreeLived> {
                 Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 230, top: 60),
+                      padding: const EdgeInsets.only(left: 230, top: 230),
                       child: Image(
                         image: AssetImage("assets/images/tree_died.jpg"),
-                        width: 150,
-                        height: 600,
+                        width: 50,
+                        height: 150,
                       ),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsets.only(left: 200, top: 0, bottom: 0),
+                          const EdgeInsets.only(left: 220, top: 22, bottom: 0),
                       child: Text(
                         "Tree Died",
                         style: TextStyle(
@@ -98,7 +98,7 @@ class _TreeState extends State<TreeLived> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 200),
+                      padding: const EdgeInsets.only(left: 225),
                       child: Text(
                         "10 ",
                         style: TextStyle(

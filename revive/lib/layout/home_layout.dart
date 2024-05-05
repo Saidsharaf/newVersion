@@ -31,13 +31,14 @@ class HomeLayout extends StatelessWidget {
               extendBody: true,
               backgroundColor: Colors.grey[100],
               appBar: AppBar(
-                actions: const [
+                actions:  [
                   CircleAvatar(
                     radius: 23,
                     backgroundColor: Color.fromARGB(255, 68, 124, 70),
                     child: CircleAvatar(
                       radius: 21.3,
-                      backgroundImage: AssetImage("assets/images/prof1.jpeg"),
+                      backgroundImage:NetworkImage(server+sharedPref.getData(key: "profilePic"),
+                      ),
                     ),
                   ),
                   SizedBox(

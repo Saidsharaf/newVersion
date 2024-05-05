@@ -303,7 +303,7 @@ class Myfootprint extends StatelessWidget {
                       },
                       child: buildIcon(
                         shadowColor: Color.fromRGBO(154, 241, 165, 0.278),
-                        icon: Icons.fastfood,
+                        icon: Icons.details_sharp,
                         padd: EdgeInsets.only(
                           top: 330,
                           left: 280,
@@ -312,20 +312,20 @@ class Myfootprint extends StatelessWidget {
                       ),
                     ),
 
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => TreeLived()),
-                        );
-                      },
-                      child: buildIcon(
-                        padd: EdgeInsets.only(left: 37, top: 330),
-                        shadowColor: Color.fromRGBO(154, 241, 165, 0.278),
-                        icon: Icons.access_time,
-                        color: Colors.green[400],
-                      ),
-                    ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(builder: (context) => TreeLived()),
+                    //     );
+                    //   },
+                    //   child: buildIcon(
+                    //     padd: EdgeInsets.only(left: 37, top: 330),
+                    //     shadowColor: Color.fromRGBO(154, 241, 165, 0.278),
+                    //     icon: Icons.access_time,
+                    //     color: Colors.green[400],
+                    //   ),
+                    // ),
 
                     GestureDetector(
                       onTap: () {
@@ -337,7 +337,7 @@ class Myfootprint extends StatelessWidget {
                       child: buildIcon(
                         padd: EdgeInsets.only(top: 40, left: 280),
                         shadowColor: Color.fromRGBO(154, 241, 165, 0.278),
-                        icon: Icons.bus_alert,
+                        icon: Icons.grass_sharp,
                         color: Colors.green[400],
                       ),
                     ),

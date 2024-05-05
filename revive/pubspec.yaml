@@ -69,6 +69,8 @@ dependencies:
   rename:
   permission_handler: ^11.3.1
   flutter_pw_validator: ^1.6.0
+  popover: ^0.3.0
+  percent_indicator: ^4.2.3
   syncfusion_flutter_charts: 
   path:
   image_picker:

@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:revive/modules/betweenOwner_Customer/settings_screen/account.dart';
+import 'package:revive/shared/network/end_point.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 
 class Settings extends StatelessWidget {
@@ -27,37 +29,47 @@ class Settings extends StatelessWidget {
               ),
               Stack(
                 children: [
-                  CircleAvatar(
-                    radius: 30,
-                    child:CircleAvatar(
-                              radius: 33.3,
-                              backgroundImage:
-                                  AssetImage("assets/images/prof1.jpeg"),
-                            ),
-                  ),
-                Container(
-                  padding: EdgeInsets.only(top: 35, left: 43),
-                  child: CircleAvatar(
-                    radius: 12,
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.edit,
-                    color: Colors.green,
-                    size: 18,
+                  Container(
+                    width: 70,
+                    height: 70,
+                    child: ClipOval(
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            server + sharedPref.getData(key: "profilePic"),
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
+                  Container(
+                    padding: EdgeInsets.only(top: 37, left: 45),
+                    child: CircleAvatar(
+                      radius: 12,
+                      backgroundColor: Colors.white,
+                      child: Icon(
+                        Icons.edit,
+                        color: Colors.green,
+                        size: 18,
+                      ),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
-                width: 30,
+                width: 20,
               ),
-              Text(
-                'Said Sharaf',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontFamily: 'Pacifico',
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: Text(
+                  sharedPref.getData(key: "username"),
+                  style: TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontFamily: 'Pacifico',
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:revive/modules/LoginAndReg/component.dart';
+import 'package:revive/modules/LoginAndReg/login.dart';
+import 'package:revive/shared/component/component.dart';
 
 class NewPass extends StatefulWidget {
   const NewPass({super.key});
@@ -27,16 +30,19 @@ class _NewPassState extends State<NewPass> {
                   "assets/icons/pass.svg",
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               TextFormField(
                 controller: passwordController,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(7),
-                  )
-                ),
+                    border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(7),
+                )),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 height: 200,
                 child: FlutterPwValidator(
@@ -51,7 +57,37 @@ class _NewPassState extends State<NewPass> {
                   onSuccess: () {},
                   onFail: () {},
                 ),
-              )
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    navigate(context, loginScreen());
+                    showToast(
+                        msg: "New password is saved",
+                        state: toastStates.SUCCESS);
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 250,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 102, 173, 105),
+                      borderRadius: BorderRadius.circular(7),
+                    ),
+                    child: Center(
+                        child: Text(
+                      "SAVE",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

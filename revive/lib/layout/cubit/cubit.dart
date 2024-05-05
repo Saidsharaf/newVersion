@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/layout/cubit/states.dart';
 import 'package:revive/modules/Customer/footprint_Page/footprint_customer.dart';
+import 'package:revive/modules/Customer/orderMachine/order_machine.dart';
 import 'package:revive/modules/Owner/machine_screen/machine.dart';
 import 'package:revive/modules/betweenOwner_Customer/posts_Screen/posts.dart';
 import 'package:revive/modules/betweenOwner_Customer/prof_screen/prof.dart';
@@ -36,7 +37,7 @@ class NewsCubit extends Cubit<NewsStates> {
 
   List<Widget> screens = [
     sharedPref.getData(key: "role")==3? FootprintCustomer(): Footprint(),
-    Machine(),
+    sharedPref.getData(key: "role")==3? OrderMachine():Machine(),
     Posts(),
     Prof(),
     Settings(),

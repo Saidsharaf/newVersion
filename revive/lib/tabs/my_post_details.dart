@@ -6,14 +6,14 @@ import 'package:revive/modules/betweenOwner_Customer/post_screen/posts.dart';
 import 'package:revive/modules/betweenOwner_Customer/prof_screen/prof.dart';
 import 'package:revive/shared/component/component.dart';
 
-class TrashPost extends StatefulWidget {
-  const TrashPost({super.key});
+class MyPostDetails extends StatefulWidget {
+  const MyPostDetails({super.key});
 
   @override
-  State<TrashPost> createState() => _MyPostDetailsState();
+  State<MyPostDetails> createState() => _MyPostDetailsState();
 }
 
-class _MyPostDetailsState extends State<TrashPost> {
+class _MyPostDetailsState extends State<MyPostDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _MyPostDetailsState extends State<TrashPost> {
       appBar: AppBar(
         backgroundColor: Colors.grey[100],
         title: Text(
-          'TRASH',
+          'My Post',
           style: TextStyle(
             fontFamily: "Title",
             fontSize: 25,
@@ -74,7 +74,7 @@ class _MyPostDetailsState extends State<TrashPost> {
               ),
 
               /////////// image post
-              Image.asset("assets/images/image4.jpg"),
+              Image.asset("assets/images/post_1.jpeg"),
 
               ///footer post
               Row(

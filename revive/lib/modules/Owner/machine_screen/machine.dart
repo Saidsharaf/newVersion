@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:popover/popover.dart';
+import 'package:revive/models/machineMenuItems/menu_items.dart';
 import 'package:revive/modules/Owner/machine_screen/machine_info_model.dart';
 import 'package:revive/modules/Owner/machine_screen/single_machine.dart';
 import 'package:revive/shared/component/component.dart';
@@ -322,6 +324,16 @@ class BuildCardOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onLongPress: () {
+        showPopover(
+          context: context,
+          bodyBuilder: (context) => MachineMenuItem(),
+          width: 200,
+          height: 150,
+          backgroundColor: Colors.greenAccent.shade400,
+          direction: PopoverDirection.bottom
+        );
+      },
       onTap: () {
         navigate(context, SingleMachine());
       },

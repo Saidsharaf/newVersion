@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:revive/modules/LoginAndReg/login.dart';
 import 'package:revive/modules/LoginAndReg/register.dart';
+import 'package:revive/shared/network/end_point.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -23,7 +25,7 @@ class WelcomeScreen extends StatelessWidget {
               "assets/images/login_background_2.jpg",
             ),
             fit: BoxFit.cover,
-           // colorFilter: ColorFilter.srgbToLinearGamma(),
+            // colorFilter: ColorFilter.srgbToLinearGamma(),
           ),
         ),
         child: Center(
@@ -39,7 +41,7 @@ class WelcomeScreen extends StatelessWidget {
               const Text(
                 'Welcome To Revive',
                 style: TextStyle(
-                  fontSize: 40,
+                  fontSize: 48,
                   color: Colors.white,
                   fontFamily: "Zuume",
                 ),
@@ -116,22 +118,36 @@ class WelcomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Image(
-                    image: AssetImage(
-                      'assets/images/github.png',
+                  GestureDetector(
+                    onTap: () async {
+                      await launchUrl(
+                        Uri.parse(server + "/api/rev/redirect/github"),
+                      );
+                    },
+                    child: const Image(
+                      image: AssetImage(
+                        'assets/images/github.png',
+                      ),
+                      height: 35,
                     ),
-                    height: 35,
                   ),
                   SizedBox(
                     width: 20,
                   ),
                   CircleAvatar(
                     radius: 17.5,
-                    child: const Image(
-                      image: AssetImage(
-                        'assets/images/google.png',
+                    child: GestureDetector(
+                      onTap: () async {
+                        await launchUrl(
+                          Uri.parse(server + "/api/rev/redirect/google"),
+                        );
+                      },
+                      child: const Image(
+                        image: AssetImage(
+                          'assets/images/google.png',
+                        ),
+                        height: 40,
                       ),
-                      height: 40,
                     ),
                   ),
                 ],

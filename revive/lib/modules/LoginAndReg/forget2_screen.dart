@@ -217,7 +217,7 @@ class _MyWidgetState extends State<VerficationPass> {
               Center(
                 child: GestureDetector(
                   onTap: () {
-                    navigate(context, NewPass());
+                    navigateAndFinish(context, NewPass());
                   },
                   child: Container(
                     height: 50,
