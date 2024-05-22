@@ -11,6 +11,7 @@ class AllUsersCubit extends Cubit<AllUsersStates> {
   static AllUsersCubit get(context) => BlocProvider.of(context);
   AllUsersModel? allUsersModel;
 
+  List<dynamic> users = [];
   void showALlUsers({
     @required String? type,
   }) {
@@ -26,8 +27,43 @@ class AllUsersCubit extends Cubit<AllUsersStates> {
       },
     ).then((value) {
       print(value.data);
+      print("______________________________________");
       allUsersModel = AllUsersModel.fromJson(value.data);
+      users = value.data["users"];
+      print(users[1]["email"]);
+      emit(allUsersSuccessState(allUsersModel!));
+    }).catchError(
+      (error) {
+        print(error.toString());
+        emit(allUsersErrorState(error.toString()));
+      },
+    );
+  }
 
+  String? msgRole;
+  bool stat = true;
+  void ModifyRole({
+    @required int? id,
+    @required int? role,
+  }) {
+    emit(allUsersLoadingState());
+    print("loooooooading");
+    DioHelper.PutData(
+      url: MODIFYROLE,
+      data: {
+        "checksecurity": "EI8m2bl8TFVjbwYmuopsNPd1",
+        "token":
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3Jldi91c2Vycy9sb2dpbiIsImlhdCI6MTcxMTY5NDA1OCwibmJmIjoxNzExNjk0MDU4LCJqdGkiOiJlbGRZbzRjVGRid09Cek41Iiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.RTDj6HW2CIdhL8e3i5Nxm1NKgq8gAEFwLjyYRmArPME",
+        "id": id,
+        "role": role,
+      },
+    ).then((value) {
+      print(value.data);
+      print("*********************");
+      allUsersModel = AllUsersModel.fromJson(value.data);
+      msgRole = value.data["msg"];
+      stat = value.data["status"];
+      print(value.data["msg"]);
       emit(allUsersSuccessState(allUsersModel!));
     }).catchError(
       (error) {
@@ -123,11 +159,18 @@ class AllUsersCubit extends Cubit<AllUsersStates> {
     emit(allUsersChangeIndexState());
   }
 
-  String valueChosen = "customer";
-  void changeDropBtn(value) {
+  String valueChosen = "1";
+  void changeDropBtnUser(value) {
     valueChosen = value!;
 
     emit(allUsersChangeDropDownState());
     showALlUsers(type: "CUSTOMER");
+    emit(allUsersChangeDoneState());
+  }
+  void changeDropBtnOwner(value) {
+    valueChosen = value!;
+
+    emit(allUsersChangeDropDownState());
+    showALlUsers(type: "OWNER");
   }
 }

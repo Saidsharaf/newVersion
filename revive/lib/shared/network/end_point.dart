@@ -5,5 +5,6 @@ const SHOWALLUSERS = "/api/rev/users";
 const DELETEDATA = "/api/rev/users/destroy/37";
 const CARBONFACTORY = "/api/rev/python/carbon/footprint/factory";
 const CARBONPERSON = "/api/rev/python/dioxide/ratio";
+const MODIFYROLE = "/api/rev/users/modifyrole/37";
 
-const server = "https://dddf-2a09-bac5-30ca-16a0-00-241-62.ngrok-free.app";
+const server = "https://3895-2a09-bac5-30cb-16a0-00-241-4c.ngrok-free.app";

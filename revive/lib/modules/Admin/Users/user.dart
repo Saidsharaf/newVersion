@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -25,86 +26,89 @@ class Users extends StatelessWidget {
         },
         builder: (context, state) {
           var cubit = AllUsersCubit.get(context);
-          return state is allUsersSuccessState
-              ? Scaffold(
-                  appBar: AppBar(
-                    title: Text("User"),
-                    centerTitle: true,
-                    leading: IconButton(
-                        onPressed: () {
-                          navigateAndFinish(context, Audience());
-                        },
-                        icon: Icon(Icons.arrow_back)),
-                  ),
-                  body: ListView.builder(
-                    itemCount: state.allUsersModel.users!.length,
-                    itemBuilder: (context, index) {
-                      return Slidable(
-                        key: const ValueKey(0),
-                        startActionPane: ActionPane(
-                          // A motion is a widget used to control how the pane animates.
-                          motion: const ScrollMotion(),
+          var list = cubit.users;
+          return ConditionalBuilder(
+            condition: state is allUsersSuccessState,
+            builder: (context) => Scaffold(
+              appBar: AppBar(
+                title: Text("User"),
+                centerTitle: true,
+                leading: IconButton(
+                    onPressed: () {
+                      navigateAndFinish(context, Audience());
+                    },
+                    icon: Icon(Icons.arrow_back)),
+              ),
+              body: ListView.builder(
+                itemCount: list.length,
+                itemBuilder: (context, index) {
+                  return Slidable(
+                    key: const ValueKey(0),
+                    startActionPane: ActionPane(
+                      // A motion is a widget used to control how the pane animates.
+                      motion: const ScrollMotion(),
 
-                          // A pane can dismiss the Slidable.
-                          dismissible: DismissiblePane(onDismissed: () {
-                            cubit.DeleteUsers(
-                                id: state.allUsersModel.users![index].id);
-                          }),
-                          // All actions are defined in the children parameter.
-                          children: [
-                            // A SlidableAction can have an icon and/or a label.
-                            SlidableAction(
-                              onPressed: (context) {
-                                // cubit.DeleteUsers(
-                                //     id: state.allUsersModel.users![index].id);
-                              },
-                              backgroundColor: Color(0xFFFE4A49),
-                              foregroundColor: Colors.white,
-                              icon: Icons.delete,
-                              label: 'Delete',
-                            ),
-                            SlidableAction(
-                              onPressed: (context) {
-                                navigate(context, MachineAdmin());
-                              },
-                              backgroundColor: Color(0xFF21B7CA),
-                              foregroundColor: Colors.white,
-                              icon: Icons.factory_outlined,
-                              label: 'Machine',
-                            ),
-                          ],
+                      // A pane can dismiss the Slidable.
+                      dismissible: DismissiblePane(onDismissed: () {
+                        cubit.DeleteUsers(
+                            id: list[index]["id"]);
+                      }),
+                      // All actions are defined in the children parameter.
+                      children: [
+                        // A SlidableAction can have an icon and/or a label.
+                        SlidableAction(
+                          onPressed: (context) {
+                            // cubit.DeleteUsers(
+                            //     id: state.allUsersModel.users![index].id);
+                          },
+                          backgroundColor: Color(0xFFFE4A49),
+                          foregroundColor: Colors.white,
+                          icon: Icons.delete,
+                          label: 'Delete',
                         ),
-                        child: Card(
-                          child: ListTile(
-                            onTap: () {
-                              cubit.changeIndexNumber(index);
-                              sharedPref.saveData(key: "id", value: index);
-                              navigateAndFinish(context, OneUser());
-                            },
-                            leading: CircleAvatar(
-                              radius: 28,
-                              backgroundImage: NetworkImage(
-                                server +
-                                    state.allUsersModel.users![index]
-                                        .profilePhoto!,
-                              ),
-                            ),
-                            title: Text(
-                                state.allUsersModel.users![index].username!),
-                            subtitle:
-                                Text(state.allUsersModel.users![index].email!),
-                            trailing: Icon(Icons.arrow_forward),
+                        SlidableAction(
+                          onPressed: (context) {
+                            navigate(context, MachineAdmin());
+                          },
+                          backgroundColor: Color(0xFF21B7CA),
+                          foregroundColor: Colors.white,
+                          icon: Icons.factory_outlined,
+                          label: 'Machine',
+                        ),
+                      ],
+                    ),
+                    child: Card(
+                      child: ListTile(
+                        onTap: () {
+                          cubit.changeIndexNumber(index);
+                          sharedPref.saveData(key: "id", value: index);
+                          navigateAndFinish(context, OneUser());
+                        },
+                        leading: CircleAvatar(
+                          radius: 28,
+                          backgroundImage: NetworkImage(
+                            server +
+                              list[index]["profile_photo"],
                           ),
                         ),
-                      );
-                    },
-                  ),
-                )
-              : Center(
-                  child: CircularProgressIndicator(
-                  color: Colors.green,
-                  backgroundColor: Colors.grey[300],
-                ));
+                        title:
+                            Text(list[index]["username"]),
+                        subtitle:
+                            Text(list[index]["email"]),
+                        trailing: Icon(Icons.arrow_forward),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            fallback: (context) => Center(
+              child: CircularProgressIndicator(
+                color: Colors.green,
+                backgroundColor: Colors.grey[300],
+              ),
+            ),
+          );
         },
       ),
     );

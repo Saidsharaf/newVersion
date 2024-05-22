@@ -122,7 +122,7 @@ class UsersModel {
   String? personalCard;
   String? birthday;
   String? profilePhoto;
-  Null? carbonFootprint;
+  int? carbonFootprint;
   UsersModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];

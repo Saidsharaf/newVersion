@@ -49,6 +49,23 @@ class DioHelper {
       data: data,
     );
   }
+  static Future<Response> PutData({
+    @required String? url,
+    Map<String, dynamic>? query,
+    @required Map<String, dynamic>? data,
+    String? token,
+    String lang = "en",
+  }) async {
+    dio!.options.headers = {
+      "lang": lang,
+      "Authorization": token,
+    };
+    return dio!.put(
+      url!,
+      queryParameters: query,
+      data: data,
+    );
+  }
   static Future<Response> DeleteData({
     @required String? url,
     Map<String, dynamic>? query,

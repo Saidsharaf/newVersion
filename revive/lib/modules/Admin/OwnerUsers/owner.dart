@@ -1,8 +1,10 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:revive/models/appModel/adminModel/allUsers/cubit.dart';
 import 'package:revive/models/appModel/adminModel/allUsers/states.dart';
+import 'package:revive/modules/Admin/OwnerUsers/oneOwner.dart';
 import 'package:revive/modules/Admin/home_admin/audience.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/end_point.dart';
@@ -23,8 +25,11 @@ class OwnerUsers extends StatelessWidget {
         },
         builder: (context, state) {
           var cubit = AllUsersCubit.get(context);
-          return state is allUsersSuccessState
-              ? Scaffold(
+          var list = cubit.users;
+          return ConditionalBuilder(
+          condition: state is allUsersSuccessState,
+          builder: (context) {
+            return Scaffold(
                   appBar: AppBar(
                     title: Text("Owners"),
                     centerTitle: true,
@@ -35,7 +40,7 @@ class OwnerUsers extends StatelessWidget {
                         icon: Icon(Icons.arrow_back)),
                   ),
                   body: ListView.builder(
-                    itemCount: state.allUsersModel.users!.length,
+                    itemCount:list.length,
                     itemBuilder: (context, index) {
                       return Slidable(
                         key: const ValueKey(0),
@@ -46,7 +51,7 @@ class OwnerUsers extends StatelessWidget {
                           // A pane can dismiss the Slidable.
                           dismissible: DismissiblePane(onDismissed: () {
                             cubit.DeleteOwners(
-                                id: state.allUsersModel.users![index].id);
+                                id: list[index]["id"]);
                           }),
                   
                           // All actions are defined in the children parameter.
@@ -70,28 +75,35 @@ class OwnerUsers extends StatelessWidget {
                         ),
                         child: Card(
                           child: ListTile(
+                            onTap: () {
+                          cubit.changeIndexNumber(index);
+                          sharedPref.saveData(key: "idOwner", value: index);
+                          navigateAndFinish(context, OneOwner());
+                        },
                             leading: CircleAvatar(
                               radius: 28,
                               backgroundImage: NetworkImage( server +
-                                    state.allUsersModel.users![index]
-                                        .profilePhoto!,),
+                                    list[index]["profile_photo"],
+                                        ),
                             ),
                             title:
-                                Text(state.allUsersModel.users![index].username!),
+                                Text(list[index]["username"]),
                             subtitle:
-                                Text(state.allUsersModel.users![index].email!),
+                                Text(list[index]["email"]),
                             trailing: Icon(Icons.arrow_forward),
                           ),
                         ),
                       );
                     },
                   ),
-                )
-              : Center(
+                );
+          }, fallback: (context) => Center(
                   child: CircularProgressIndicator(
                   color: Colors.green,
                   backgroundColor: Colors.grey[300],
-                ));
+                ),
+                ),
+                );
         },
       ),
     );

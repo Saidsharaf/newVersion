@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/models/appModel/adminModel/allUsers/cubit.dart';
 import 'package:revive/models/appModel/adminModel/allUsers/states.dart';
-import 'package:revive/modules/Admin/Users/user.dart';
+import 'package:revive/modules/Admin/OwnerUsers/owner.dart';
 import 'package:revive/modules/Admin/home_admin/audience.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/end_point.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 
-class OneUser extends StatelessWidget {
-  const OneUser({super.key});
+class OneOwner extends StatelessWidget {
+  const OneOwner({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AllUsersCubit()..showALlUsers(type: "CUSTOMER"),
+      create: (context) => AllUsersCubit()..showALlUsers(type: "OWNER"),
       child: BlocConsumer<AllUsersCubit, AllUsersStates>(
         listener: (context, state) {
           // if (state is allUsersSuccessState) {
@@ -35,7 +35,7 @@ class OneUser extends StatelessWidget {
               appBar: AppBar(
                 leading: IconButton(
                     onPressed: () {
-                      navigateAndFinish(context, Users());
+                      navigateAndFinish(context, OwnerUsers());
                     },
                     icon: Icon(Icons.arrow_back)),
               ),
@@ -75,7 +75,7 @@ class OneUser extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                   child: Image.network(
-                                    server + list[sharedPref.getData(key: "id")]["profile_photo"],
+                                    server + list[sharedPref.getData(key: "idOwner")]["profile_photo"],
                                     // height: 150,
                                     fit: BoxFit.cover,
                                   ),
@@ -84,7 +84,7 @@ class OneUser extends StatelessWidget {
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    "${list[sharedPref.getData(key: "id")]["username"]}",
+                                    "${list[sharedPref.getData(key: "idOwner")]["username"]}",
                                     style: TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold),
@@ -119,7 +119,7 @@ class OneUser extends StatelessWidget {
                                     ),
                                   ],
                                   onChanged: (value) {
-                                    cubit.changeDropBtnUser(value);
+                                    cubit.changeDropBtnOwner(value);
                                     print(value);
                                   },
                                 ),
@@ -133,7 +133,7 @@ class OneUser extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          cubit.ModifyRole(id: list[sharedPref.getData(key: "id")]["id"],role:int.tryParse(cubit.valueChosen) ,);
+                          cubit.ModifyRole(id: list[sharedPref.getData(key: "idOwner")]["id"],role:int.tryParse(cubit.valueChosen) ,);
                           // showToast(
                           //     msg: msgRole,
                           //     state:stat? toastStates.SUCCESS:toastStates.ERROR,);

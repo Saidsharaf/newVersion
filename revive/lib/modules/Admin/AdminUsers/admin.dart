@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -22,74 +23,77 @@ class AdminUsers extends StatelessWidget {
         },
         builder: (context, state) {
           var cubit = AllUsersCubit.get(context);
-          return state is allUsersSuccessState
-              ? Scaffold(
-                  appBar: AppBar(
-                    title: Text("Admins"),
-                    centerTitle: true,
-                      leading: IconButton(
-                        onPressed: () {
-                          navigateAndFinish(context, Audience());
-                        },
-                        icon: Icon(Icons.arrow_back)),
-                  ),
-                  body: ListView.builder(
-                    itemCount: state.allUsersModel.users!.length,
-                    itemBuilder: (context, index) {
-                      return Slidable(
-                        key: const ValueKey(0),
-                        startActionPane: ActionPane(
-                          // A motion is a widget used to control how the pane animates.
-                          motion: const ScrollMotion(),
-                  
-                          // A pane can dismiss the Slidable.
-                          dismissible: DismissiblePane(onDismissed: () {
-                            cubit.DeleteAdmins(
-                                id: state.allUsersModel.users![index].id);
-                          }),
-                  
-                          // All actions are defined in the children parameter.
-                          children: [
-                            // A SlidableAction can have an icon and/or a label.
-                            SlidableAction(
-                              onPressed: (context) {},
-                              backgroundColor: Color(0xFFFE4A49),
-                              foregroundColor: Colors.white,
-                              icon: Icons.delete,
-                              label: 'Delete',
-                            ),
-                            SlidableAction(
-                              onPressed: (context) {},
-                              backgroundColor: Color(0xFF21B7CA),
-                              foregroundColor: Colors.white,
-                              icon: Icons.share,
-                              label: 'Share',
-                            ),
-                          ],
-                        ),
-                        child: Card(
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              radius: 28,
-                              backgroundImage: NetworkImage( server +
-                                    state.allUsersModel.users![index]
-                                        .profilePhoto!,),
-                            ),
-                            title:
-                                Text(state.allUsersModel.users![index].username!),
-                            subtitle:
-                                Text(state.allUsersModel.users![index].email!),
-                            trailing: Icon(Icons.arrow_forward),
+          var list = cubit.users;
+          return ConditionalBuilder(
+            condition: state is allUsersSuccessState,
+            builder: (context) {
+              return Scaffold(
+                appBar: AppBar(
+                  title: Text("Admins"),
+                  centerTitle: true,
+                  leading: IconButton(
+                      onPressed: () {
+                        navigateAndFinish(context, Audience());
+                      },
+                      icon: Icon(Icons.arrow_back)),
+                ),
+                body: ListView.builder(
+                  itemCount: list.length,
+                  itemBuilder: (context, index) {
+                    return Slidable(
+                      key: const ValueKey(0),
+                      startActionPane: ActionPane(
+                        // A motion is a widget used to control how the pane animates.
+                        motion: const ScrollMotion(),
+
+                        // A pane can dismiss the Slidable.
+                        dismissible: DismissiblePane(onDismissed: () {
+                          cubit.DeleteAdmins(id: list[index]["id"]);
+                        }),
+
+                        // All actions are defined in the children parameter.
+                        children: [
+                          // A SlidableAction can have an icon and/or a label.
+                          SlidableAction(
+                            onPressed: (context) {},
+                            backgroundColor: Color(0xFFFE4A49),
+                            foregroundColor: Colors.white,
+                            icon: Icons.delete,
+                            label: 'Delete',
                           ),
+                          SlidableAction(
+                            onPressed: (context) {},
+                            backgroundColor: Color(0xFF21B7CA),
+                            foregroundColor: Colors.white,
+                            icon: Icons.share,
+                            label: 'Share',
+                          ),
+                        ],
+                      ),
+                      child: Card(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            radius: 28,
+                            backgroundImage: NetworkImage(
+                              server + list[index]["profile_photo"],
+                            ),
+                          ),
+                          title: Text(list[index]["username"]),
+                          subtitle: Text(list[index]["email"]),
+                          trailing: Icon(Icons.arrow_forward),
                         ),
-                      );
-                    },
-                  ),
-                )
-              : Center(
-                  child: CircularProgressIndicator(
-                  color: Colors.green,
-                ));
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+            fallback: (context) => Center(
+              child: CircularProgressIndicator(
+                color: Colors.green,
+              ),
+            ),
+          );
         },
       ),
     );

@@ -9,6 +9,7 @@ class allUsersLoadingState extends AllUsersStates {}
 
 class allUsersChangeIndexState extends AllUsersStates {}
 class allUsersChangeDropDownState extends AllUsersStates {}
+class allUsersChangeDoneState extends AllUsersStates {}
 
 class allUsersSuccessState extends AllUsersStates {
   final AllUsersModel allUsersModel;
