@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/models/appModel/adminModel/allUsers/cubit.dart';
 import 'package:revive/models/appModel/adminModel/allUsers/states.dart';
 import 'package:revive/modules/Admin/home_admin/audience.dart';
+import 'package:revive/modules/Admin/restoreUsers/restore.dart';
 import 'package:revive/modules/LoginAndReg/login.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
@@ -98,7 +99,9 @@ class HomeAdmin extends StatelessWidget {
                             title: 'Restore',
                             iconData: CupertinoIcons.restart,
                             background: Colors.deepOrange,
-                            onPress: () {}),
+                            onPress: () {
+                              navigate(context, RestoreUsers());
+                            }),
                         itemDashboard(
                             title: 'Analytics',
                             iconData: CupertinoIcons.graph_circle,
@@ -120,9 +123,7 @@ class HomeAdmin extends StatelessWidget {
                           title: 'Machine',
                           iconData: Icons.factory_outlined,
                           background: Colors.indigo,
-                          onPress: () {
-                            
-                          },
+                          onPress: () {},
                         ),
                         itemDashboard(
                             title: 'Upload',

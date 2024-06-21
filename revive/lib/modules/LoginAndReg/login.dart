@@ -6,7 +6,7 @@ import 'package:revive/modules/Admin/home_admin/homeAdmin.dart';
 import 'package:revive/modules/LoginAndReg/component.dart';
 import 'package:revive/modules/LoginAndReg/cubitForLogin/cubit.dart';
 import 'package:revive/modules/LoginAndReg/cubitForLogin/state.dart';
-import 'package:revive/modules/LoginAndReg/forget_screen.dart';
+import 'package:revive/modules/LoginAndReg/forgetPassword/forget_screen.dart';
 import 'package:revive/modules/LoginAndReg/register.dart';
 import 'package:revive/modules/Owner/FactoryFootprint/questions_factory.dart';
 import 'package:revive/shared/component/component.dart';
