@@ -5,7 +5,7 @@ import 'package:revive/layout/cubit/states.dart';
 import 'package:revive/modules/Customer/footprint_Page/footprint_customer.dart';
 import 'package:revive/modules/Customer/orderMachine/order_machine.dart';
 import 'package:revive/modules/Owner/machine_screen/machine.dart';
-import 'package:revive/modules/betweenOwner_Customer/posts_Screen/posts.dart';
+import 'package:revive/modules/betweenOwner_Customer/post_screen/posts.dart';
 import 'package:revive/modules/betweenOwner_Customer/prof_screen/prof.dart';
 import 'package:revive/modules/betweenOwner_Customer/settings_screen/settings.dart';
 import 'package:revive/modules/footprint_screen/footprint.dart';

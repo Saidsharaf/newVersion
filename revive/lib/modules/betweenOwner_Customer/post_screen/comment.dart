@@ -73,7 +73,8 @@ class _CommentPageState extends State<CommentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Center(
+          title: Align(
+            alignment: Alignment.center,
             child: Text(
               "Comment Page",
               style: TextStyle(color: Colors.white, fontSize: 20),

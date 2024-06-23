@@ -11,6 +11,7 @@ const CHECKCODE = "/api/rev/check/code";
 const NEWPASS = "/api/rev/forget/pass";
 const SHOWRESTOREUSERS = "/api/rev/users/restore/index";
 const RESTOREUSERS = "/api/rev/users/restore";
+const ADDPOST = "/api/rev/posts";
 
 
-const server = "https://48a8-2a09-bac5-30ca-16a0-00-241-62.ngrok-free.app";
+const server = "https://df29-2a09-bac1-2220-10-00-31-cd.ngrok-free.app";

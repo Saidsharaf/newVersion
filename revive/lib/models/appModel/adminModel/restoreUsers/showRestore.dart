@@ -9,7 +9,7 @@ class ShowRestoreModel {
   ShowRestoreModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     errNum = json['errNum'];
-    msg = json['msg'];
+    msg = json['msg'].toString();
     if (json['users'] != null) {
       users = <Users>[];
       json['users'].forEach((v) {
@@ -32,18 +32,18 @@ class ShowRestoreModel {
 
 class Users {
   int? id;
-  Null name;
+  String? name;
   String? username;
   String? email;
-  Null gmail;
+  String? gmail;
   String? password;
   int? role;
   String? gender;
-  Null phone;
-  Null personalCard;
+  String? phone;
+  String? personalCard;
   String? birthday;
   String? profilePhoto;
-  Null carbonFootprint;
+  String? carbonFootprint;
   String? deletedAt;
 
   Users(
@@ -64,18 +64,18 @@ class Users {
 
   Users.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
+    name = json['name'].toString();
     username = json['username'];
     email = json['email'];
-    gmail = json['gmail'];
+    gmail = json['gmail'].toString();
     password = json['password'];
     role = json['role'];
     gender = json['gender'];
-    phone = json['phone'];
-    personalCard = json['Personal_card'];
+    phone = json['phone'].toString();
+    personalCard = json['Personal_card'].toString();
     birthday = json['birthday'];
     profilePhoto = json['profile_photo'];
-    carbonFootprint = json['carbon_footprint'];
+    carbonFootprint = json['carbon_footprint'].toString();
     deletedAt = json['deleted_at'];
   }
 

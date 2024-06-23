@@ -115,10 +115,13 @@ class HomeAdmin extends StatelessWidget {
                               navigate(context, Audience());
                             }),
                         itemDashboard(
-                            title: 'Comments',
-                            iconData: CupertinoIcons.chat_bubble_2,
+                            title: 'Reports',
+                            iconData: CupertinoIcons.ant_circle_fill,
                             background: Colors.brown,
-                            onPress: () {}),
+                            onPress: () {
+                              
+                            },
+                            ),
                         itemDashboard(
                           title: 'Machine',
                           iconData: Icons.factory_outlined,

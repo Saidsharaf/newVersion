@@ -2,155 +2,316 @@ import 'package:flutter/material.dart';
 import 'package:revive/models/dropdownMenu/menu.dart';
 import 'package:revive/models/dropdownMenu/menu_item.dart';
 import 'package:revive/modules/betweenOwner_Customer/post_screen/add_post.dart';
+import 'package:revive/modules/betweenOwner_Customer/post_screen/comment.dart';
+import 'package:revive/modules/betweenOwner_Customer/prof_screen/prof.dart';
 import 'package:revive/shared/component/component.dart';
+import 'package:revive/tabs/saved_post.dart';
 
-class post extends StatelessWidget {
-  post({super.key});
+class Posts extends StatefulWidget {
+  const Posts({Key? key});
 
   @override
-  Widget build(BuildContext context) {
-    return ListView(physics: BouncingScrollPhysics(), children: [
-      // SizedBox(
-      //   height: 5,
-      // ),
-      buildAddPost(context),
-      postwid(
-        name: "Ziad shalaby",
-        contentPost: "he is a good man",
-        photo: "assets/images/prof1.jpeg",
-      ),
-      postwid(
-          name: "Osama mohamed",
-          contentPost: "i want to do thank u for fdjfsfhf"),
-      postwid(
-          name: "Ali hamed", contentPost: "i want to do thank u for fdjfsfhf"),
-      postwid(
-          name: "Mostafa amin",
-          contentPost: "i want to do thank u for fdjfsfhf"),
-    ]);
-  }
+  State<Posts> createState() => _PostsState();
 }
 
-class postwid extends StatelessWidget {
-  final name;
-  final contentPost;
-  final photo;
+class _PostsState extends State<Posts> {
+  //////////////favourite button
 
-  const postwid(
-      {super.key, required this.name, required this.contentPost, this.photo});
+  List<String> profileImages = [
+    "images/image1.jpg",
+    "images/image2.jpg",
+    "images/image3.jpg",
+    "images/image4.jpg",
+    "images/image5.jpg",
+    "images/image6.jpg",
+    "images/image7.jpg",
+    "images/image8.jpg",
+  ];
+
+  List<String> posts = [
+    "images/image1.jpg",
+    "images/image2.jpg",
+    "images/image3.jpg",
+    "images/image4.jpg",
+    "images/image5.jpg",
+    "images/image6.jpg",
+    "images/image7.jpg",
+    "images/image8.jpg",
+  ];
+  List<OwnerPostModel> listOfItems = [
+    OwnerPostModel(
+      name: 'Said kkkkkk',
+      ownerImage: 'assets/images/prof1.jpeg',
+      postImage: 'assets/images/machine_background3.jpeg',
+      isLiked: false,
+    ),
+    OwnerPostModel(
+      name: 'Salma Magdy',
+      ownerImage: "assets/images/prof_2.jpeg",
+      postImage: 'assets/images/login_background_1.jpg',
+      isLiked: false,
+    ),
+    OwnerPostModel(
+      name: 'Ziad Shalaby',
+      ownerImage: 'assets/images/prof1.jpeg',
+      postImage: 'assets/images/fci_2.jpeg',
+      isLiked: false,
+    ),
+    OwnerPostModel(
+      name: 'Rowida Ehab',
+      ownerImage: "assets/images/prof_3.jpeg",
+      postImage: "assets/images/factory_3.jpeg",
+      isLiked: false,
+    ),
+  ];
+
+  Future<void> onRefresh() async {
+    await Future.delayed(Duration(seconds: 2));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromRGBO(38, 41, 37, 0.29),
-            blurRadius: 25,
-            //offset: Offset(0, 0),
-          ),
-        ],
-      ),
-      child: Card(
-        child: Column(
-          children: [
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.person),
-              ),
-              title: Container(
-                margin: EdgeInsets.only(top: 8),
-                child: Text(
-                  name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Body",
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              trailing: PopupMenuButton<MenuItem>(
-                onSelected: (value) => onSelect(context, value),
-                itemBuilder: (context) => [
-                  ...MenuItems.items.map(buildItem).toList(),
-                ],
-              ),
-              isThreeLine: true,
-              subtitle: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Text(
-                      contentPost,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "Inter",
-                      ),
-                    ),
-                    photo == null ? SizedBox() : Image.asset(photo),
-                  ],
-                ),
-              ),
-            ),
-            Divider(
-              color: Colors.grey.withOpacity(.5),
-            ),
-            Row(
+    return Scaffold(
+      body: SafeArea(
+        child: RefreshIndicator(
+          onRefresh: onRefresh,
+          child: SingleChildScrollView(
+            child: Column(
               children: [
-                Expanded(
+                ///////////adddd possst
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
                   child: Container(
+                    height: 80,
                     decoration: BoxDecoration(
-                      border: Border(
-                        right: BorderSide(
-                          color: Colors.grey.withOpacity(.5),
-                        ),
-                      ),
-                    ),
-                    padding: EdgeInsets.only(top: 0, bottom: 1, left: 25),
-                    child: Row(
-                      children: [
-                        // Icon(Icons.thumb_up, color: Colors.grey),
-                        like(),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Like",
-                          style: TextStyle(color: Colors.grey),
-                          textAlign: TextAlign.center,
+                      color: Colors.grey[100],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(86, 201, 48, 0.278),
+                          blurRadius: 50,
+                          //offset: Offset(0, 0),
                         ),
                       ],
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: InkWell(
-                    onTap: () => Navigator.of(context).push(createRoute()),
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 0, bottom: 0, left: 27),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.comment_rounded,
-                            color: Colors.grey,
-                            size: 25,
+                    child: ListTile(
+                      onTap: () {
+                        navigate(context, AddPost());
+                      },
+                      //tileColor: Colors.white,
+                      leading: CircleAvatar(
+                        backgroundImage: AssetImage("assets/images/prof1.jpeg"),
+                      ),
+                      title: Container(
+                        margin: EdgeInsets.only(top: 8),
+                        child: Text(
+                          "What is on your mind ?",
+                          style: TextStyle(
+                            // fontWeight: FontWeight.w600,
+                            // fontFamily: "Body",
+                            fontSize: 14,
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Comment",
-                            style: TextStyle(color: Colors.grey),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                        ),
+                      ),
+                      isThreeLine: true,
+                      subtitle: Padding(
+                        padding: EdgeInsets.all(8.0),
                       ),
                     ),
                   ),
+                ),
+
+                SizedBox(
+                  height: 5,
+                ),
+                // Row(
+                //   children: [
+                //     // Icon(Icons.thumb_up, color: Colors.grey),
+                //     like(),
+                //     SizedBox(
+                //       width: 10,
+                //     ),
+                //     Text(
+                //       "Like",
+                //       style: TextStyle(color: Colors.grey),
+                //       textAlign: TextAlign.center,
+                //     ),
+                //   ],
+                // ),
+
+                //////////////////////////////////////////////////
+                ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: listOfItems.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ////headerpost
+                          Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    navigate(context, Prof());
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 22,
+                                    backgroundColor: Colors.green[400],
+                                    child: CircleAvatar(
+                                      radius: 21,
+                                      backgroundImage: AssetImage(
+                                          listOfItems[index].ownerImage),
+                                      //  profileImages[index]
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  navigate(context, Prof());
+                                },
+                                child: Text(listOfItems[index].name),
+                              ),
+                              Spacer(),
+                              PopupMenuButton<MenuItem>(
+                                onSelected: (value) => onSelect(context, value),
+                                itemBuilder: (context) => [
+                                  ...MenuItems.items.map(buildItem).toList(),
+                                ],
+                              ),
+                            ],
+                          ),
+
+                          /////////// image post
+                          Image.asset(listOfItems[index].postImage),
+
+                          ///footer post
+                          Row(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    listOfItems[index].isLiked =
+                                        !listOfItems[index].isLiked;
+                                  });
+                                },
+                                icon: Icon(
+                                  listOfItems[index].isLiked
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: listOfItems[index].isLiked
+                                      ? Colors.green[400]
+                                      : Colors.green[400],
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CommentPage(),
+                                    ),
+                                  );
+                                },
+                                icon: Icon(Icons.chat_bubble_outline),
+                                color: Colors.green[400],
+                              ),
+                              // IconButton(
+                              //   onPressed: () {
+                              //     Navigator.push(
+                              //       context,
+                              //       MaterialPageRoute(
+                              //         builder: (context) => CommentPage(),
+                              //       ),
+                              //     );
+                              //   },
+                              //   icon: Icon(Icons.label_outline),
+                              //   color: Colors.green[400],
+                              // ),
+                              Spacer(),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Prof(),
+                                    ),
+                                  );
+                                },
+                                icon: Icon(Icons.bookmark_border),
+                                color: Colors.green[400],
+                              ),
+                            ],
+                          ),
+
+                          /////post text
+                          Container(
+                            padding: EdgeInsets.all(15),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(color: Colors.black),
+                                    children: [
+                                      TextSpan(text: "Liked by"),
+                                      TextSpan(
+                                        text: "Ziad Shalaby",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      TextSpan(text: "and"),
+                                      TextSpan(
+                                        text: "others",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(color: Colors.black),
+                                    children: [
+                                      TextSpan(
+                                        text: "Said Sharaf",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      TextSpan(
+                                        text:
+                                            "i want to do thank u for this machine ",
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    navigate(context, CommentPage());
+                                  },
+                                  child: Text(
+                                    "View all 10 comments",
+                                    style: TextStyle(
+                                      color: Colors.black38,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
+
+                SizedBox(
+                  height: 50,
                 ),
               ],
             ),
-            Padding(padding: EdgeInsets.only(top: 2)),
-          ],
+          ),
         ),
       ),
     );
@@ -185,6 +346,20 @@ class postwid extends StatelessWidget {
   }
 }
 
+class OwnerPostModel {
+  final String name;
+  final String ownerImage;
+  final String postImage;
+  bool isLiked;
+
+  OwnerPostModel({
+    required this.name,
+    required this.ownerImage,
+    required this.postImage,
+    required this.isLiked,
+  });
+}
+
 PopupMenuItem<MenuItem> buildItem(MenuItem item) => PopupMenuItem(
       value: item,
       child: Row(
@@ -200,42 +375,3 @@ PopupMenuItem<MenuItem> buildItem(MenuItem item) => PopupMenuItem(
         ],
       ),
     );
-
-Widget buildAddPost(context) {
-  return Container(
-    decoration: BoxDecoration(
-      color: Colors.grey[100],
-      boxShadow: [
-        BoxShadow(
-          color: Color.fromRGBO(38, 41, 37, 0.29),
-          blurRadius: 25,
-          //offset: Offset(0, 0),
-        ),
-      ],
-    ),
-    child: ListTile(
-      onTap: () {
-        navigate(context, AddPost());
-      },
-      //tileColor: Colors.white,
-      leading: CircleAvatar(
-        backgroundImage: AssetImage("assets/images/prof1.jpeg"),
-      ),
-      title: Container(
-        margin: EdgeInsets.only(top: 8),
-        child: Text(
-          "What is on your mind ?",
-          style: TextStyle(
-            // fontWeight: FontWeight.w600,
-            // fontFamily: "Body",
-            fontSize: 14,
-          ),
-        ),
-      ),
-      isThreeLine: true,
-      subtitle: Padding(
-        padding: EdgeInsets.all(8.0),
-      ),
-    ),
-  );
-}

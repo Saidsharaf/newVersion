@@ -20,10 +20,13 @@ class RestoreCubit extends Cubit<RestoreStates> {
       "token":
           "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3Jldi91c2Vycy9sb2dpbiIsImlhdCI6MTcwNjk5ODkxNSwibmJmIjoxNzA2OTk4OTE1LCJqdGkiOiJRWkp6azlSRnJXSERqN0dJIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.yGzlSZoxTCQY4TETLhUapP4xT_QBB6KLLuBlvsrlBaI"
     }).then((value) {
-      print(value.data);
+      //print(value.data);
+      print("sssssssssssssss");
       showrestoreModel = ShowRestoreModel.fromJson(value.data);
+      print("sssssssssssss");
       users = value.data["users"];
       emit(showRestoreSuccessState(showrestoreModel!));
+      print("successsssssssssss");
     }).catchError(
       (error) {
         emit(showRestoreErrorState(error.toString()));
@@ -32,12 +35,10 @@ class RestoreCubit extends Cubit<RestoreStates> {
   }
 
   void userRestore({
-    @required int? id ,
+    @required int? id,
   }) {
     emit(restoreLoadingState());
-    DioHelper.postData(
-      url: RESTOREUSERS,
-      data: {
+    DioHelper.postData(url: RESTOREUSERS, data: {
       "checksecurity": "EI8m2bl8TFVjbwYmuopsNPd1",
       "token":
           "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3Jldi91c2Vycy9sb2dpbiIsImlhdCI6MTcwNjk5ODkxNSwibmJmIjoxNzA2OTk4OTE1LCJqdGkiOiJRWkp6azlSRnJXSERqN0dJIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.yGzlSZoxTCQY4TETLhUapP4xT_QBB6KLLuBlvsrlBaI",
