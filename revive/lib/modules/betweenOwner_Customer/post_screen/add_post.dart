@@ -6,8 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:revive/layout/home_layout.dart';
 import 'package:revive/modules/LoginAndReg/component.dart';
-import 'package:revive/modules/betweenOwner_Customer/post_screen/cubit/cubit.dart';
-import 'package:revive/modules/betweenOwner_Customer/post_screen/cubit/state.dart';
+import 'package:revive/modules/betweenOwner_Customer/post_screen/cubitAddPost/cubit.dart';
+import 'package:revive/modules/betweenOwner_Customer/post_screen/cubitAddPost/state.dart';
 import 'package:revive/shared/component/component.dart';
 
 class AddPost extends StatelessWidget {

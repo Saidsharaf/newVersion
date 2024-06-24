@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/models/dropdownMenu/menu.dart';
 import 'package:revive/models/dropdownMenu/menu_item.dart';
 import 'package:revive/modules/betweenOwner_Customer/post_screen/add_post.dart';
 import 'package:revive/modules/betweenOwner_Customer/post_screen/comment.dart';
+import 'package:revive/modules/betweenOwner_Customer/post_screen/cubitShowAllPosts/cubit.dart';
+import 'package:revive/modules/betweenOwner_Customer/post_screen/cubitShowAllPosts/state.dart';
 import 'package:revive/modules/betweenOwner_Customer/prof_screen/prof.dart';
 import 'package:revive/shared/component/component.dart';
-import 'package:revive/tabs/saved_post.dart';
+import 'package:revive/shared/network/end_point.dart';
+import 'package:revive/shared/network/local/shared_pref.dart';
 
 class Posts extends StatefulWidget {
   const Posts({Key? key});
@@ -71,248 +75,248 @@ class _PostsState extends State<Posts> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: onRefresh,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ///////////adddd possst
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromRGBO(86, 201, 48, 0.278),
-                          blurRadius: 50,
-                          //offset: Offset(0, 0),
-                        ),
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: ListTile(
-                      onTap: () {
-                        navigate(context, AddPost());
-                      },
-                      //tileColor: Colors.white,
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage("assets/images/prof1.jpeg"),
-                      ),
-                      title: Container(
-                        margin: EdgeInsets.only(top: 8),
-                        child: Text(
-                          "What is on your mind ?",
-                          style: TextStyle(
-                            // fontWeight: FontWeight.w600,
-                            // fontFamily: "Body",
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                      isThreeLine: true,
-                      subtitle: Padding(
-                        padding: EdgeInsets.all(8.0),
-                      ),
-                    ),
-                  ),
-                ),
-
-                SizedBox(
-                  height: 5,
-                ),
-                // Row(
-                //   children: [
-                //     // Icon(Icons.thumb_up, color: Colors.grey),
-                //     like(),
-                //     SizedBox(
-                //       width: 10,
-                //     ),
-                //     Text(
-                //       "Like",
-                //       style: TextStyle(color: Colors.grey),
-                //       textAlign: TextAlign.center,
-                //     ),
-                //   ],
-                // ),
-
-                //////////////////////////////////////////////////
-                ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: listOfItems.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ////headerpost
-                          Row(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(10),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    navigate(context, Prof());
-                                  },
-                                  child: CircleAvatar(
-                                    radius: 22,
-                                    backgroundColor: Colors.green[400],
-                                    child: CircleAvatar(
-                                      radius: 21,
-                                      backgroundImage: AssetImage(
-                                          listOfItems[index].ownerImage),
-                                      //  profileImages[index]
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  navigate(context, Prof());
-                                },
-                                child: Text(listOfItems[index].name),
-                              ),
-                              Spacer(),
-                              PopupMenuButton<MenuItem>(
-                                onSelected: (value) => onSelect(context, value),
-                                itemBuilder: (context) => [
-                                  ...MenuItems.items.map(buildItem).toList(),
-                                ],
+    return BlocProvider(
+      create: (context) => ShowAllPostsCubit()..showAllPosts(),
+      child: BlocConsumer<ShowAllPostsCubit,ShowAllPostsStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          
+          return Scaffold(
+            body: SafeArea(
+              child: RefreshIndicator(
+                onRefresh: onRefresh,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ///////////adddd possst
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[100],
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(86, 201, 48, 0.278),
+                                blurRadius: 50,
+                                //offset: Offset(0, 0),
                               ),
                             ],
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
-
-                          /////////// image post
-                          Image.asset(listOfItems[index].postImage),
-
-                          ///footer post
-                          Row(
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    listOfItems[index].isLiked =
-                                        !listOfItems[index].isLiked;
-                                  });
-                                },
-                                icon: Icon(
-                                  listOfItems[index].isLiked
-                                      ? Icons.favorite
-                                      : Icons.favorite_border,
-                                  color: listOfItems[index].isLiked
-                                      ? Colors.green[400]
-                                      : Colors.green[400],
+                          child: ListTile(
+                            onTap: () {
+                              navigate(context, AddPost());
+                            },
+                            //tileColor: Colors.white,
+                            leading: CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(server+sharedPref.getData(key: "profilePic")),
+                            ),
+                            title: Container(
+                              margin: EdgeInsets.only(top: 8),
+                              child: Text(
+                                "What is on your mind ?",
+                                style: TextStyle(
+                                  // fontWeight: FontWeight.w600,
+                                  // fontFamily: "Body",
+                                  fontSize: 14,
                                 ),
                               ),
-                              IconButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => CommentPage(),
-                                    ),
-                                  );
-                                },
-                                icon: Icon(Icons.chat_bubble_outline),
-                                color: Colors.green[400],
-                              ),
-                              // IconButton(
-                              //   onPressed: () {
-                              //     Navigator.push(
-                              //       context,
-                              //       MaterialPageRoute(
-                              //         builder: (context) => CommentPage(),
-                              //       ),
-                              //     );
-                              //   },
-                              //   icon: Icon(Icons.label_outline),
-                              //   color: Colors.green[400],
-                              // ),
-                              Spacer(),
-                              IconButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Prof(),
-                                    ),
-                                  );
-                                },
-                                icon: Icon(Icons.bookmark_border),
-                                color: Colors.green[400],
-                              ),
-                            ],
+                            ),
+                            isThreeLine: true,
+                            subtitle: Padding(
+                              padding: EdgeInsets.all(8.0),
+                            ),
                           ),
+                        ),
+                      ),
 
-                          /////post text
-                          Container(
-                            padding: EdgeInsets.all(15),
-                            child: Column(
+                      SizedBox(
+                        height: 5,
+                      ),
+
+                      //////////////////////////////////////////////////
+                      ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: context.read<ShowAllPostsCubit>().users.length,
+                          itemBuilder: (context, index) {
+                            return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                RichText(
-                                  text: TextSpan(
-                                    style: TextStyle(color: Colors.black),
-                                    children: [
-                                      TextSpan(text: "Liked by"),
-                                      TextSpan(
-                                        text: "Ziad Shalaby",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
+                                ////headerpost
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(10),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          navigate(context, Prof());
+                                        },
+                                        child: CircleAvatar(
+                                          radius: 22,
+                                          backgroundColor: Colors.green[400],
+                                          child: CircleAvatar(
+                                            radius: 21,
+                                            backgroundImage: NetworkImage(
+                                                server+context.read<ShowAllPostsCubit>().users[index]["user"]["profile_photo"]),
+                                            //  profileImages[index]
+                                          ),
+                                        ),
                                       ),
-                                      TextSpan(text: "and"),
-                                      TextSpan(
-                                        text: "others",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                    style: TextStyle(color: Colors.black),
-                                    children: [
-                                      TextSpan(
-                                        text: "Said Sharaf",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      TextSpan(
-                                        text:
-                                            "i want to do thank u for this machine ",
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    navigate(context, CommentPage());
-                                  },
-                                  child: Text(
-                                    "View all 10 comments",
-                                    style: TextStyle(
-                                      color: Colors.black38,
                                     ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        navigate(context, Prof());
+                                      },
+                                      child: Text(context.read<ShowAllPostsCubit>().users[index]["user"]["username"]),
+                                    ),
+                                    Spacer(),
+                                    PopupMenuButton<MenuItem>(
+                                      onSelected: (value) =>
+                                          onSelect(context, value),
+                                      itemBuilder: (context) => [
+                                        ...MenuItems.items
+                                            .map(buildItem)
+                                            .toList(),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+
+                                /////////// image post
+                                Image.network(server+context.read<ShowAllPostsCubit>().users[index]["path"]),
+
+                                ///footer post
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          context.read<ShowAllPostsCubit>().users[index]["saved"] =
+                                              !context.read<ShowAllPostsCubit>().users[index]["saved"];
+                                        });
+                                      },
+                                      icon: Icon(
+                                        context.read<ShowAllPostsCubit>().users[index]["saved"] 
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
+                                        color: context.read<ShowAllPostsCubit>().users[index]["saved"]
+                                            ? Colors.green[400]
+                                            : Colors.green[400],
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => CommentPage(),
+                                          ),
+                                        );
+                                      },
+                                      icon: Icon(Icons.chat_bubble_outline),
+                                      color: Colors.green[400],
+                                    ),
+                                    // IconButton(
+                                    //   onPressed: () {
+                                    //     Navigator.push(
+                                    //       context,
+                                    //       MaterialPageRoute(
+                                    //         builder: (context) => CommentPage(),
+                                    //       ),
+                                    //     );
+                                    //   },
+                                    //   icon: Icon(Icons.label_outline),
+                                    //   color: Colors.green[400],
+                                    // ),
+                                    Spacer(),
+                                    IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Prof(),
+                                          ),
+                                        );
+                                      },
+                                      icon: Icon(Icons.bookmark_border),
+                                      color: Colors.green[400],
+                                    ),
+                                  ],
+                                ),
+
+                                /////post text
+                                Container(
+                                  padding: EdgeInsets.all(15),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      RichText(
+                                        text: TextSpan(
+                                          style: TextStyle(color: Colors.black),
+                                          children: [
+                                            TextSpan(text: "Liked by"),
+                                            TextSpan(
+                                              text: "Ziad Shalaby",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            TextSpan(text: "and"),
+                                            TextSpan(
+                                              text: "others",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      RichText(
+                                        text: TextSpan(
+                                          style: TextStyle(color: Colors.black),
+                                          children: [
+                                            TextSpan(
+                                              text: context.read<ShowAllPostsCubit>().users[index]["user"]["username"],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            TextSpan(
+                                              text:
+                                                " "+  context.read<ShowAllPostsCubit>().users[index]["description"],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          navigate(context, CommentPage());
+                                        },
+                                        child: Text(
+                                          "View all comments",
+                                          style: TextStyle(
+                                            color: Colors.black38,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
-                            ),
-                          ),
-                        ],
-                      );
-                    }),
+                            );
+                          }),
 
-                SizedBox(
-                  height: 50,
+                      SizedBox(
+                        height: 50,
+                      ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

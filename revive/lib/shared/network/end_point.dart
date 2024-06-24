@@ -12,6 +12,8 @@ const NEWPASS = "/api/rev/forget/pass";
 const SHOWRESTOREUSERS = "/api/rev/users/restore/index";
 const RESTOREUSERS = "/api/rev/users/restore";
 const ADDPOST = "/api/rev/posts";
+const MYPOSTS = "/api/rev/posts/showmyposts";
+const AllPOSTS = "/api/rev/posts";
 
 
 const server = "https://df29-2a09-bac1-2220-10-00-31-cd.ngrok-free.app";
