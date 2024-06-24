@@ -49,19 +49,7 @@ class HomeLayout extends StatelessWidget {
                   textName: cubit.title[cubit.currentIndex],
                 ),
                 centerTitle: true,
-                // leading: Padding(
-                //   padding: const EdgeInsets.only(top: 6),
-                //   child: IconButton(
-                //     onPressed: () {
-                //       navigate(context, chat());
-                //     },
-                //     icon: Icon(
-                //       Icons.chat,
-                //       size: 32,
-                //       color: Color.fromARGB(255, 68, 124, 70),
-                //     ),
-                //   ),
-                // ),
+                
               ),
               body: cubit.screens[cubit.currentIndex],
               bottomNavigationBar: CurvedNavigationBar(

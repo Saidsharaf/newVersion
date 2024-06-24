@@ -14,6 +14,8 @@ const RESTOREUSERS = "/api/rev/users/restore";
 const ADDPOST = "/api/rev/posts";
 const MYPOSTS = "/api/rev/posts/showmyposts";
 const AllPOSTS = "/api/rev/posts";
+const ADDREPORT = "/api/rev/add/report/posts";
+const SHOWCOMMENT = "/api/rev/posts/comment";
 
 
 const server = "https://df29-2a09-bac1-2220-10-00-31-cd.ngrok-free.app";

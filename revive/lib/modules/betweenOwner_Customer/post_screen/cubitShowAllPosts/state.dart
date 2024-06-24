@@ -1,4 +1,5 @@
 
+import 'package:revive/models/appModel/post/addReportModel.dart';
 import 'package:revive/models/appModel/post/showAllPostsModel.dart';
 
 abstract class ShowAllPostsStates {}
@@ -14,4 +15,16 @@ class showAllPostsSuccessState extends ShowAllPostsStates {
 class showAllPostsErrorState extends ShowAllPostsStates {
   final String error;
   showAllPostsErrorState(this.error);
+}
+
+class addReportLoadingState extends ShowAllPostsStates {}
+
+class addReportSuccessState extends ShowAllPostsStates {
+  final AddReportModel addReportModel;
+  addReportSuccessState(this.addReportModel);
+}
+
+class addReportErrorState extends ShowAllPostsStates {
+  final String error;
+  addReportErrorState(this.error);
 }
