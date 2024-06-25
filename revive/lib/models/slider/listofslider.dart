@@ -199,7 +199,7 @@ class _headofsliderState extends State<headofslider> {
                   txt: "Trash post",
                   icon: "assets/icons/garbage-bin-svgrepo-com.svg",
                   press: () {
-                    navigate(context, TrashPost());
+                    navigate(context, TrashPosts());
                   },
                 ),
 
@@ -215,7 +215,7 @@ class _headofsliderState extends State<headofslider> {
                     value: isCheck,
                   ),
                   press: () {
-                    navigate(context, TrashPost());
+                    navigate(context, TrashPosts());
                   },
                 ),
 

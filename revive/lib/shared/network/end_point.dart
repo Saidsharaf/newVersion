@@ -13,9 +13,14 @@ const SHOWRESTOREUSERS = "/api/rev/users/restore/index";
 const RESTOREUSERS = "/api/rev/users/restore";
 const ADDPOST = "/api/rev/posts";
 const MYPOSTS = "/api/rev/posts/showmyposts";
+const ONEPOST = "/api/rev/posts/show/10";
+const DELETEPOST = "/api/rev/posts/destroy/11";
+const SHOWRESTOREPOST = "/api/rev/posts/restore/index";
+const DORESTOREPOST = "/api/rev/posts/restore";
+
 const AllPOSTS = "/api/rev/posts";
 const ADDREPORT = "/api/rev/add/report/posts";
 const SHOWCOMMENT = "/api/rev/posts/comment";
 
 
-const server = "https://df29-2a09-bac1-2220-10-00-31-cd.ngrok-free.app";
+const server = "https://d1ee-2a09-bac5-30c4-16a0-00-241-2f.ngrok-free.app";

@@ -1,6 +1,11 @@
 
 import 'package:revive/models/appModel/post/addReportModel.dart';
+import 'package:revive/models/appModel/post/deletePostModel.dart';
+import 'package:revive/models/appModel/post/doRestoreModel.dart';
 import 'package:revive/models/appModel/post/showAllPostsModel.dart';
+import 'package:revive/models/appModel/post/showMyPosts.dart';
+import 'package:revive/models/appModel/post/showOnePostModel.dart';
+import 'package:revive/models/appModel/post/showRestorePostModel.dart';
 
 abstract class ShowAllPostsStates {}
 class showAllPostsInitialState extends ShowAllPostsStates {}
@@ -17,6 +22,55 @@ class showAllPostsErrorState extends ShowAllPostsStates {
   showAllPostsErrorState(this.error);
 }
 
+class showMyPostsLoadingState extends ShowAllPostsStates {}
+
+class showMyPostsSuccessState extends ShowAllPostsStates {
+  final ShowMyPostsModel showMyPostsModel;
+  showMyPostsSuccessState(this.showMyPostsModel);
+}
+
+class showMyPostsErrorState extends ShowAllPostsStates {
+  final String error;
+  showMyPostsErrorState(this.error);
+}
+class showOnePostLoadingState extends ShowAllPostsStates {}
+
+class showOnePostSuccessState extends ShowAllPostsStates {
+  final ShowOnePostModel showOnePostModel;
+  showOnePostSuccessState(this.showOnePostModel);
+}
+
+class showOnePostErrorState extends ShowAllPostsStates {
+  final String error;
+  showOnePostErrorState(this.error);
+}
+
+
+class showRestorePostLoadingState extends ShowAllPostsStates {}
+
+class showRestorePostSuccessState extends ShowAllPostsStates {
+  final ShowRestorePostModel showRestorePostModel;
+  showRestorePostSuccessState(this.showRestorePostModel);
+}
+
+class showRestorePostErrorState extends ShowAllPostsStates {
+  final String error;
+  showRestorePostErrorState(this.error);
+}
+
+
+class doRestorePostLoadingState extends ShowAllPostsStates {}
+
+class doRestorePostSuccessState extends ShowAllPostsStates {
+  final DoRestorePostModel doRestorePostModel;
+  doRestorePostSuccessState(this.doRestorePostModel);
+}
+
+class doRestorePostErrorState extends ShowAllPostsStates {
+  final String error;
+  doRestorePostErrorState(this.error);
+}
+
 class addReportLoadingState extends ShowAllPostsStates {}
 
 class addReportSuccessState extends ShowAllPostsStates {
@@ -27,4 +81,15 @@ class addReportSuccessState extends ShowAllPostsStates {
 class addReportErrorState extends ShowAllPostsStates {
   final String error;
   addReportErrorState(this.error);
+}
+class deleteLoadingState extends ShowAllPostsStates {}
+
+class deleteSuccessState extends ShowAllPostsStates {
+  final DeletePostModel deletePostModel;
+  deleteSuccessState(this.deletePostModel);
+}
+
+class deleteErrorState extends ShowAllPostsStates {
+  final String error;
+  deleteErrorState(this.error);
 }

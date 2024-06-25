@@ -340,43 +340,7 @@ class Profile extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 20,
-                ),
-                // Center(
-                //   child: GestureDetector(
-                //     onTap: () {
-                //       navigate(context, Tree());
-                //     },
-                //     child: Container(
-                //       height: 50,
-                //       width: 230,
-                //       decoration: BoxDecoration(
-                //         color: Colors.red[400],
-                //         borderRadius: BorderRadius.circular(17),
-                //         boxShadow: [
-                //           BoxShadow(
-                //             color: Color.fromRGBO(38, 41, 37, 0.29),
-                //             blurRadius: 1,
-                //             offset: Offset(0, 1),
-                //           ),
-                //         ],
-                //       ),
-                //       child: Center(
-                //         child: Text(
-                //           "just click it !",
-                //           style: TextStyle(
-                //             color: Colors.white,
-                //             fontSize: 20,
-                //             fontFamily: "Revive",
-                //             fontWeight: FontWeight.bold,
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                SizedBox(
-                  height: 40,
+                  height: 60,
                 ),
               ],
             ),
