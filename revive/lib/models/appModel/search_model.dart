@@ -1,9 +1,9 @@
-class SearchModel {
+class SearchPostModel {
   bool? status;
   String? message;
   Data? data;
 
-  SearchModel.fromJson(Map<String, dynamic> json) {
+  SearchPostModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     message = json["msg"];
     data = json["Users"] != null ? Data.fromJson(json["Users"]) : null;

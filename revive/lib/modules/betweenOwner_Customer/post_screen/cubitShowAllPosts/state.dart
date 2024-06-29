@@ -33,6 +33,22 @@ class showMyPostsErrorState extends ShowAllPostsStates {
   final String error;
   showMyPostsErrorState(this.error);
 }
+
+
+class showHisPostsLoadingState extends ShowAllPostsStates {}
+
+class showHisPostsSuccessState extends ShowAllPostsStates {
+  final ShowMyPostsModel showMyPostsModel;
+  showHisPostsSuccessState(this.showMyPostsModel);
+}
+
+class showHisPostsErrorState extends ShowAllPostsStates {
+  final String error;
+  showHisPostsErrorState(this.error);
+}
+
+
+
 class showOnePostLoadingState extends ShowAllPostsStates {}
 
 class showOnePostSuccessState extends ShowAllPostsStates {

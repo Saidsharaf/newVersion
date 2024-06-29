@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/layout/home_layout.dart';
@@ -39,94 +40,94 @@ class FootprintPerson extends StatelessWidget {
       child: BlocConsumer<CarbonPersonCubit, CarbonPersonStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return state is carbonPersonSuccessState
-              ? Scaffold(
-                  appBar: AppBar(
-                    leading: IconButton(
-                      onPressed: () {
-                        navigateAndFinish(
-                          context,
-                          HomeLayout(
-                            index: 0,
-                          ),
-                        );
-                      },
-                      icon: Icon(Icons.arrow_back),
-                    ),
-                    title: Text(
-                      "My Footprint",
-                      style: TextStyle(fontFamily: "Title"),
-                    ),
-                    centerTitle: true,
+          return ConditionalBuilder(
+            condition: state is carbonPersonSuccessState,
+            builder: (context) {
+              return Scaffold(
+                appBar: AppBar(
+                  leading: IconButton(
+                    onPressed: () {
+                      navigateAndFinish(
+                        context,
+                        HomeLayout(
+                          index: 0,
+                        ),
+                      );
+                    },
+                    icon: Icon(Icons.arrow_back),
                   ),
-                  body: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 17,
-                        right: 12,
-                        left: 12,
-                        bottom: 17,
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color.fromRGBO(38, 41, 37, 0.29),
-                                  blurRadius: 15,
-                                  offset: Offset(0, 1),
-                                ),
-                              ],
-                            ),
-                            padding: EdgeInsets.only(
-                              top: 20,
-                              right: 10,
-                              left: 10,
-                              bottom: 5,
-                            ),
-                            child: SfRadialGauge(
-                              axes: <RadialAxis>[
-                                RadialAxis(
-                                    minimum: 0,
+                  title: Text(
+                    "My Footprint",
+                    style: TextStyle(fontFamily: "Title"),
+                  ),
+                  centerTitle: true,
+                ),
+                body: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 17,
+                      right: 12,
+                      left: 12,
+                      bottom: 17,
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromRGBO(38, 41, 37, 0.29),
+                                blurRadius: 15,
+                                offset: Offset(0, 1),
+                              ),
+                            ],
+                          ),
+                          padding: EdgeInsets.only(
+                            top: 20,
+                            right: 10,
+                            left: 10,
+                            bottom: 5,
+                          ),
+                          child: SfRadialGauge(
+                            axes: <RadialAxis>[
+                              RadialAxis(
+                                minimum: 0,
                                 maximum: 80000,
                                 interval: 10000,
-                                  annotations: [
-                                    GaugeAnnotation(
-                                      widget: Text(
-                                        state.carbonPersonModel.pythonOutput
-                                            .toString(),
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: double.tryParse(state
-                                                  .carbonPersonModel
-                                                  .pythonOutput!)! > 2000
-                                              ? Colors.red
+                                annotations: [
+                                  GaugeAnnotation(
+                                    widget: Text(
+                                      context
+                                          .read<CarbonPersonCubit>()
+                                          .carbon[2],
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        color: double.tryParse(context
+                                                    .read<CarbonPersonCubit>()
+                                                    .carbon[2])! >
+                                                2000
+                                            ? Colors.red
                                             : Colors.green,
-                                        ),
                                       ),
-                                      positionFactor: .5,
-                                      angle: 90,
                                     ),
-                                  ],
-                                  pointers: <GaugePointer>[
-                                    NeedlePointer(
-                                      value: double.tryParse(state
-                                                  .carbonPersonModel
-                                                  .pythonOutput!)! !=
-                                              null
-                                          ? double.tryParse(state
-                                              .carbonPersonModel.pythonOutput!)!
-                                          : 0,
-                                      enableAnimation: true,
-                                    ),
-                                  ],
-                                  ranges: [
-                                    GaugeRange(
+                                    positionFactor: .5,
+                                    angle: 90,
+                                  ),
+                                ],
+                                pointers: <GaugePointer>[
+                                  NeedlePointer(
+                                    value: double.tryParse(context
+                                        .read<CarbonPersonCubit>()
+                                        .carbon[2])!,
+                                    enableAnimation: true,
+                                  ),
+                                ],
+                                ranges: [
+                                  GaugeRange(
                                     startValue: 0,
                                     endValue: 1000,
                                     color: Colors.green,
@@ -141,23 +142,27 @@ class FootprintPerson extends StatelessWidget {
                                     endValue: 80000,
                                     color: Colors.red,
                                   ),
-                                  ],
-                                )
-                              ],
-                            ),
+                                ],
+                              )
+                            ],
                           ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          height: 25,
+                        ),
+                      ],
                     ),
                   ),
-                )
-              : Center(
+                ),
+              );
+            },
+            fallback: (context) {
+              return Center(
                   child: CircularProgressIndicator(
-                  color: Colors.green,
-                ));
+                color: Colors.green,
+              ));
+            },
+          );
         },
       ),
     );

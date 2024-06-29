@@ -6,7 +6,7 @@ import 'package:revive/modules/LoginAndReg/login.dart';
 import 'package:revive/modules/Owner/FactoryFootprint/questions_factory.dart';
 import 'package:revive/modules/Owner/Report/report.dart';
 import 'package:revive/modules/betweenOwner_Customer/trash_Screen/trash_post.dart';
-import 'package:revive/modules/chat_screen/chat.dart';
+import 'package:revive/modules/chatScreen/chat.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -223,7 +223,7 @@ class _headofsliderState extends State<headofslider> {
                   txt: "Chat ",
                   icon: "assets/icons/chat-chat-svgrepo-com.svg",
                   press: () {
-                    navigate(context, chat());
+                    navigate(context, Chat());
                   },
                 ),
                 SizedBox(

@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/layout/cubit/cubit.dart';
 import 'package:revive/layout/cubit/states.dart';
 import 'package:revive/models/slider/listofslider.dart';
+import 'package:revive/modules/search/search.dart';
+import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/end_point.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 import 'package:shimmer/shimmer.dart';
@@ -31,25 +33,29 @@ class HomeLayout extends StatelessWidget {
               extendBody: true,
               backgroundColor: Colors.grey[100],
               appBar: AppBar(
-                actions:  [
-                  CircleAvatar(
-                    radius: 23,
-                    backgroundColor: Color.fromARGB(255, 68, 124, 70),
-                    child: CircleAvatar(
-                      radius: 21.3,
-                      backgroundImage:NetworkImage(server+sharedPref.getData(key: "profilePic"),
-                      ),
-                    ),
-                  ),
+                actions: [
+                  // CircleAvatar(
+                  //   radius: 23,
+                  //   backgroundColor: Color.fromARGB(255, 68, 124, 70),
+                  //   child: CircleAvatar(
+                  //     radius: 21.3,
+                  //     backgroundImage:NetworkImage(server+sharedPref.getData(key: "profilePic"),
+                  //     ),
+                  //   ),
+                  // ),
+                  IconButton(
+                      onPressed: () {
+                        navigate(context, Search());
+                      },
+                      icon: Icon(Icons.search)),
                   SizedBox(
-                    width: 6,
+                    width: 12,
                   ),
                 ],
                 title: TitletextWidget(
                   textName: cubit.title[cubit.currentIndex],
                 ),
                 centerTitle: true,
-                
               ),
               body: cubit.screens[cubit.currentIndex],
               bottomNavigationBar: CurvedNavigationBar(
@@ -70,7 +76,7 @@ class HomeLayout extends StatelessWidget {
                   userName: sharedPref.getData(key: "username"),
                   email: sharedPref.getData(key: "email"),
                   backgroundImage: "assets/images/soft.jpg",
-                  imageOfprof: server+sharedPref.getData(key: "profilePic"),
+                  imageOfprof: server + sharedPref.getData(key: "profilePic"),
                 ),
               ),
             ),

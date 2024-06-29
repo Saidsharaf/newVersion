@@ -74,6 +74,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.green,
         ),
         primarySwatch: Colors.green,
+        
         // scaffoldBackgroundColor: Colors.white,
         appBarTheme: AppBarTheme(
           iconTheme: IconThemeData(

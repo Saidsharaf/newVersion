@@ -10,6 +10,7 @@ class CarbonFactoryCubit extends Cubit<CarbonFactoryStates> {
   static CarbonFactoryCubit get(context) => BlocProvider.of(context);
   CarbonFactoryModel? carbonFactoryModel;
 
+  List<dynamic> carbon = [];
   void carbonFactory({
     String? Country,
     int? numPeople,
@@ -32,34 +33,6 @@ class CarbonFactoryCubit extends Cubit<CarbonFactoryStates> {
             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL3Jldi91c2Vycy9sb2dpbiIsImlhdCI6MTcwOTg0MDc4MywibmJmIjoxNzA5ODQwNzgzLCJqdGkiOiIyT013VVNWWG5oMlpsY09KIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.qMDjnmzKorwgBbMRGa9nO0n-iiXjjWxdwLIkBd9ZUQU",
         "maachineid": 3,
         "question": {
-          // "Country": Country, // string
-          // "num_people": numPeople, // int
-          // "electricity_cons": electricityCons, // int
-          // "Clean_energy": cleanEnergy, // int
-          // "Num_cars": numCars, // int
-          // "Fact_size": factSize, // int
-          // "Local_product": localProduct, // string
-          // "Buy_env_comp": buyEnvComp, // string
-          // "Handle_waste": handleWaste, // string
-          // "Heating": heating, // string
-          // "Gasoline": "20", // int
-          // "Natural_gas": "25", // int
-          // "Water_cons": "30", // int
-          // "Waste_quan": "28" // int
-          // "country "                  : "Egypt",      // string
-          // "num_people"               : numPeople,     // int
-          // "electricity_cons"         : electricityCons,    // int
-          // "Clean_energy"             : cleanEnergy,    // int
-          // "Num_cars"                 : numCars,     // int
-          // "Fact_size"                : factSize,    // int
-          // "Local_product"            : "example",    // string
-          // "Buy_env_comp"             : "example",    // string
-          // "Handle_waste"             : "example",    // string
-          // "Heating"                  : "example",    // string
-          // "Gasoline"                 : "20",    // int
-          // "Natural_gas"              : "25",    // int
-          // "Water_cons"               : "30",    // int
-          // "Waste_quan"               : "28"
           "country": "Egypt",
           "num_people": numPeople,
           "Electricity_consumption": electricityCons,
@@ -79,7 +52,9 @@ class CarbonFactoryCubit extends Cubit<CarbonFactoryStates> {
     ).then((value) {
       print(value.data);
       carbonFactoryModel = CarbonFactoryModel.fromJson(value.data);
-      emit(carbonFactorySuccessState(carbonFactoryModel!));
+      carbon = value.data["Python Output"];
+      print(carbon);
+    if(!isClosed) emit(carbonFactorySuccessState(carbonFactoryModel!));
     }).catchError(
       (error) {
         print(error.toString());

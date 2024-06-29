@@ -2,7 +2,7 @@ class CarbonPersonModel {
   bool? status;
   String? errNum;
   String? msg;
-  String? pythonOutput;
+  List<String>? pythonOutput;
 
   CarbonPersonModel({this.status, this.errNum, this.msg, this.pythonOutput});
 
@@ -10,7 +10,7 @@ class CarbonPersonModel {
     status = json['status'];
     errNum = json['errNum'];
     msg = json['msg'];
-    pythonOutput = json['Python Output'];
+    pythonOutput = json['Python Output'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {

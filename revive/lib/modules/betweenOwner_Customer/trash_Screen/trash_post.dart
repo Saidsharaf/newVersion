@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/layout/home_layout.dart';
-import 'package:revive/models/dropdownMenu/menu.dart';
 import 'package:revive/models/dropdownMenu/menuRestore.dart';
-import 'package:revive/models/dropdownMenu/menu_item.dart';
 import 'package:revive/models/dropdownMenu/menu_itemRestore.dart';
 import 'package:revive/modules/LoginAndReg/component.dart';
-import 'package:revive/modules/betweenOwner_Customer/post_screen/add_post.dart';
 import 'package:revive/modules/betweenOwner_Customer/post_screen/comment.dart';
 import 'package:revive/modules/betweenOwner_Customer/post_screen/cubitShowAllPosts/cubit.dart';
 import 'package:revive/modules/betweenOwner_Customer/post_screen/cubitShowAllPosts/state.dart';

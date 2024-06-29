@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:revive/models/appModel/adminModel/restoreUsers/showRestore.dart';
 import 'package:revive/models/appModel/post/addReportModel.dart';
 import 'package:revive/models/appModel/post/deletePostModel.dart';
 import 'package:revive/models/appModel/post/doRestoreModel.dart';
@@ -41,7 +40,7 @@ class ShowAllPostsCubit extends Cubit<ShowAllPostsStates> {
       print(users);
       print(":::::::::::::::::::::::::::");
       print(users[1]["user"]["username"]);
-      emit(showAllPostsSuccessState(showAllPostsModel!));
+      if(!isClosed)emit(showAllPostsSuccessState(showAllPostsModel!));
     }).catchError(
       (error) {
         emit(showAllPostsErrorState(error.toString()));
@@ -68,6 +67,28 @@ class ShowAllPostsCubit extends Cubit<ShowAllPostsStates> {
     }).catchError(
       (error) {
         emit(showMyPostsErrorState(error.toString()));
+      },
+    );
+  }
+  void showHisPosts({@required String? tok}) {
+    emit(showHisPostsLoadingState());
+    DioHelper.getAdminData(
+      url: MYPOSTS,
+      data: {
+        "checksecurity": "EI8m2bl8TFVjbwYmuopsNPd1",
+        "token": tok,
+      },
+    ).then((value) {
+      print(value.data);
+      showMyPostsModel = ShowMyPostsModel.fromJson(value.data);
+      users = value.data["posts"]["posts"];
+      print(users);
+      print(":::::::::::::::::::::::::::");
+      print(users[1]["description"]);
+      emit(showHisPostsSuccessState(showMyPostsModel!));
+    }).catchError(
+      (error) {
+        emit(showHisPostsErrorState(error.toString()));
       },
     );
   }

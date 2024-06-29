@@ -9,6 +9,8 @@ class CarbonPersonCubit extends Cubit<CarbonPersonStates> {
 
   static CarbonPersonCubit get(context) => BlocProvider.of(context);
   CarbonPersonModel? carbonPersonModel;
+  List<dynamic> carbon = [];
+
 
   void carbonPerson({
     int? numPeople,
@@ -71,39 +73,13 @@ class CarbonPersonCubit extends Cubit<CarbonPersonStates> {
         "waste quantity"          : 77,
         "ferune"                  : 1,
         "fruite out of season"    : 15
-        // "num_people"              : numPeople,
-        // "country"                 : "Egypt",
-        // "size_house"              : 800,
-        // "type_house"              : "Detached",
-        // "Electricity_consumption" : 900,
-        // "clean_energy"            : 45,
-        // "Heating energy"          : "Charcoal",
-        // "IntercityTrain_avghours" : 5,
-        // "Subway_avghours"         : 0,
-        // "IntercityBus_avghours"   : 0,
-        // "City Bus_avghours"       : 5,
-        // "Tram_avghours"           : 0,
-        // "Bike/walk_avghours"      : 2,
-        // "plane_verylong"          : 2,
-        // "plane_long"              : 1,
-        // "plane_medium"            : 1,
-        // "plane_short"             : 1,
-        // "household preferred diet": "Vegan",
-        // "local_products?"         : "Always",
-        // "buy _environmentally_companies?": "Sometimes",
-        // "How many times a week does your family eat out?": 4,
-        // "HANDLE WASTE?"           : "Paper",
-        // "gasoline"                : 500,
-        // "natural gas "            : 555,
-        // "water consumtion"        : 179,
-        // "waste quantity"          : 77,
-        // "ferune"                  : 1,
-        // "fruite out of season"    : 15
         }
       },
     ).then((value) {
       print(value.data);
       carbonPersonModel = CarbonPersonModel.fromJson(value.data);
+      carbon = value.data["Python Output"];
+
       emit(carbonPersonSuccessState(carbonPersonModel!));
     }).catchError(
       (error) {

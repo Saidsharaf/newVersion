@@ -282,7 +282,7 @@ Widget btnkQuestions({
             selected: Selected!,
             onSelected: onSelected,
             backgroundColor: Colors.grey[200],
-            selectedColor:Colors.grey[200] ,
+            selectedColor: Colors.grey[200],
             side: BorderSide.none,
           )),
         ),
@@ -335,13 +335,13 @@ Widget textBuild2({
     padding: const EdgeInsets.only(top: 20, bottom: 10, right: 15, left: 15),
     child: TextFormField(
       onChanged: onChange,
-    onFieldSubmitted: onSubmit,
-    validator: validate,
-    controller: controller,
+      onFieldSubmitted: onSubmit,
+      validator: validate,
+      controller: controller,
       cursorColor: Colors.white,
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
-        hoverColor: Colors.green,
+          hoverColor: Colors.green,
           filled: true,
           fillColor: Colors.green,
           label: Text(text!),
@@ -646,6 +646,11 @@ Widget defultFormField({
           return null;
         },
         decoration: InputDecoration(
+          labelStyle: TextStyle(color: Colors.black),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
+            borderRadius: BorderRadius.circular(20),
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
           ),

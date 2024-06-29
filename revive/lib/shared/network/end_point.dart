@@ -11,16 +11,25 @@ const CHECKCODE = "/api/rev/check/code";
 const NEWPASS = "/api/rev/forget/pass";
 const SHOWRESTOREUSERS = "/api/rev/users/restore/index";
 const RESTOREUSERS = "/api/rev/users/restore";
+
 const ADDPOST = "/api/rev/posts";
 const MYPOSTS = "/api/rev/posts/showmyposts";
 const ONEPOST = "/api/rev/posts/show/10";
 const DELETEPOST = "/api/rev/posts/destroy/11";
 const SHOWRESTOREPOST = "/api/rev/posts/restore/index";
 const DORESTOREPOST = "/api/rev/posts/restore";
+const ADDFOLLOW = "/api/rev/users/follow";
+
+
+const SEARCH = "/api/rev/users/follow/autocolmpletesearch";
+
+
 
 const AllPOSTS = "/api/rev/posts";
 const ADDREPORT = "/api/rev/add/report/posts";
 const SHOWCOMMENT = "/api/rev/posts/comment";
 
 
-const server = "https://d1ee-2a09-bac5-30c4-16a0-00-241-2f.ngrok-free.app";
+
+
+const server = "https://e47f-2a09-bac5-30c4-1eb-00-31-107.ngrok-free.app";
