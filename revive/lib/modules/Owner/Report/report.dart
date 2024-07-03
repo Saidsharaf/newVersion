@@ -213,6 +213,7 @@ class _ReportScreenState extends State<ReportScreen> {
                         minimum: 0,
                         maximum: 100,
                         interval: 40,
+                        
                       ),
                       series: <LineSeries<SalesData, num>>[
                         LineSeries<SalesData, num>(
