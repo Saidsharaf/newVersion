@@ -7,7 +7,9 @@ import 'package:revive/modules/betweenOwner_Customer/post_screen/add_post.dart';
 import 'package:revive/modules/betweenOwner_Customer/post_screen/comment.dart';
 import 'package:revive/modules/betweenOwner_Customer/post_screen/cubitShowAllPosts/cubit.dart';
 import 'package:revive/modules/betweenOwner_Customer/post_screen/cubitShowAllPosts/state.dart';
+import 'package:revive/modules/betweenOwner_Customer/post_screen/likes.dart';
 import 'package:revive/modules/betweenOwner_Customer/prof_screen/prof.dart';
+import 'package:revive/modules/search/addFollowToOther/secProfile.dart';
 import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/end_point.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
@@ -163,7 +165,7 @@ class _PostsState extends State<Posts> {
                                             padding: EdgeInsets.all(10),
                                             child: GestureDetector(
                                               onTap: () {
-                                                navigate(context, Prof());
+                                                navigate(context, secProfile());
                                               },
                                               child: CircleAvatar(
                                                 radius: 22,
@@ -187,7 +189,7 @@ class _PostsState extends State<Posts> {
                                           ),
                                           GestureDetector(
                                             onTap: () {
-                                              navigate(context, Prof());
+                                              navigate(context, secProfile());
                                             },
                                             child: Text(context
                                                     .read<ShowAllPostsCubit>()
@@ -219,24 +221,25 @@ class _PostsState extends State<Posts> {
                                           IconButton(
                                             onPressed: () {
                                               setState(() {
+                                                // context
+                                                //         .read<ShowAllPostsCubit>()
+                                                //         .users[index]["saved"] =
+                                                // !context
+                                                //     .read<
+                                                //         ShowAllPostsCubit>()
+                                                //     .users[index]["saved"];
                                                 context
-                                                        .read<ShowAllPostsCubit>()
-                                                        .users[index]["saved"] =
-                                                    !context
-                                                        .read<
-                                                            ShowAllPostsCubit>()
-                                                        .users[index]["saved"];
+                                                    .read<ShowAllPostsCubit>()
+                                                    .addFav(
+                                                        id: cubit.users[index]
+                                                            ["id"]);
                                               });
                                             },
                                             icon: Icon(
-                                              context
-                                                      .read<ShowAllPostsCubit>()
-                                                      .users[index]["saved"]
+                                              cubit.isFav
                                                   ? Icons.favorite
                                                   : Icons.favorite_border,
-                                              color: context
-                                                      .read<ShowAllPostsCubit>()
-                                                      .users[index]["saved"]
+                                              color: cubit.isFav
                                                   ? Colors.green[400]
                                                   : Colors.green[400],
                                             ),
@@ -280,26 +283,32 @@ class _PostsState extends State<Posts> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            RichText(
-                                              text: TextSpan(
-                                                style: TextStyle(
-                                                    color: Colors.black),
-                                                children: [
-                                                  TextSpan(text: "Liked by"),
-                                                  TextSpan(
-                                                    text: "Ziad Shalaby",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  TextSpan(text: "and"),
-                                                  TextSpan(
-                                                    text: "others",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ],
+                                            GestureDetector(
+                                              onTap: () {
+
+                                                navigate(context,Likes());
+                                              },
+                                              child: RichText(
+                                                text: TextSpan(
+                                                  style: TextStyle(
+                                                      color: Colors.black),
+                                                  children: [
+                                                    TextSpan(text: "Liked by"),
+                                                    TextSpan(
+                                                      text: "Ziad Shalaby",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    TextSpan(text: "and"),
+                                                    TextSpan(
+                                                      text: "others",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                             RichText(

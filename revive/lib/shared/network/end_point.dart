@@ -16,9 +16,19 @@ const ADDPOST = "/api/rev/posts";
 const MYPOSTS = "/api/rev/posts/showmyposts";
 const ONEPOST = "/api/rev/posts/show/10";
 const DELETEPOST = "/api/rev/posts/destroy/11";
+
+const ADDFAV = "/api/rev/posts/favourite";
+const REMOVEFAV = "/api/rev/posts/favourite";
+const SHOWFAV = "/api/rev/posts/favourite";
+
+
 const SHOWRESTOREPOST = "/api/rev/posts/restore/index";
 const DORESTOREPOST = "/api/rev/posts/restore";
+
 const ADDFOLLOW = "/api/rev/users/follow";
+const DELETEFOLLOW = "/api/rev/users/follow";
+const SHOWFOLLOWING = "/api/rev/users/following";
+const SHOWFOLLOWER = "/api/rev/users/followers";
 
 
 const SEARCH = "/api/rev/users/follow/autocolmpletesearch";
@@ -30,6 +40,15 @@ const ADDREPORT = "/api/rev/add/report/posts";
 const SHOWCOMMENT = "/api/rev/posts/comment";
 
 
+const ADDBARTER = "/api/rev/BarterProcess/Store";
+const SHOWPERCENTAGE = "/api/rev/calculate/percentage/footprint";
 
 
-const server = "https://e47f-2a09-bac5-30c4-1eb-00-31-107.ngrok-free.app";
+
+const REPORTFACTORY = "/api/rev/python/trainng/footprint/product";
+
+
+
+
+
+const server = "https://4262-2a09-bac1-2240-10-00-31-61.ngrok-free.app";

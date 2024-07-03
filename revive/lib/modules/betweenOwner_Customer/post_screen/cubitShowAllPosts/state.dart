@@ -2,6 +2,7 @@
 import 'package:revive/models/appModel/post/addReportModel.dart';
 import 'package:revive/models/appModel/post/deletePostModel.dart';
 import 'package:revive/models/appModel/post/doRestoreModel.dart';
+import 'package:revive/models/appModel/post/fav/AddFavModel.dart';
 import 'package:revive/models/appModel/post/showAllPostsModel.dart';
 import 'package:revive/models/appModel/post/showMyPosts.dart';
 import 'package:revive/models/appModel/post/showOnePostModel.dart';
@@ -108,4 +109,27 @@ class deleteSuccessState extends ShowAllPostsStates {
 class deleteErrorState extends ShowAllPostsStates {
   final String error;
   deleteErrorState(this.error);
+}
+class addFavLoadingState extends ShowAllPostsStates {}
+
+class addFavSuccessState extends ShowAllPostsStates {
+  final AddFavModel addFavModel;
+  addFavSuccessState(this.addFavModel);
+}
+
+class addFavErrorState extends ShowAllPostsStates {
+  final String error;
+  addFavErrorState(this.error);
+}
+
+class removeFavLoadingState extends ShowAllPostsStates {}
+
+class removeFavSuccessState extends ShowAllPostsStates {
+  final AddFavModel addFavModel;
+  removeFavSuccessState(this.addFavModel);
+}
+
+class removeFavErrorState extends ShowAllPostsStates {
+  final String error;
+  removeFavErrorState(this.error);
 }

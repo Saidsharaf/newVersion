@@ -164,7 +164,7 @@ class _MyWidgetState extends State<Prof> {
                                             height: 10,
                                           ),
                                           Text(
-                                            "300",
+                                            "0",
                                             style: TextStyle(
                                               color: Color.fromARGB(
                                                   178, 58, 116, 40),
@@ -199,7 +199,7 @@ class _MyWidgetState extends State<Prof> {
                                             height: 10,
                                           ),
                                           Text(
-                                            "10K",
+                                            "5",
                                             style: TextStyle(
                                               color: Color.fromARGB(
                                                   178, 58, 116, 40),
@@ -229,7 +229,7 @@ class _MyWidgetState extends State<Prof> {
                                             height: 10,
                                           ),
                                           Text(
-                                            "20",
+                                            "0",
                                             style: TextStyle(
                                               color: Color.fromARGB(
                                                   178, 58, 116, 40),

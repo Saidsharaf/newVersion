@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/models/appModel/post/addReportModel.dart';
 import 'package:revive/models/appModel/post/deletePostModel.dart';
 import 'package:revive/models/appModel/post/doRestoreModel.dart';
+import 'package:revive/models/appModel/post/fav/AddFavModel.dart';
 import 'package:revive/models/appModel/post/showAllPostsModel.dart';
 import 'package:revive/models/appModel/post/showMyPosts.dart';
 import 'package:revive/models/appModel/post/showOnePostModel.dart';
@@ -23,7 +24,10 @@ class ShowAllPostsCubit extends Cubit<ShowAllPostsStates> {
   ShowRestorePostModel? showRestorePostModel;
   DoRestorePostModel? doRestorePostModel;
   DeletePostModel? deletePostModel;
+  AddFavModel? addFavModel;
   static ShowAllPostsCubit get(context) => BlocProvider.of(context);
+
+  bool isFav = false;
 
   void showAllPosts() {
     emit(showAllPostsLoadingState());
@@ -40,7 +44,7 @@ class ShowAllPostsCubit extends Cubit<ShowAllPostsStates> {
       print(users);
       print(":::::::::::::::::::::::::::");
       print(users[1]["user"]["username"]);
-      if(!isClosed)emit(showAllPostsSuccessState(showAllPostsModel!));
+      if (!isClosed) emit(showAllPostsSuccessState(showAllPostsModel!));
     }).catchError(
       (error) {
         emit(showAllPostsErrorState(error.toString()));
@@ -70,6 +74,7 @@ class ShowAllPostsCubit extends Cubit<ShowAllPostsStates> {
       },
     );
   }
+
   void showHisPosts({@required String? tok}) {
     emit(showHisPostsLoadingState());
     DioHelper.getAdminData(
@@ -114,6 +119,7 @@ class ShowAllPostsCubit extends Cubit<ShowAllPostsStates> {
       },
     );
   }
+
   void showRestorePost() {
     emit(showRestorePostLoadingState());
     DioHelper.getAdminData(
@@ -135,6 +141,7 @@ class ShowAllPostsCubit extends Cubit<ShowAllPostsStates> {
       },
     );
   }
+
   void DoRestorePost({@required int? id}) {
     emit(doRestorePostLoadingState());
     DioHelper.postData(
@@ -178,6 +185,7 @@ class ShowAllPostsCubit extends Cubit<ShowAllPostsStates> {
       },
     );
   }
+
   void DeletePost({
     @required int? id,
   }) {
@@ -192,10 +200,59 @@ class ShowAllPostsCubit extends Cubit<ShowAllPostsStates> {
     ).then((value) {
       print(value.data);
       deletePostModel = DeletePostModel.fromJson(value.data);
-     if (!isClosed) emit(deleteSuccessState(deletePostModel!));
+      if (!isClosed) emit(deleteSuccessState(deletePostModel!));
     }).catchError(
       (error) {
         emit(deleteErrorState(error.toString()));
+      },
+    );
+  }
+
+  void addFav({@required int? id}) {
+    isFav = !isFav;
+    emit(addFavLoadingState());
+    DioHelper.postData(
+      url: ADDFAV,
+      data: {
+        "checksecurity": "EI8m2bl8TFVjbwYmuopsNPd1",
+        "token": token,
+        "posts_id": id
+      },
+    ).then((value) {
+      print(value.data);
+      addFavModel = AddFavModel.fromJson(value.data);
+      if (!addFavModel!.status!) {
+        removeFav(id: id);
+        isFav = !isFav;
+      }
+      print(":::::::::::::::::::::::::::");
+      if (!isClosed) emit(addFavSuccessState(addFavModel!));
+    }).catchError(
+      (error) {
+        emit(addFavErrorState(error.toString()));
+      },
+    );
+  }
+
+  void removeFav({@required int? id}) {
+    isFav = !isFav;
+    emit(removeFavLoadingState());
+    DioHelper.DeleteData(
+      url: REMOVEFAV,
+      data: {
+        "checksecurity": "EI8m2bl8TFVjbwYmuopsNPd1",
+        "token": token,
+        "post_id": id
+      },
+    ).then((value) {
+      print(value.data);
+      addFavModel = AddFavModel.fromJson(value.data);
+      if (!addFavModel!.status!) {}
+      print(":::::::::::::::::::::::::::");
+      if (!isClosed) emit(removeFavSuccessState(addFavModel!));
+    }).catchError(
+      (error) {
+        emit(removeFavErrorState(error.toString()));
       },
     );
   }
