@@ -15,13 +15,17 @@ class _ChatState extends State<Chat> {
       messages.insert(0, {'sender': 'user', 'message': message});
     });
     print(messages);
+    reviveMessage(message);
     textController.clear();
   }
 
-  void reviveMessage(String message){
-    //المسدج اللي واخدها فوق دي المفرض اديها ل api 
+  void reviveMessage(String message) {
+    //المسدج اللي واخدها فوق دي المفرض اديها ل api
     setState(() {
-      messages.insert(0, {'sender': 'revive', 'message': message});//بدل المسدج المفروض response
+      messages.insert(0, {
+        'sender': 'revive',
+        'message': message
+      }); //بدل المسدج المفروض response
     });
   }
 
@@ -49,22 +53,30 @@ class _ChatState extends State<Chat> {
                 reverse: true,
                 itemBuilder: (context, index) {
                   return Column(
-                    crossAxisAlignment:messages[index]['sender']=='user'? CrossAxisAlignment.end:CrossAxisAlignment.start,
+                    crossAxisAlignment: messages[index]['sender'] == 'user'
+                        ? CrossAxisAlignment.end
+                        : CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(5),
                         child: Container(
                           padding: const EdgeInsets.all(15),
                           decoration: BoxDecoration(
-                              color: messages[index]['sender']=='user'? Colors.green:Colors.grey.withOpacity(.5),
-                              borderRadius:const BorderRadius.only(
+                              color: messages[index]['sender'] == 'user'
+                                  ? Colors.green
+                                  : Colors.grey.withOpacity(.5),
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(5),
                                 bottomLeft: Radius.circular(5),
                                 topRight: Radius.circular(5),
                               )),
                           child: Text(
                             messages[index]['message'],
-                            style: TextStyle(color:messages[index]['sender']=='user'? Colors.white:Colors.black, fontSize: 17),
+                            style: TextStyle(
+                                color: messages[index]['sender'] == 'user'
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontSize: 17),
                           ),
                         ),
                       ),

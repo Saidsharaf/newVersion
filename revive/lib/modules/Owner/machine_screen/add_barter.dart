@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:revive/layout/home_layout.dart';
 import 'package:revive/modules/LoginAndReg/component.dart';
 import 'package:revive/modules/Owner/machine_screen/cubitBarter/cubit.dart';
 import 'package:revive/modules/Owner/machine_screen/cubitBarter/state.dart';
+import 'package:revive/shared/component/component.dart';
 import 'package:revive/shared/network/local/shared_pref.dart';
 
 class AddBarter extends StatefulWidget {
@@ -24,7 +26,7 @@ class _BarterState extends State<AddBarter> {
       child: BlocConsumer<BarterCubit, BarterStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          var cubit = BarterCubit.get(context);
+        //  var cubit = BarterCubit.get(context);
           List<Step> getSteps() {
             var nameController = TextEditingController();
             var carbonController = TextEditingController();
@@ -248,18 +250,18 @@ class _BarterState extends State<AddBarter> {
                                 showToast(
                                     msg: "The barter is added",
                                     state: toastStates.SUCCESS);
-                                cubit.addBarter(
-                                  nameSeller: sharedPref.getData(key: "nameC"),
-                                  nameBuyer: sharedPref.getData(key: "nameC"),
-                                  carbonFootprint:
-                                      sharedPref.getData(key: "carbonC"),
-                                  expire: sharedPref.getData(key: "timeC"),
-                                );
-                                // navigateAndFinish(
-                                //     context,
-                                //     HomeLayout(
-                                //       index: 1,
-                                //     ));
+                                // cubit.addBarter(
+                                //   nameSeller: sharedPref.getData(key: "nameC"),
+                                //   nameBuyer: sharedPref.getData(key: "nameC"),
+                                //   carbonFootprint:
+                                //       sharedPref.getData(key: "carbonC"),
+                                //   expire: sharedPref.getData(key: "timeC"),
+                                // );
+                                navigateAndFinish(
+                                    context,
+                                    HomeLayout(
+                                      index: 1,
+                                    ));
                               } else {
                                 currentStep++;
                               }
