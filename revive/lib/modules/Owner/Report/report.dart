@@ -14,22 +14,8 @@ class ReportScreen extends StatefulWidget {
 }
 
 class _ReportScreenState extends State<ReportScreen> {
-  num containerId = 0;
   late ZoomPanBehavior _zoomPanBehavior;
-  List<SalesData> lineOne = [
-    SalesData(5, 20),
-    SalesData(2, 35),
-    SalesData(3, 93),
-    SalesData(4, 55),
-    SalesData(5, 36),
-    SalesData(6, 19),
-    SalesData(7, 66),
-    SalesData(8, 77),
-    SalesData(9, 60),
-    SalesData(11, 74),
-    SalesData(12, 23),
-    SalesData(13, 40),
-  ];
+
   // List<SalesData> lineTwo = [
   //   SalesData(1, 5),
   //   SalesData(2, 6),
@@ -93,236 +79,273 @@ class _ReportScreenState extends State<ReportScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ReportFactoryCubit()..reportFactory(date: "a1"),
-      child: BlocConsumer<ReportFactoryCubit,ReportFactoryStates>(
+      child: BlocConsumer<ReportFactoryCubit, ReportFactoryStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return Scaffold(
-            backgroundColor: Color.fromARGB(167, 193, 226, 199),
-            body: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(
-                    right: 12,
-                    left: 12,
-                    top: 50,
-                    bottom: 6,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          num containerId = 0;
+          var cubit = ReportFactoryCubit.get(context);
+          // List<SalesData> lineOne = [
+          //   SalesData(5, cubit.numbers[0]),
+          //   SalesData(2, cubit.numbers[1]),
+          //   SalesData(3, cubit.numbers[2]),
+          //   SalesData(4, cubit.numbers[3]),
+          //   SalesData(5, cubit.numbers[4]),
+          //   SalesData(6, cubit.numbers[5]),
+          //   SalesData(7, cubit.numbers[6]),
+          //   SalesData(8, cubit.numbers[7]),
+          //   SalesData(9, cubit.numbers[8]),
+          //   SalesData(11, cubit.numbers[9]),
+          //   SalesData(12, cubit.numbers[10]),
+          //   SalesData(13, cubit.numbers[11]),
+          // ];
+          return state is reportFactorySuccessState
+              ? Scaffold(
+                  backgroundColor: Color.fromARGB(167, 193, 226, 199),
+                  body: Column(
                     children: [
-                      Text(
-                        'Summary Report',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
+                      const Padding(
+                        padding: EdgeInsets.only(
+                          right: 12,
+                          left: 12,
+                          top: 50,
+                          bottom: 6,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Summary Report',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 28,
+                              ),
+                            ),
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.white,
+                              child: CircleAvatar(
+                                radius: 29,
+                                backgroundImage:
+                                    AssetImage("assets/images/prof1.jpeg"),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.white,
-                        child: CircleAvatar(
-                          radius: 29,
-                          backgroundImage:
-                              AssetImage("assets/images/prof1.jpeg"),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          right: 12,
+                          left: 12,
+                          top: 6,
+                          bottom: 6,
                         ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  containerId = 1;
+                                });
+                              },
+                              child: MonthsContainerWidget(
+                                isCheck: containerId,
+                                containerName: '1 month',
+                                containerId: 1,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  containerId = 2;
+                                });
+                              },
+                              child: MonthsContainerWidget(
+                                isCheck: containerId,
+                                containerName: '3 month',
+                                containerId: 2,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  containerId = 3;
+                                });
+                              },
+                              child: MonthsContainerWidget(
+                                isCheck: containerId,
+                                containerName: '6 month',
+                                containerId: 3,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          child: SfCartesianChart(
+                            zoomPanBehavior: _zoomPanBehavior,
+                            plotAreaBorderWidth: 0,
+                            tooltipBehavior: TooltipBehavior(
+                              enable: true,
+                              header: 'Weither Item',
+                            ),
+                            primaryXAxis: NumericAxis(
+                              majorGridLines:
+                                  MajorGridLines(width: 0, color: Colors.grey),
+                              edgeLabelPlacement: EdgeLabelPlacement.shift,
+                              autoScrollingMode: AutoScrollingMode.start,
+                              majorTickLines:
+                                  MajorTickLines(color: Colors.transparent),
+                              axisLine: AxisLine(width: 1),
+                              autoScrollingDelta: 15,
+                              minimum: 0,
+                              maximum: 100,
+                            ),
+                            primaryYAxis: NumericAxis(
+                              majorTickLines:
+                                  MajorTickLines(color: Colors.transparent),
+                              majorGridLines:
+                                  MajorGridLines(color: Colors.black),
+                              axisLine: AxisLine(width: 0),
+                              autoScrollingDelta: 100,
+                              autoScrollingMode: AutoScrollingMode.start,
+                              edgeLabelPlacement: EdgeLabelPlacement.hide,
+                              minimum: 0,
+                              maximum: 100,
+                              interval: 40,
+                            ),
+                            series: <LineSeries<SalesData, num>>[
+                              LineSeries<SalesData, num>(
+                                dataSource:  [
+            SalesData(5, cubit.numbers[0]),
+            SalesData(2, cubit.numbers[1]),
+            SalesData(3, cubit.numbers[2]),
+            SalesData(4, cubit.numbers[3]),
+            SalesData(5, cubit.numbers[4]),
+            SalesData(6, cubit.numbers[5]),
+            SalesData(7, cubit.numbers[6]),
+            SalesData(8, cubit.numbers[7]),
+            SalesData(9, cubit.numbers[8]),
+            SalesData(11, cubit.numbers[9]),
+            SalesData(12, cubit.numbers[10]),
+            SalesData(13, cubit.numbers[11]),
+          ],
+                                enableTooltip: true,
+                                xValueMapper: (SalesData sales, _) =>
+                                    sales.year,
+                                yValueMapper: (SalesData sales, _) =>
+                                    sales.sales,
+                                dataLabelSettings:
+                                    const DataLabelSettings(isVisible: true),
+                                color: Colors.red,
+                              ),
+                              // LineSeries<SalesData, num>(
+                              //   dataSource: lineTwo,
+                              //   // enableTooltip: true,
+                              //   xValueMapper: (SalesData sales, _) => sales.year,
+                              //   yValueMapper: (SalesData sales, _) => sales.sales,
+                              //   dataLabelSettings: const DataLabelSettings(isVisible: true),
+                              //   color: Colors.green,
+                              // ),
+                              // LineSeries<SalesData, num>(
+                              //   dataSource: lineThree,
+                              //   xValueMapper: (SalesData sale, _) => sale.year,
+                              //   yValueMapper: (SalesData sale, _) => sale.sales,
+                              //   // animationDuration: 200,
+                              //   // animationDelay: 300,
+                              //   color: Color.fromARGB(220, 230, 83, 181),
+                              //   width: 2,
+                              //   dataLabelSettings: const DataLabelSettings(
+                              //     textStyle: TextStyle(fontSize: 30, color: Colors.orange),
+                              //   ),
+                              //   // xAxisName: 'X',
+                              //   // yAxisName: 'Y',
+                              // ),
+                              // LineSeries<SalesData, num>(
+                              //   dataSource: lineFour,
+                              //   xValueMapper: (SalesData sale, _) => sale.year,
+                              //   yValueMapper: (SalesData sale, _) => sale.sales,
+                              //   // animationDuration: 200,
+                              //   // animationDelay: 300,
+                              //   color: Colors.amberAccent,
+                              //   width: 2,
+                              //   dataLabelSettings: const DataLabelSettings(
+                              //     textStyle: TextStyle(fontSize: 30, color: Colors.orange),
+                              //   ),
+                              // xAxisName: 'X',
+                              // yAxisName: 'Y',
+                              // ),
+                              // LineSeries<SalesData, num>(
+                              //   dataSource: lineFive,
+                              //   xValueMapper: (SalesData sale, _) => sale.year,
+                              //   yValueMapper: (SalesData sale, _) => sale.sales,
+                              //   // animationDuration: 200,
+                              //   // animationDelay: 300,
+                              //   color: Colors.teal,
+                              //   width: 2,
+                              //   dataLabelSettings: const DataLabelSettings(
+                              //     textStyle: TextStyle(fontSize: 30, color: Colors.orange),
+                              //   ),
+                              //   // xAxisName: 'X',
+                              //   // yAxisName: 'Y',
+                              // ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            WietherItemsContainerWidget(
+                              itemColor: Colors.red,
+                              itemName: 'Co',
+                              itemDetails: '20',
+                            ),
+                            WietherItemsContainerWidget(
+                              itemColor: Colors.green,
+                              itemName: 'CO₂',
+                              itemDetails: '20',
+                            ),
+                            WietherItemsContainerWidget(
+                              itemColor: Color.fromARGB(220, 230, 83, 181),
+                              itemName: 'O₂',
+                              itemDetails: '20',
+                            ),
+                            WietherItemsContainerWidget(
+                              itemColor: Colors.amberAccent,
+                              itemName: 'Temperature',
+                              itemDetails: '20',
+                            ),
+                            WietherItemsContainerWidget(
+                              itemColor: Colors.teal,
+                              itemName: 'Humidity',
+                              itemDetails: '20',
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                     ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    right: 12,
-                    left: 12,
-                    top: 6,
-                    bottom: 6,
+                )
+              :  Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.green,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            containerId = 1;
-                          });
-                        },
-                        child: MonthsContainerWidget(
-                          isCheck: containerId,
-                          containerName: '1 month',
-                          containerId: 1,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            containerId = 2;
-                          });
-                        },
-                        child: MonthsContainerWidget(
-                          isCheck: containerId,
-                          containerName: '3 month',
-                          containerId: 2,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            containerId = 3;
-                          });
-                        },
-                        child: MonthsContainerWidget(
-                          isCheck: containerId,
-                          containerName: '6 month',
-                          containerId: 3,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Expanded(
-                  child: SizedBox(
-                    child: SfCartesianChart(
-                      zoomPanBehavior: _zoomPanBehavior,
-                      plotAreaBorderWidth: 0,
-                      tooltipBehavior: TooltipBehavior(
-                        enable: true,
-                        header: 'Weither Item',
-                      ),
-                      primaryXAxis: NumericAxis(
-                        majorGridLines:
-                            MajorGridLines(width: 0, color: Colors.grey),
-                        edgeLabelPlacement: EdgeLabelPlacement.shift,
-                        autoScrollingMode: AutoScrollingMode.start,
-                        majorTickLines:
-                            MajorTickLines(color: Colors.transparent),
-                        axisLine: AxisLine(width: 1),
-                        autoScrollingDelta: 15,
-                        minimum: 0,
-                        maximum: 100,
-                      ),
-                      primaryYAxis: NumericAxis(
-                        majorTickLines:
-                            MajorTickLines(color: Colors.transparent),
-                        majorGridLines: MajorGridLines(color: Colors.black),
-                        axisLine: AxisLine(width: 0),
-                        autoScrollingDelta: 100,
-                        autoScrollingMode: AutoScrollingMode.start,
-                        edgeLabelPlacement: EdgeLabelPlacement.hide,
-                        minimum: 0,
-                        maximum: 100,
-                        interval: 40,
-                        
-                      ),
-                      series: <LineSeries<SalesData, num>>[
-                        LineSeries<SalesData, num>(
-                          dataSource: lineOne,
-                          enableTooltip: true,
-                          xValueMapper: (SalesData sales, _) => sales.year,
-                          yValueMapper: (SalesData sales, _) => sales.sales,
-                          dataLabelSettings:
-                              const DataLabelSettings(isVisible: true),
-                          color: Colors.red,
-                        ),
-                        // LineSeries<SalesData, num>(
-                        //   dataSource: lineTwo,
-                        //   // enableTooltip: true,
-                        //   xValueMapper: (SalesData sales, _) => sales.year,
-                        //   yValueMapper: (SalesData sales, _) => sales.sales,
-                        //   dataLabelSettings: const DataLabelSettings(isVisible: true),
-                        //   color: Colors.green,
-                        // ),
-                        // LineSeries<SalesData, num>(
-                        //   dataSource: lineThree,
-                        //   xValueMapper: (SalesData sale, _) => sale.year,
-                        //   yValueMapper: (SalesData sale, _) => sale.sales,
-                        //   // animationDuration: 200,
-                        //   // animationDelay: 300,
-                        //   color: Color.fromARGB(220, 230, 83, 181),
-                        //   width: 2,
-                        //   dataLabelSettings: const DataLabelSettings(
-                        //     textStyle: TextStyle(fontSize: 30, color: Colors.orange),
-                        //   ),
-                        //   // xAxisName: 'X',
-                        //   // yAxisName: 'Y',
-                        // ),
-                        // LineSeries<SalesData, num>(
-                        //   dataSource: lineFour,
-                        //   xValueMapper: (SalesData sale, _) => sale.year,
-                        //   yValueMapper: (SalesData sale, _) => sale.sales,
-                        //   // animationDuration: 200,
-                        //   // animationDelay: 300,
-                        //   color: Colors.amberAccent,
-                        //   width: 2,
-                        //   dataLabelSettings: const DataLabelSettings(
-                        //     textStyle: TextStyle(fontSize: 30, color: Colors.orange),
-                        //   ),
-                        // xAxisName: 'X',
-                        // yAxisName: 'Y',
-                        // ),
-                        // LineSeries<SalesData, num>(
-                        //   dataSource: lineFive,
-                        //   xValueMapper: (SalesData sale, _) => sale.year,
-                        //   yValueMapper: (SalesData sale, _) => sale.sales,
-                        //   // animationDuration: 200,
-                        //   // animationDelay: 300,
-                        //   color: Colors.teal,
-                        //   width: 2,
-                        //   dataLabelSettings: const DataLabelSettings(
-                        //     textStyle: TextStyle(fontSize: 30, color: Colors.orange),
-                        //   ),
-                        //   // xAxisName: 'X',
-                        //   // yAxisName: 'Y',
-                        // ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      WietherItemsContainerWidget(
-                        itemColor: Colors.red,
-                        itemName: 'Co',
-                        itemDetails: '20',
-                      ),
-                      WietherItemsContainerWidget(
-                        itemColor: Colors.green,
-                        itemName: 'CO₂',
-                        itemDetails: '20',
-                      ),
-                      WietherItemsContainerWidget(
-                        itemColor: Color.fromARGB(220, 230, 83, 181),
-                        itemName: 'O₂',
-                        itemDetails: '20',
-                      ),
-                      WietherItemsContainerWidget(
-                        itemColor: Colors.amberAccent,
-                        itemName: 'Temperature',
-                        itemDetails: '20',
-                      ),
-                      WietherItemsContainerWidget(
-                        itemColor: Colors.teal,
-                        itemName: 'Humidity',
-                        itemDetails: '20',
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
-          );
+                );
         },
       ),
     );

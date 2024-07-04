@@ -12,6 +12,7 @@ class ReportFactoryCubit extends Cubit<ReportFactoryStates> {
   ReportFactoryModel? reportFactoryModel;
 
   List<dynamic> output = [];
+List<int> numbers = [];
 
   static ReportFactoryCubit get(context) => BlocProvider.of(context);
 
@@ -36,8 +37,7 @@ class ReportFactoryCubit extends Cubit<ReportFactoryStates> {
       output = value.data["Python Output"];
 
       // List to store the extracted numbers
-      List<int> numbers = [];
-
+      
       // Iterate through each string in the list
       for (String item in output) {
         // Use regular expressions to check if the line matches the desired pattern
