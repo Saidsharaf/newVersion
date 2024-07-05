@@ -50,5 +50,10 @@ const REPORTFACTORY = "/api/rev/python/trainng/footprint/product";
 
 
 
+const CHAT = "/api/rev/python/chat";
+
+
+
+
 
 const server = "https://4262-2a09-bac1-2240-10-00-31-61.ngrok-free.app";
