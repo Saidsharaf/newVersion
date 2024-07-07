@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:popover/popover.dart';
 import 'package:revive/models/machineMenuItems/menu_items.dart';
+import 'package:revive/modules/Owner/machine_screen/cubitMachine/cubit.dart';
+import 'package:revive/modules/Owner/machine_screen/cubitMachine/state.dart';
 import 'package:revive/modules/Owner/machine_screen/machine_info_model.dart';
 import 'package:revive/modules/Owner/machine_screen/single_machine.dart';
 import 'package:revive/shared/component/component.dart';
+import 'package:revive/shared/network/end_point.dart';
+import 'package:revive/shared/network/local/shared_pref.dart';
 
 // ignore: must_be_immutable
 class Machine extends StatefulWidget {
@@ -89,222 +94,192 @@ class _MachineState extends State<Machine> {
   ];
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            height: 320,
-            width: double.infinity,
-            child: ClipRRect(
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Image.asset(
-                    'assets/images/machine_background_1.jpg',
-                    fit: BoxFit.fill,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 80),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      // child: Text(
-                      //   'Hello in Revive ..',
-                      //   style: TextStyle(fontSize: 25, color: Colors.black),
+    return BlocProvider(
+      create: (context) => MachineOwnerCubit()..machineOwner(),
+      child: BlocConsumer<MachineOwnerCubit, MachineOwnerStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          var cubit = MachineOwnerCubit.get(context);
+
+          return state is machineOwnerSuccessState
+              ? SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 265,
+                        width: double.infinity,
+                        child: ClipRRect(
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              Image.asset(
+                                'assets/images/machine_background_1.jpg',
+                                fit: BoxFit.fill,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 80),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  // child: Text(
+                                  //   'Hello in Revive ..',
+                                  //   style: TextStyle(fontSize: 25, color: Colors.black),
+                                  // ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(0),
+                            bottomRight: Radius.circular(0),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 20,
+                          bottom: 8,
+                          left: 8,
+                        ),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                'Your Machines .',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 250,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                physics: BouncingScrollPhysics(),
+                                itemBuilder: (context, index) => Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: BuildCardOne(
+                                    machineImage:server+sharedPref.getData(key: "profilePic"),
+                                    machineName: cubit.data[index]["name"],
+                                    machinePlace: cubit.data[index]["location"],
+                                  ),
+                                ),
+                                itemCount: cubit.data.length,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // SizedBox(
+                      //   height: 250,
+                      //   child: Row(
+                      //     children: [
+                      //       Expanded(
+                      //         child: ListView.builder(
+                      //           scrollDirection: Axis.horizontal,
+                      //           physics: BouncingScrollPhysics(),
+                      //           itemBuilder: (context, index) => Padding(
+                      //             padding: const EdgeInsets.all(8.0),
+                      //             child: BuildCardOne(
+                      //               machineImage: items2[index].machineImage,
+                      //               machineName: items2[index].machineName,
+                      //               machinePlace: items2[index].machinePlace,
+                      //             ),
+                      //           ),
+                      //           itemCount: items2.length,
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
                       // ),
-                    ),
-                  ),
-                ],
-              ),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(0),
-                bottomRight: Radius.circular(0),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: 20,
-              bottom: 8,
-              left: 8,
-            ),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    'Your Machines .',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 250,
-            child: Row(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: BuildCardOne(
-                        machineImage: items1[index].machineImage,
-                        machineName: items1[index].machineName,
-                        machinePlace: items1[index].machinePlace,
-                      ),
-                    ),
-                    itemCount: items1.length,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 250,
-            child: Row(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: BuildCardOne(
-                        machineImage: items2[index].machineImage,
-                        machineName: items2[index].machineName,
-                        machinePlace: items2[index].machinePlace,
-                      ),
-                    ),
-                    itemCount: items2.length,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          /////
-          SizedBox(
-            height: 250,
-            child: Row(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: BuildCardOne(
-                        machineImage: items3[index].machineImage,
-                        machineName: items3[index].machineName,
-                        machinePlace: items3[index].machinePlace,
-                      ),
-                    ),
-                    itemCount: items3.length,
-                  ),
-                ),
-              ],
-            ),
-          ),
+                      // /////
+                      // SizedBox(
+                      //   height: 250,
+                      //   child: Row(
+                      //     children: [
+                      //       Expanded(
+                      //         child: ListView.builder(
+                      //           scrollDirection: Axis.horizontal,
+                      //           physics: BouncingScrollPhysics(),
+                      //           itemBuilder: (context, index) => Padding(
+                      //             padding: const EdgeInsets.all(8.0),
+                      //             child: BuildCardOne(
+                      //               machineImage: items3[index].machineImage,
+                      //               machineName: items3[index].machineName,
+                      //               machinePlace: items3[index].machinePlace,
+                      //             ),
+                      //           ),
+                      //           itemCount: items3.length,
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
 
-          SizedBox(
-            height: 250,
-            child: Row(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: BuildCardOne(
-                        machineImage: items4[index].machineImage,
-                        machineName: items4[index].machineName,
-                        machinePlace: items4[index].machinePlace,
-                      ),
-                    ),
-                    itemCount: items4.length,
-                  ),
-                ),
-              ],
-            ),
-          ),
+                      // SizedBox(
+                      //   height: 250,
+                      //   child: Row(
+                      //     children: [
+                      //       Expanded(
+                      //         child: ListView.builder(
+                      //           scrollDirection: Axis.horizontal,
+                      //           physics: BouncingScrollPhysics(),
+                      //           itemBuilder: (context, index) => Padding(
+                      //             padding: const EdgeInsets.all(8.0),
+                      //             child: BuildCardOne(
+                      //               machineImage: items4[index].machineImage,
+                      //               machineName: items4[index].machineName,
+                      //               machinePlace: items4[index].machinePlace,
+                      //             ),
+                      //           ),
+                      //           itemCount: items4.length,
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
 
-          SizedBox(
-            height: 250,
-            child: Row(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: BuildCardOne(
-                        machineImage: items5[index].machineImage,
-                        machineName: items5[index].machineName,
-                        machinePlace: items5[index].machinePlace,
-                      ),
-                    ),
-                    itemCount: items5.length,
+                      // SizedBox(
+                      //   height: 250,
+                      //   child: Row(
+                      //     children: [
+                      //       Expanded(
+                      //         child: ListView.builder(
+                      //           scrollDirection: Axis.horizontal,
+                      //           physics: BouncingScrollPhysics(),
+                      //           itemBuilder: (context, index) => Padding(
+                      //             padding: const EdgeInsets.all(8.0),
+                      //             child: BuildCardOne(
+                      //               machineImage: items5[index].machineImage,
+                      //               machineName: items5[index].machineName,
+                      //               machinePlace: items5[index].machinePlace,
+                      //             ),
+                      //           ),
+                      //           itemCount: items5.length,
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      // SizedBox(
+                      //   height: 60,
+                      // ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          ),
-
-          // Padding(
-          //   padding: const EdgeInsets.only(
-          //     bottom: 46,
-          //     left: 10,
-          //     right: 10,
-          //   ),
-          //   child: Container(
-          //     height: 200,
-          //     width: double.infinity,
-          //     decoration: BoxDecoration(
-          //       color: Colors.white,
-          //       borderRadius: BorderRadius.circular(20),
-          //       boxShadow: [
-          //         BoxShadow(
-          //           color: Color.fromRGBO(38, 41, 37, 0.29),
-          //           blurRadius: 1,
-          //           offset: Offset(0, 1),
-          //         ),
-          //       ],
-          //     ),
-          //     child: Padding(
-          //       padding: const EdgeInsets.all(30.0),
-          //       child: Text(
-          //         "You can order a new machine or check your old machine and see the temperature or carbon dioxide percentage on today’s date or the previous days. ",
-          //         style: TextStyle(
-          //           fontSize: 16,
-          //           fontFamily: "Body",
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.only(bottom: 65),
-          //   child: FloatingActionButton(
-          //     onPressed: () {
-          //       bottomSheet(context);
-          //     },
-          //     child: Icon(
-          //       Icons.add,
-          //       color: Colors.white,
-          //       size: 29,
-          //     ),
-          //   ),
-          // ),
-          SizedBox(
-            height: 60,
-          ),
-        ],
+                )
+              :Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.green,
+                  ),
+                );
+        },
       ),
     );
   }
@@ -326,13 +301,12 @@ class BuildCardOne extends StatelessWidget {
     return InkWell(
       onLongPress: () {
         showPopover(
-          context: context,
-          bodyBuilder: (context) => MachineMenuItem(),
-          width: 200,
-          height: 150,
-          backgroundColor: Colors.greenAccent.shade400,
-          direction: PopoverDirection.bottom
-        );
+            context: context,
+            bodyBuilder: (context) => MachineMenuItem(),
+            width: 200,
+            height: 150,
+            backgroundColor: Colors.greenAccent.shade400,
+            direction: PopoverDirection.bottom);
       },
       onTap: () {
         navigate(context, SingleMachine());
@@ -344,7 +318,7 @@ class BuildCardOne extends StatelessWidget {
           width: 155,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(machineImage), fit: BoxFit.cover),
+                image: NetworkImage(machineImage), fit: BoxFit.cover),
             borderRadius: BorderRadius.circular(15),
             color: Colors.white,
           ),

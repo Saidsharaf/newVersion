@@ -53,7 +53,15 @@ const REPORTFACTORY = "/api/rev/python/trainng/footprint/product";
 const CHAT = "/api/rev/python/chat";
 
 
+const SHOWTOURISM = "/api/rev/tourism/data";
+
+
+const MACHINEOWNER = "/api/rev/revive/machine/data";
 
 
 
-const server = "https://4262-2a09-bac1-2240-10-00-31-61.ngrok-free.app";
+
+
+
+
+const server = "https://16e9-2a09-bac1-2220-10-00-31-91.ngrok-free.app";

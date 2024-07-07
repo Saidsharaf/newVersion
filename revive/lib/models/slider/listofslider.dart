@@ -5,6 +5,7 @@ import 'package:revive/layout/cubit/states.dart';
 import 'package:revive/modules/LoginAndReg/login.dart';
 import 'package:revive/modules/Owner/FactoryFootprint/questions_factory.dart';
 import 'package:revive/modules/Owner/Report/report.dart';
+import 'package:revive/modules/Owner/tourism_screen/tourism.dart';
 import 'package:revive/modules/betweenOwner_Customer/trash_Screen/trash_post.dart';
 import 'package:revive/modules/chatScreen/chat.dart';
 import 'package:revive/shared/component/component.dart';
@@ -123,6 +124,13 @@ class _headofsliderState extends State<headofslider> {
                   icon: "assets/icons/report-svgrepo-com.svg",
                   press: () {
                     navigate(context, ReportScreen());
+                  },
+                ),
+                sharedPref.getData(key: "role")==3? Container():SvglistOfslider(
+                  txt: "Tourism",
+                  icon: "assets/icons/postcard.svg",
+                  press: () {
+                    navigate(context, Tourism());
                   },
                 ),
                 // listOfslider(

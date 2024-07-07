@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revive/modules/Owner/Report/cubitReport/cubit.dart';
 import 'package:revive/modules/Owner/Report/cubitReport/state.dart';
 import 'package:revive/modules/Owner/Report/data_model.dart';
+import 'package:revive/modules/Owner/Report/report_ml/visualization.dart';
+import 'package:revive/shared/component/component.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ReportScreen extends StatefulWidget {
@@ -84,26 +86,12 @@ class _ReportScreenState extends State<ReportScreen> {
         builder: (context, state) {
           num containerId = 0;
           var cubit = ReportFactoryCubit.get(context);
-          // List<SalesData> lineOne = [
-          //   SalesData(5, cubit.numbers[0]),
-          //   SalesData(2, cubit.numbers[1]),
-          //   SalesData(3, cubit.numbers[2]),
-          //   SalesData(4, cubit.numbers[3]),
-          //   SalesData(5, cubit.numbers[4]),
-          //   SalesData(6, cubit.numbers[5]),
-          //   SalesData(7, cubit.numbers[6]),
-          //   SalesData(8, cubit.numbers[7]),
-          //   SalesData(9, cubit.numbers[8]),
-          //   SalesData(11, cubit.numbers[9]),
-          //   SalesData(12, cubit.numbers[10]),
-          //   SalesData(13, cubit.numbers[11]),
-          // ];
           return state is reportFactorySuccessState
               ? Scaffold(
                   backgroundColor: Color.fromARGB(167, 193, 226, 199),
                   body: Column(
                     children: [
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(
                           right: 12,
                           left: 12,
@@ -120,14 +108,11 @@ class _ReportScreenState extends State<ReportScreen> {
                                 fontSize: 28,
                               ),
                             ),
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.white,
-                              child: CircleAvatar(
-                                radius: 29,
-                                backgroundImage:
-                                    AssetImage("assets/images/prof1.jpeg"),
-                              ),
+                            FloatingActionButton(
+                              onPressed: () {
+                                navigate(context, Visualization());
+                              },
+                              child: Icon(Icons.arrow_circle_right_outlined),
                             ),
                           ],
                         ),
@@ -220,20 +205,20 @@ class _ReportScreenState extends State<ReportScreen> {
                             ),
                             series: <LineSeries<SalesData, num>>[
                               LineSeries<SalesData, num>(
-                                dataSource:  [
-            SalesData(5, cubit.numbers[0]),
-            SalesData(2, cubit.numbers[1]),
-            SalesData(3, cubit.numbers[2]),
-            SalesData(4, cubit.numbers[3]),
-            SalesData(5, cubit.numbers[4]),
-            SalesData(6, cubit.numbers[5]),
-            SalesData(7, cubit.numbers[6]),
-            SalesData(8, cubit.numbers[7]),
-            SalesData(9, cubit.numbers[8]),
-            SalesData(11, cubit.numbers[9]),
-            SalesData(12, cubit.numbers[10]),
-            SalesData(13, cubit.numbers[11]),
-          ],
+                                dataSource: [
+                                  SalesData(int.tryParse(cubit.days[0]) as num, cubit.numbers[0]),
+                                  SalesData(int.tryParse(cubit.days[1]) as num, cubit.numbers[1]),
+                                  SalesData(int.tryParse(cubit.days[2]) as num, cubit.numbers[2]),
+                                  SalesData(int.tryParse(cubit.days[3]) as num, cubit.numbers[3]),
+                                  SalesData(int.tryParse(cubit.days[4]) as num, cubit.numbers[4]),
+                                  SalesData(int.tryParse(cubit.days[5]) as num, cubit.numbers[5]),
+                                  SalesData(int.tryParse(cubit.days[6]) as num, cubit.numbers[6]),
+                                  SalesData(int.tryParse(cubit.days[7]) as num, cubit.numbers[7]),
+                                  SalesData(int.tryParse(cubit.days[8]) as num, cubit.numbers[8]),
+                                  SalesData(int.tryParse(cubit.days[9]) as num, cubit.numbers[9]),
+                                  SalesData(int.tryParse(cubit.days[10]) as num, cubit.numbers[10]),
+                                  SalesData(int.tryParse(cubit.days[11]) as num, cubit.numbers[11]),
+                                ],
                                 enableTooltip: true,
                                 xValueMapper: (SalesData sales, _) =>
                                     sales.year,
@@ -307,27 +292,27 @@ class _ReportScreenState extends State<ReportScreen> {
                             WietherItemsContainerWidget(
                               itemColor: Colors.red,
                               itemName: 'Co',
-                              itemDetails: '20',
+                              itemDetails: '0.00',
                             ),
                             WietherItemsContainerWidget(
                               itemColor: Colors.green,
                               itemName: 'CO₂',
-                              itemDetails: '20',
+                              itemDetails: '0.00',
                             ),
                             WietherItemsContainerWidget(
                               itemColor: Color.fromARGB(220, 230, 83, 181),
                               itemName: 'O₂',
-                              itemDetails: '20',
+                              itemDetails: '25',
                             ),
                             WietherItemsContainerWidget(
                               itemColor: Colors.amberAccent,
                               itemName: 'Temperature',
-                              itemDetails: '20',
+                              itemDetails: '59',
                             ),
                             WietherItemsContainerWidget(
                               itemColor: Colors.teal,
                               itemName: 'Humidity',
-                              itemDetails: '20',
+                              itemDetails: '39',
                             ),
                             SizedBox(
                               width: 10,
@@ -341,7 +326,7 @@ class _ReportScreenState extends State<ReportScreen> {
                     ],
                   ),
                 )
-              :  Center(
+              : Center(
                   child: CircularProgressIndicator(
                     color: Colors.green,
                   ),

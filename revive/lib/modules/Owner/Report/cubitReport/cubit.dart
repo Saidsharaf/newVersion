@@ -12,7 +12,8 @@ class ReportFactoryCubit extends Cubit<ReportFactoryStates> {
   ReportFactoryModel? reportFactoryModel;
 
   List<dynamic> output = [];
-List<int> numbers = [];
+  List<int> numbers = [];
+  List<String> days = [];
 
   static ReportFactoryCubit get(context) => BlocProvider.of(context);
 
@@ -50,9 +51,25 @@ List<int> numbers = [];
           numbers.add(number);
         }
       }
+ List<dynamic> dataLines = output.sublist(6);
 
-      // Output the extracted numbers
-      print(numbers[5]);
+  // Initialize an empty list to hold the extracted days
+
+
+  // Iterate over the data lines to extract the day from the 'created_at' column
+  for (var line in dataLines) {
+    // Split the line into columns by spaces (remove leading/trailing spaces)
+    var columns = line.trim().split(RegExp(r'\s+'));
+    // The last column is the 'created_at' date
+    var createdAt = columns.last;
+    // Extract the day from the date (last two characters)
+    var day = createdAt.substring(createdAt.length - 2);
+    // Append the extracted day to the list
+    days.add(day);
+  }
+
+  // Print the extracted days
+  print(days);
       print(":::::::::::::::::::::::::::");
       emit(reportFactorySuccessState(reportFactoryModel!));
     }).catchError(
